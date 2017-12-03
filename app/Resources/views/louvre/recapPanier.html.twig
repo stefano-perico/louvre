@@ -1,0 +1,15 @@
+{% extends '::basePanier.html.twig' %}
+
+{% block panier %}
+    <h2>Récaputilatif de votre commande</h2>
+    <p>Bonjour Mr {{ commande.utilisateur.nom }}, {{ commande.utilisateur.prenom }}</p>
+    <p>Vous souhaitez visiter le Louvre le </p>
+    <p>Un fois votre commande validé une facture vous sera envoyez à l'adresse mail suivante {{ commande.utilisateur.email }}</p>
+    <p>Votre adesse de facturation est la suivante</p>
+    <ul>
+        <li>Adresse : {{ utilisateurAdresse.adresse }}</li>
+        <li>Code postal : {{ utilisateurAdresse.codePostal }}</li>
+        <li>Ville : {{ utilisateurAdresse.ville }}</li>
+        <li>Pays : {{ utilisateurAdresse.pays }}</li>
+    </ul>
+{% endblock %}

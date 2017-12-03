@@ -21,6 +21,10 @@ class UtilisateurType extends AbstractType
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('email', EmailType::class)
+            ->add('adresse')
+            ->add('codePostal')
+            ->add('ville')
+            ->add('pays')
         ;
     }
     

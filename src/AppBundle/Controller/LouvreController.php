@@ -42,11 +42,12 @@ class LouvreController extends Controller
     }
 
     /**
-     * @Route("/louvre/panier")
+     * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
      */
-    public function panierAction(Request $request)
+    public function panierAction(Request $request, $idUser)
     {
-
+        $em = $this->getDoctrine()->getManager();
+        $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
         $commande = new Commande();
         $form = $this->createForm(CommandeType::class,$commande);
 
@@ -55,7 +56,7 @@ class LouvreController extends Controller
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $em = $this->getDoctrine()->getManager();
+                $commande->setUtilisateur($utilisateur);
                 foreach ($commande->getBillet() as $billet)
                 {
                     $billet->setCommande($commande);
@@ -65,38 +66,32 @@ class LouvreController extends Controller
                 $em->flush();
 
                 $request->getSession()->getFlashBag()->add('notice', 'Billet bien enregistré.');
-                return $this->redirectToRoute('info_fac', array('idCmd' => $commande->getId(), 'idUser' => $commande->getUtilisateur()->getId()));
+                return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId(), 'idUser' => $idUser));
             }
         }
         return $this->render(':louvre:panier.html.twig', array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/louvre/info_facturation/commande:{idCmd}/utilisateur:{idUser}", name="info_fac")
+     * @Route("/louvre/info_facturation, name="info_fac")
      */
-    public function infoFacturationAction(Request $request, $idCmd, $idUser)
+    public function infoFacturationAction(Request $request)
     {
-        $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Utilisateur');
-        $utilisateur = $repository->find($idUser);
-
-        $utilisateurAdresse = new UtilisateurAdresse();
-        $form = $this->createForm(UtilisateurAdresseType::class, $utilisateurAdresse);
+        $utilisateur = new Utilisateur();
+        $form = $this->createForm(UtilisateurType::class, $utilisateur);
         if ($request->isMethod('POST'))
         {
             $form->handleRequest($request);
             if ($form->isValid())
             {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($utilisateurAdresse);
+                $em->persist($utilisateur);
                 $em->flush();
-                return $this->redirectToRoute('recap_cmd', array('idCmd' => $idCmd, 'idUser' => $idUser, 'idAdresse' => $utilisateurAdresse->getId()));
+                return $this->redirectToRoute('panier', array('idUser' => $utilisateur->getId()));
             }
         }
 
-        return $this->render(':louvre:infoFacturation.html.twig', array('utilisateur' => $utilisateur, 'form' => $form->createView()));
+        return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));
     }
 
     /**

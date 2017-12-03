@@ -49,8 +49,8 @@ class Commande
     private $utilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove", "merge"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"})
+     * @ORM\JoinColumn()
      */
     private $billet;
 
@@ -181,7 +181,7 @@ class Commande
     public function addBillet(\AppBundle\Entity\Billet $billet)
     {
         $this->billet[] = $billet;
-
+        $billet->setCommande($this);
         return $this;
     }
 

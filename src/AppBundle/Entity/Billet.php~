@@ -56,8 +56,7 @@ class Billet
    private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="billet", cascade={"persist", "merge"})
-     * @ORM\JoinColumn(name="commande_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="billet", cascade={"persist"})
      */
    private $commande;
 
@@ -66,6 +65,7 @@ class Billet
      */
     public function __construct()
     {
+
         $this->prix = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -216,10 +216,9 @@ class Billet
      *
      * @return Billet
      */
-    public function setCommande(\AppBundle\Entity\Commande $commande = null)
+    public function setCommande(\AppBundle\Entity\Commande $commande)
     {
         $this->commande = $commande;
-
         return $this;
     }
 

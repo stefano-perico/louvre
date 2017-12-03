@@ -35,11 +35,6 @@ class Prix
      */
     private $montant;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Billet")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $billet;
 
     const NORMAL = 16;
     const ENFANT = 8;

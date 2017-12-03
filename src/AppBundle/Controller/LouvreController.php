@@ -66,14 +66,14 @@ class LouvreController extends Controller
                 $em->flush();
 
                 $request->getSession()->getFlashBag()->add('notice', 'Billet bien enregistré.');
-                return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId(), 'idUser' => $idUser));
+                return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
             }
         }
         return $this->render(':louvre:panier.html.twig', array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/louvre/info_facturation, name="info_fac")
+     * @Route("/louvre/info_facturation", name="info_fac")
      */
     public function infoFacturationAction(Request $request)
     {
@@ -95,20 +95,17 @@ class LouvreController extends Controller
     }
 
     /**
-     * @Route("/louvre/recap/commande:{idCmd}/utilisateur:{idUser}/adresse:{idAdresse}", name="recap_cmd")
+     * @Route("/louvre/recap/commande:{idCmd}", name="recap_cmd")
      */
-    public function recapAction(Request $request, $idCmd, $idUser, $idAdresse)
+    public function recapAction(Request $request, $idCmd)
     {
         $repository = $this
             ->getDoctrine()
             ->getManager()
         ;
-
-        $utilisateur = $repository->getRepository('AppBundle:Utilisateur')->find($idUser);
-        $utilisateurAdresse = $repository->getRepository('AppBundle:UtilisateurAdresse')->find($idAdresse);
         $commande = $repository->getRepository('AppBundle:Commande')->find($idCmd);
 
-        return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande, 'utilisateurAdresse' => $utilisateurAdresse ));
+        return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande ));
     }
 
     /**

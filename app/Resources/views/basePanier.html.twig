@@ -8,7 +8,7 @@
                 <div class="well well-lg">
                     <ul class="list-group">
                         <li><a href="{{ path('app_louvre_selection') }}">Selection</a></li>
-                        <li><a href="{{ path('app_louvre_panier') }}">Panier</a></li>
+                        <li><a href="{{ path('panier', {'idUser': 'x'}) }}">Panier</a></li>
                         <li><a href="{{ path('info_fac', {'idCmd': 'x', 'idUser': 'x'}) }}">informations de facturation</a></li>
                         <li><a href="{{ path('recap_cmd', {'idCmd': 'x', 'idUser': 'x', 'idAdresse': 'x'}) }}">Validation de la commande</a></li>
                         <li><a href="{{ path('app_louvre_payement', {'id': 'x'}) }}">Payement</a></li>

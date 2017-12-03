@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="commandes")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommandesRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Commande
 {
@@ -61,8 +62,6 @@ class Commande
     public function __construct()
     {
         $this->billet = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->date = new \DateTime();
-        $this->dateBillet = new \DateTime();
     }
 
     /**
@@ -121,6 +120,16 @@ class Commande
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * set la date acctuel à la création de la commande
+     *
+     * @ORM\PrePersist()
+     */
+    public function createdAt()
+    {
+        $this->setDate(new \DateTime());
     }
 
     /**

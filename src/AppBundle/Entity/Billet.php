@@ -50,8 +50,9 @@ class Billet
     private $disponible = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Prix", mappedBy="billet")
+     * @var float
      *
+     * @ORM\Column(name="prix", type="float")
      */
    private $prix;
 
@@ -230,5 +231,15 @@ class Billet
     public function getCommande()
     {
         return $this->commande;
+    }
+
+    public function getAge()
+    {
+        $age = date('Y') - date('Y', strtotime($this->getDateNaissance()));
+        if (date('md') < date('md', strtotime($this->getDateNaissance())))
+        {
+            return $age -1;
+        }
+        return $age;
     }
 }

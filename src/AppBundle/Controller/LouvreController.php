@@ -99,11 +99,9 @@ class LouvreController extends Controller
      */
     public function recapAction(Request $request, $idCmd)
     {
-        $repository = $this
-            ->getDoctrine()
-            ->getManager()
-        ;
+        $repository = $this->getDoctrine()->getManager();
         $commande = $repository->getRepository('AppBundle:Commande')->find($idCmd);
+
 
         return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande ));
     }

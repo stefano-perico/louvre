@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * billets
  *
  * @ORM\Table(name="billets")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BilletsRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Billet
 {
@@ -67,7 +69,6 @@ class Billet
     public function __construct()
     {
 
-        $this->prix = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -175,54 +176,7 @@ class Billet
     {
         return $this->disponible;
     }
-
-    /**
-     * Add prix
-     *
-     * @param \AppBundle\Entity\Prix $prix
-     *
-     * @return Billet
-     */
-    public function addPrix(\AppBundle\Entity\Prix $prix)
-    {
-        $this->prix[] = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Remove prix
-     *
-     * @param \AppBundle\Entity\Prix $prix
-     */
-    public function removePrix(\AppBundle\Entity\Prix $prix)
-    {
-        $this->prix->removeElement($prix);
-    }
-
-    /**
-     * Get prix
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
-     * Set commande
-     *
-     * @param \AppBundle\Entity\Commande $commande
-     *
-     * @return Billet
-     */
-    public function setCommande(\AppBundle\Entity\Commande $commande)
-    {
-        $this->commande = $commande;
-        return $this;
-    }
-
+    
     /**
      * Get commande
      *
@@ -235,11 +189,68 @@ class Billet
 
     public function getAge()
     {
-        $age = date('Y') - date('Y', strtotime($this->getDateNaissance()));
-        if (date('md') < date('md', strtotime($this->getDateNaissance())))
-        {
-            return $age -1;
-        }
+        $age = $this->getDateNaissance()->diff(new \DateTime())->format('%Y');
         return $age;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Billet
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+
+    /**
+     * Calcule et set le prix du billet
+     *
+     */
+    public function calculerPrix()
+    {
+        $age = (int) $this->getAge();
+        if($age < 4)
+        {
+            $this->setPrix(0);
+        }
+        elseif ($age >= 4 && $age <= 12 OR $age >= 60)
+        {
+            $this->setPrix(12);
+        }
+        else
+        {
+            $this->setPrix(16);
+        }
+    }
+
+
+    /**
+     * Set commande
+     *
+     * @param \AppBundle\Entity\Commande $commande
+     *
+     * @return Billet
+     */
+    public function setCommande(\AppBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
     }
 }

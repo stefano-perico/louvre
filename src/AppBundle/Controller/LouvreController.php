@@ -12,14 +12,13 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Commande;
 use AppBundle\Entity\Utilisateur;
-use AppBundle\Entity\UtilisateurAdresse;
 use AppBundle\Form\BilletType;
 use AppBundle\Form\CommandeType;
-use AppBundle\Form\UtilisateurAdresseType;
 use AppBundle\Form\UtilisateurType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\CalculerPrix;
 use Symfony\Component\HttpFoundation\Response;
 
 class LouvreController extends Controller
@@ -29,7 +28,9 @@ class LouvreController extends Controller
      */
     public function accueilAction()
     {
-        return $this->render(':louvre:accueil.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $billets = $em->getRepository("AppBundle:Billet")->find('9');
+        return $this->render(':louvre:accueil.html.twig', array('billets' => $billets));
     }
 
     /**
@@ -59,6 +60,9 @@ class LouvreController extends Controller
                 $commande->setUtilisateur($utilisateur);
                 foreach ($commande->getBillet() as $billet)
                 {
+                    $calculerPrix = new CalculerPrix();
+                    $prix = $calculerPrix->calculerPrix($billet->getAge());
+                    $billet->setPrix($prix);
                     $billet->setCommande($commande);
                     $em->persist($billet);
                 }

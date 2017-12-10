@@ -50,8 +50,9 @@ class Billet
     private $disponible = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Prix", mappedBy="billet")
+     * @var float
      *
+     * @ORM\Column(name="prix", type="float")
      */
    private $prix;
 
@@ -66,7 +67,6 @@ class Billet
     public function __construct()
     {
 
-        $this->prix = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -174,54 +174,7 @@ class Billet
     {
         return $this->disponible;
     }
-
-    /**
-     * Add prix
-     *
-     * @param \AppBundle\Entity\Prix $prix
-     *
-     * @return Billet
-     */
-    public function addPrix(\AppBundle\Entity\Prix $prix)
-    {
-        $this->prix[] = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Remove prix
-     *
-     * @param \AppBundle\Entity\Prix $prix
-     */
-    public function removePrix(\AppBundle\Entity\Prix $prix)
-    {
-        $this->prix->removeElement($prix);
-    }
-
-    /**
-     * Get prix
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
-     * Set commande
-     *
-     * @param \AppBundle\Entity\Commande $commande
-     *
-     * @return Billet
-     */
-    public function setCommande(\AppBundle\Entity\Commande $commande)
-    {
-        $this->commande = $commande;
-        return $this;
-    }
-
+    
     /**
      * Get commande
      *
@@ -230,5 +183,15 @@ class Billet
     public function getCommande()
     {
         return $this->commande;
+    }
+
+    public function getAge()
+    {
+        $age = date('Y') - date('Y', strtotime($this->getDateNaissance()));
+        if (date('md') < date('md', strtotime($this->getDateNaissance())))
+        {
+            return $age -1;
+        }
+        return $age;
     }
 }

@@ -59,6 +59,20 @@ class Billet
    private $prix;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="tarif_reduit", type="boolean")
+     */
+    private $tarifReduit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string")
+     */
+    private $type;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="billet", cascade={"persist"})
      */
    private $commande;
@@ -252,5 +266,53 @@ class Billet
         $this->commande = $commande;
 
         return $this;
+    }
+
+    /**
+     * Set tarifReduit
+     *
+     * @param boolean $tarifReduit
+     *
+     * @return Billet
+     */
+    public function setTarifReduit($tarifReduit)
+    {
+        $this->tarifReduit = $tarifReduit;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifReduit
+     *
+     * @return boolean
+     */
+    public function getTarifReduit()
+    {
+        return $this->tarifReduit;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Billet
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

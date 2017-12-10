@@ -9,6 +9,8 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Entity\Billet;
+
 class CalculerPrix
 {
     private $normal = 16;
@@ -18,8 +20,9 @@ class CalculerPrix
     private $gratuit = 0;
 
 
-    public function calculerPrix($age)
+    public function calculerPrix(Billet $billet)
     {
+        $age = $billet->getAge();
         if($age < 4)
         {
             return $this->gratuit;

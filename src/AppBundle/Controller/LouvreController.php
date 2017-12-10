@@ -28,9 +28,7 @@ class LouvreController extends Controller
      */
     public function accueilAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $billets = $em->getRepository("AppBundle:Billet")->find('9');
-        return $this->render(':louvre:accueil.html.twig', array('billets' => $billets));
+        return $this->render(':louvre:accueil.html.twig');
     }
 
     /**
@@ -61,7 +59,7 @@ class LouvreController extends Controller
                 foreach ($commande->getBillet() as $billet)
                 {
                     $calculerPrix = new CalculerPrix();
-                    $prix = $calculerPrix->calculerPrix($billet->getAge());
+                    $prix = $calculerPrix->calculerPrix($billet);
                     $billet->setPrix($prix);
                     $billet->setCommande($commande);
                     $em->persist($billet);

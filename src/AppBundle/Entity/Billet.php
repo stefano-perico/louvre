@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Service\CalculerPrix;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -63,7 +64,7 @@ class Billet
      *
      * @ORM\Column(name="tarif_reduit", type="boolean")
      */
-    private $tarifReduit;
+    private $tarifReduit = false;
 
     /**
      * @var string

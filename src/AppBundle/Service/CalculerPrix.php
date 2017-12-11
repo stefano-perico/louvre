@@ -13,31 +13,48 @@ use AppBundle\Entity\Billet;
 
 class CalculerPrix
 {
-    private $normal = 16;
-    private $enfant = 8;
-    private $senior = 12;
-    private $reduit = 10;
-    private $gratuit = 0;
+    const CATEGORIE_BEBE = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
+    const CATEGORIE_SENIOR = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
+    const CATEGORIE_REDUIT = array('prix' => 10, 'type' => 'Réduit');
+    const CATEGORIE_ENFANT = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
+    const CATEGORIE_NORMAL = array('prix' => 16, 'type' => "Plein Tarif");
 
 
-    public function calculerPrix(Billet $billet)
+    public function prixBillet(Billet $billet)
     {
+        if ($billet->getTarifReduit() == true)
+        {
+            $billet
+                ->setPrix(self::CATEGORIE_REDUIT['prix'])
+                ->setType(self::CATEGORIE_REDUIT['type'])
+            ;
+        }
         $age = $billet->getAge();
-        if($age < 4)
+        switch ($age)
         {
-            return $this->gratuit;
-        }
-        elseif ($age >= 4 && $age <= 12)
-        {
-            return $this->enfant;
-        }
-        elseif ($age >= 60)
-        {
-            return $this->senior;
-        }
-        else
-        {
-            return $this->normal;
+            case $age <= self::CATEGORIE_BEBE['age']:
+                $billet
+                    ->setPrix(self::CATEGORIE_BEBE['prix'])
+                    ->setType(self::CATEGORIE_BEBE['type'])
+                ;
+                break;
+            case $age <= self::CATEGORIE_ENFANT['age']:
+                $billet
+                    ->setPrix(self::CATEGORIE_ENFANT['prix'])
+                    ->setType(self::CATEGORIE_ENFANT['type'])
+                ;
+                break;
+            case $age >= self::CATEGORIE_SENIOR['age']:
+                $billet
+                    ->setPrix(self::CATEGORIE_SENIOR['prix'])
+                    ->setType(self::CATEGORIE_SENIOR['type'])
+                ;
+                break;
+            default:
+                $billet
+                    ->setPrix(self::CATEGORIE_NORMAL['prix'])
+                    ->setType(self::CATEGORIE_NORMAL['type'])
+                ;
         }
     }
 }

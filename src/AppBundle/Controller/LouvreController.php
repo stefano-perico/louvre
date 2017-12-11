@@ -59,8 +59,7 @@ class LouvreController extends Controller
                 foreach ($commande->getBillet() as $billet)
                 {
                     $calculerPrix = new CalculerPrix();
-                    $prix = $calculerPrix->calculerPrix($billet);
-                    $billet->setPrix($prix);
+                    $calculerPrix->prixBillet($billet);
                     $billet->setCommande($commande);
                     $em->persist($billet);
                 }

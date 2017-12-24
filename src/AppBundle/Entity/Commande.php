@@ -39,7 +39,7 @@ class Commande
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateBillet", type="datetime")
+     * @ORM\Column(name="dateBillet", type="date")
      */
     private $dateBillet;
 

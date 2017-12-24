@@ -2,6 +2,10 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Commande;
+use Symfony\Component\Validator\Constraints\DateTime;
+
+
 /**
  * commandesRepository
  *
@@ -10,4 +14,33 @@ namespace AppBundle\Repository;
  */
 class CommandesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCommandeWithBillet($id)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb
+            ->innerJoin('c.billet', 'b')
+            ->addSelect('b')
+        ;
+
+        $qb->where($qb->expr()->in('c.id', $id));
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countBillets(Commande $commande)
+    {
+        return
+            $this->createQueryBuilder('c')
+                ->innerJoin('c.billet', 'b')
+                ->select('COUNT(b)')
+                ->where('c.dateBillet = :date')
+                ->setParameter('date', $commande->getDateBillet())
+                ->getQuery()
+                ->getSingleScalarResult()
+        ;
+    }
+
 }

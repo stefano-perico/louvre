@@ -2,7 +2,7 @@
     {{ form_errors(form) }}
 
     <div class="form-group">
-        {{ form_label(form.dateBillet, "Date et heure de la visite") }}
+        {{ form_label(form.dateBillet, "Date de la visite") }}
         {{ form_errors(form.dateBillet) }}
         {{ form_widget(form.dateBillet) }}
     </div>
@@ -52,7 +52,7 @@
         // La fonction qui ajoute un formulaire BilletType
         function addBillet($container) {
             // Dans le contenu de l'attribut "data-prototype", on remplace :
-            // - le texte "__name__label__" qu'il contient par le label d champ
+            // - le texte "__name__label__" qu'il contient par le label du champ
             // - le texte "__name__" qu'il conien par le numéro du champ
             var template = $container.attr('data-prototype')
                 .replace(/__name__label__/g, 'Billet n°' + (index+1))

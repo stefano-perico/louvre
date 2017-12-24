@@ -81,6 +81,13 @@ class Billet
     private $type;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date ;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="billet", cascade={"persist"})
      */
    private $commande;
@@ -241,28 +248,6 @@ class Billet
 
 
     /**
-     * Calcule et set le prix du billet
-     *
-     */
-    public function calculerPrix()
-    {
-        $age = (int) $this->getAge();
-        if($age < 4)
-        {
-            $this->setPrix(0);
-        }
-        elseif ($age >= 4 && $age <= 12 OR $age >= 60)
-        {
-            $this->setPrix(12);
-        }
-        else
-        {
-            $this->setPrix(16);
-        }
-    }
-
-
-    /**
      * Set commande
      *
      * @param \AppBundle\Entity\Commande $commande
@@ -346,5 +331,30 @@ class Billet
     public function getDemiJournee()
     {
         return $this->demiJournee;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Billet
+     */
+    public function setDate($date)
+    {
+
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }

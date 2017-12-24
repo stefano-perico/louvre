@@ -24,7 +24,7 @@ class CalculerPrix
     {
         if ($billet->getDemiJournee() == true)
         {
-            $this->demiJournee($billet);
+            $this->setDemiJournee($billet);
         }
         if ($billet->getTarifReduit() == true)
         {
@@ -33,10 +33,10 @@ class CalculerPrix
                 ->setType(self::CATEGORIE_REDUIT['type'])
             ;
         }
-        $this->prixJournee($billet);
+        $this->setPrixJournee($billet);
     }
 
-    public function demiJournee(Billet $billet)
+    public function setDemiJournee(Billet $billet)
     {
         switch ($age = $billet->getAge())
         {
@@ -66,7 +66,7 @@ class CalculerPrix
         }
     }
 
-    public function prixJournee(Billet $billet)
+    public function setPrixJournee(Billet $billet)
     {
         switch ($age = $billet->getAge())
         {

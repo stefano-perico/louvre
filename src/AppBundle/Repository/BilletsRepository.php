@@ -1,6 +1,8 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Billet;
+use AppBundle\Entity\Commande;
 
 /**
  * billetsRepository
@@ -10,4 +12,14 @@ namespace AppBundle\Repository;
  */
 class BilletsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function countBillets(Billet $billet)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('COUNT(b)')
+            ->where('b.date = :date')
+            ->setParameter('date', $billet->getDate())
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

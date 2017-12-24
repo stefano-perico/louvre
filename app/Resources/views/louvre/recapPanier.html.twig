@@ -1,6 +1,7 @@
 {% extends '::basePanier.html.twig' %}
 
 {% block panier %}
+    {% for commande in commandes %}
     <h2>Récaputilatif de votre commande</h2>
     <p>Bonjour Mr {{ commande.utilisateur.nom }}, {{ commande.utilisateur.prenom }}</p>
     <p>Vous souhaitez visiter le Louvre le {{ commande.dateBillet|date('d/m/Y') }}</p>
@@ -13,5 +14,7 @@
         <li>Pays : {{ commande.utilisateur.pays }}</li>
     </ul>
     <p>Récap billets</p>
+
+    {% endfor %}
 
 {% endblock %}

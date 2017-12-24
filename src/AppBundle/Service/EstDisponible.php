@@ -9,15 +9,50 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\AppBundle;
+use AppBundle\Entity\Billet;
+use AppBundle\Entity\Commande;
+use AppBundle\Repository\BilletsRepository;
+use AppBundle\Repository\CommandesRepository;
 use Symfony\Component\HttpKernel\Tests\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\Request;
+
+
+use AppBundle\Entity\Utilisateur;
+use AppBundle\Form\BilletType;
+use AppBundle\Form\CommandeType;
+use AppBundle\Form\UtilisateurType;
+
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use AppBundle\Service\CalculerPrix;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class EstDisponible
 {
-    public function nombreBillet()
-    {
+    const BILLET_MAX = 1000;
 
+    public function billetsDispo($nbBillets)
+    {
+        if ($nbBillets >= self::BILLET_MAX)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public function resteBillets($commandes)
+    {
+        if ((int)$commandes >= self::BILLET_MAX)
+        {
+            return "Désoler mais, il ne reste plus de billets pour cette date";
+        }
+        $reste = self::BILLET_MAX - (int)$commandes;
+        return "Désoler mais, il ne reste que $reste billets";
     }
 
 }

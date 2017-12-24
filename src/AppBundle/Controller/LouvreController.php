@@ -15,6 +15,8 @@ use AppBundle\Entity\Utilisateur;
 use AppBundle\Form\BilletType;
 use AppBundle\Form\CommandeType;
 use AppBundle\Form\UtilisateurType;
+use AppBundle\Repository\CommandesRepository;
+use AppBundle\Service\EstDisponible;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,9 +48,9 @@ class LouvreController extends Controller
     public function panierAction(Request $request, $idUser)
     {
         $em = $this->getDoctrine()->getManager();
-        $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
         $commande = new Commande();
-        $form = $this->createForm(CommandeType::class,$commande);
+        $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
+        $form = $this->createForm(CommandeType::class, $commande);
 
         if ($request->isMethod('POST'))
         {
@@ -64,10 +66,20 @@ class LouvreController extends Controller
                     $em->persist($billet);
                 }
                 $em->persist($commande);
-                $em->flush();
-
-                $request->getSession()->getFlashBag()->add('notice', 'Billet bien enregistré.');
-                return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
+                $commandes = $em->getRepository("AppBundle:Commande")->countBillets($commande);
+                $estDisponible = new EstDisponible();
+                if ($estDisponible->billetsDispo($commandes) == false)
+                {
+                    $em->flush();
+                    $this->addFlash('success', 'Billet bien enregistré.');
+                    return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
+                }
+                else
+                {
+                    $infoDispo = $estDisponible->resteBillets($commandes);
+                    $this->addFlash('danger', $infoDispo);
+                    return $this->render(':louvre:panier.html.twig', array('form' => $form->createView()));
+                }
             }
         }
         return $this->render(':louvre:panier.html.twig', array('form' => $form->createView()));
@@ -100,29 +112,10 @@ class LouvreController extends Controller
      */
     public function recapAction(Request $request, $idCmd)
     {
-        $repository = $this->getDoctrine()->getManager();
-        $commande = $repository->getRepository('AppBundle:Commande')->find($idCmd);
-
-
-        return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande ));
-    }
-
-    /**
-     * @Route("/louvre/payement/commande:{id}")
-     */
-    public function payementAction()
-    {
-        return $this->render(':louvre:payement.html.twig');
-    }
-
-    public function addAction(Request $request)
-    {
-        if ($request->isMethod('POST'))
-        {
-
-        }
-
-
+        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:Commande');
+        $commandes = $repository->getCommandeWithBillet($idCmd);
+        
+        return $this->render(':louvre:recapPanier.html.twig', array('commandes' => $commandes ));
     }
 
 }

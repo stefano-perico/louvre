@@ -66,9 +66,10 @@ class LouvreController extends Controller
                     $em->persist($billet);
                 }
                 $em->persist($commande);
-                $commandes = $em->getRepository("AppBundle:Commande")->countBillets($commande);
+                $commandeRepo = $em->getRepository("AppBundle:Commande");
+                $billetsDispo = $commandeRepo->countBillets($commande);
                 $estDisponible = new EstDisponible();
-                if ($estDisponible->billetsDispo($commandes) == false)
+                if ($estDisponible->billetsDispo($billetsDispo) == true)
                 {
                     $em->flush();
                     $this->addFlash('success', 'Billet bien enregistré.');
@@ -76,7 +77,7 @@ class LouvreController extends Controller
                 }
                 else
                 {
-                    $infoDispo = $estDisponible->resteBillets($commandes);
+                    $infoDispo = $estDisponible->resteBillets($billetsDispo);
                     $this->addFlash('danger', $infoDispo);
                     return $this->render(':louvre:panier.html.twig', array('form' => $form->createView()));
                 }
@@ -112,10 +113,10 @@ class LouvreController extends Controller
      */
     public function recapAction(Request $request, $idCmd)
     {
-        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:Commande');
-        $commandes = $repository->getCommandeWithBillet($idCmd);
-        
-        return $this->render(':louvre:recapPanier.html.twig', array('commandes' => $commandes ));
+        $commandeRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Commande');
+        $commande = $commandeRepo->find($idCmd);
+        $prixCommande = $commandeRepo->sumBillet($idCmd);
+        return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande, 'prixCommande' => $prixCommande ));
     }
 
 }

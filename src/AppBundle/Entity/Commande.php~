@@ -55,6 +55,13 @@ class Commande
      */
     private $billet;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+
 
     /**
      * Constructor

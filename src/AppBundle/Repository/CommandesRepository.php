@@ -43,4 +43,16 @@ class CommandesRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
+    public function sumBillet($idCommande)
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.billet', 'b')
+            ->select('SUM(b.prix)')
+            ->where('b.commande = :idCommande')
+            ->setParameter('idCommande', $idCommande)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
 }

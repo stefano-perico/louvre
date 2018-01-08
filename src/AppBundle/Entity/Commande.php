@@ -55,6 +55,13 @@ class Commande
      */
     private $billet;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+
 
     /**
      * Constructor
@@ -212,5 +219,28 @@ class Commande
     public function getBillet()
     {
         return $this->billet;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Commande
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
     }
 }

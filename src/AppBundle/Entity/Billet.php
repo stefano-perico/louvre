@@ -81,13 +81,6 @@ class Billet
     private $type;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date")
-     */
-    private $date ;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="billet", cascade={"persist"})
      */
    private $commande;
@@ -333,28 +326,4 @@ class Billet
         return $this->demiJournee;
     }
 
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Billet
-     */
-    public function setDate($date)
-    {
-
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
 }

@@ -12,14 +12,5 @@ use AppBundle\Entity\Commande;
  */
 class BilletsRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function countBillets(Billet $billet)
-    {
-        return $this->createQueryBuilder('b')
-            ->select('COUNT(b)')
-            ->where('b.date = :date')
-            ->setParameter('date', $billet->getDate())
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
-    }
+
 }

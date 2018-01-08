@@ -21,7 +21,6 @@ class BilletType extends AbstractType
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('dateNaissance', BirthdayType::class)
-            ->add('date', DateType::class)
         ;
     }
     

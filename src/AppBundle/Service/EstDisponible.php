@@ -55,4 +55,14 @@ class EstDisponible
         return "Désoler mais, il ne reste que $reste billets";
     }
 
+    public function test($key)
+    {
+        $joursFeries = new JoursFeries();
+        if (array_search($key, $joursFeries->jours_feries()))
+        {
+            return "c'est pas cool!";
+        }
+        return "ok c'est bon!";
+    }
+
 }

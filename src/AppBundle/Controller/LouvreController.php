@@ -17,6 +17,7 @@ use AppBundle\Form\CommandeType;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Repository\CommandesRepository;
 use AppBundle\Service\EstDisponible;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LouvreController extends Controller
 {
+    private $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @Route("/louvre")
      */
@@ -58,18 +66,21 @@ class LouvreController extends Controller
             if ($form->isValid())
             {
                 $commande->setUtilisateur($utilisateur);
+                $total = 0;
                 foreach ($commande->getBillet() as $billet)
                 {
                     $calculerPrix = new CalculerPrix();
-                    $calculerPrix->prixBillet($billet);
+                    $prix = $calculerPrix->prixBillet($billet);
                     $billet->setCommande($commande);
                     $em->persist($billet);
+                    $total = $total + $prix;
                 }
+                $commande->setPrix($total);
                 $em->persist($commande);
                 $commandeRepo = $em->getRepository("AppBundle:Commande");
                 $billetsDispo = $commandeRepo->countBillets($commande);
                 $estDisponible = new EstDisponible();
-                if ($estDisponible->billetsDispo($billetsDispo) == true)
+                if ($estDisponible->billetsDispo($billetsDispo) == true && $estDisponible->test($commande->getDateBillet() == false))
                 {
                     $em->flush();
                     $this->addFlash('success', 'Billet bien enregistré.');
@@ -113,10 +124,38 @@ class LouvreController extends Controller
      */
     public function recapAction(Request $request, $idCmd)
     {
-        $commandeRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Commande');
+        $commandeRepo = $this->em->getRepository('AppBundle:Commande');
         $commande = $commandeRepo->find($idCmd);
-        $prixCommande = $commandeRepo->sumBillet($idCmd);
-        return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande, 'prixCommande' => $prixCommande ));
+        if ($request->isMethod('POST'))
+        {
+            \Stripe\Stripe::setApiKey("sk_test_0qfLdJkutmeqc5EVVMWRQzI0");
+            // Token is created using Checkout or Elements!
+            // Get the payment token ID submitted by the form:
+            $token = $request->request->get("stripeToken");
+            $prix = $commande->caluclerPrixCentimes();
+            // Charge the user's card:
+            \Stripe\Charge::create(array(
+                "amount" => $prix,
+                "currency" => "eur",
+                "description" => "Example charge",
+                "source" => $token,
+            ));
+            return $this->render("louvre/paiement.html.twig");
+        }
+        return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande));
     }
+
+    /**
+     * @Route("/louvre/paiement")
+     */
+    public function paiementAction(Request $request)
+    {
+
+            return $this->render("louvre/paiement.html.twig");
+
+
+
+    }
+
 
 }

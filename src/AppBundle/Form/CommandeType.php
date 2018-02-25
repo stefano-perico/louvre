@@ -23,12 +23,20 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateBillet', DateType::class)
-            ->add('billet', CollectionType::class, array(
-                'entry_type' => BilletType::class,
-                'allow_add' => true,
-                'allow_delete' => true
-            ))
+            ->add('dateBillet', DateType::class,
+                array(
+                    'widget'    => 'single_text',
+                    'attr'      => ['class' => 'datepicker'],
+                    'html5'     => false,
+                )
+            )
+            ->add('billet', CollectionType::class,
+                array(
+                    'entry_type'    => BilletType::class,
+                    'allow_add'     => true,
+                    'allow_delete'  => true
+                )
+            )
             ->add('Envoyer', SubmitType::class)
         ;
     }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,7 +62,6 @@ class Commande
      * @ORM\Column(name="prix", type="float")
      */
     private $prix;
-
 
     /**
      * Constructor
@@ -219,5 +219,12 @@ class Commande
     public function getBillet()
     {
         return $this->billet;
+    }
+
+    public function prixCommande()
+    {
+        $test = $this->em->getRepository('AppBundle:Commande');
+        $prix = $test->sumBillet($this->id);
+        return $prix;
     }
 }

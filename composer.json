@@ -36,9 +36,10 @@
 
     },
     "require-dev": {
+        "phpunit/phpunit": "*",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0",
-        "phpunit/phpunit": "*"
+        "symfony/css-selector": "^3.4",
+        "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {
         "symfony-scripts": [

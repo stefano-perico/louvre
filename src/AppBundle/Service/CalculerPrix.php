@@ -24,16 +24,20 @@ class CalculerPrix
     {
         if ($billet->getDemiJournee() == true)
         {
-            $this->setDemiJournee($billet);
+            $prix = $this->setDemiJournee($billet);
+            return $prix;
         }
-        if ($billet->getTarifReduit() == true)
+        elseif ($billet->getTarifReduit() == true)
         {
+            $prix = self::CATEGORIE_REDUIT['prix'];
             $billet
                 ->setPrix(self::CATEGORIE_REDUIT['prix'])
                 ->setType(self::CATEGORIE_REDUIT['type'])
             ;
+            return $prix;
         }
-        $this->setPrixJournee($billet);
+        $prix = $this->setPrixJournee($billet);
+        return $prix;
     }
 
     public function setDemiJournee(Billet $billet)
@@ -41,29 +45,34 @@ class CalculerPrix
         switch ($age = $billet->getAge())
         {
             case $age <= self::CATEGORIE_BEBE['age']:
+                $prix = self::CATEGORIE_BEBE['prix'];
                 $billet
                     ->setPrix(self::CATEGORIE_BEBE['prix'])
                     ->setType(self::CATEGORIE_BEBE['type'])
                 ;
                 break;
             case $age <= self::CATEGORIE_ENFANT['age']:
+                $prix = self::CATEGORIE_ENFANT['prix']/2;
                 $billet
                     ->setPrix(self::CATEGORIE_ENFANT['prix']/2)
                     ->setType(self::CATEGORIE_ENFANT['type'])
                 ;
                 break;
             case $age >= self::CATEGORIE_SENIOR['age']:
+                $prix = self::CATEGORIE_SENIOR['prix']/2;
                 $billet
                     ->setPrix(self::CATEGORIE_SENIOR['prix']/2)
                     ->setType(self::CATEGORIE_SENIOR['type'])
                 ;
                 break;
             default:
+                $prix = self::CATEGORIE_NORMAL['prix']/2;
                 $billet
                     ->setPrix(self::CATEGORIE_NORMAL['prix']/2)
                     ->setType(self::CATEGORIE_NORMAL['type'])
                 ;
         }
+        return $prix;
     }
 
     public function setPrixJournee(Billet $billet)
@@ -71,28 +80,33 @@ class CalculerPrix
         switch ($age = $billet->getAge())
         {
             case $age <= self::CATEGORIE_BEBE['age']:
+                $prix = self::CATEGORIE_BEBE['prix'];
                 $billet
                     ->setPrix(self::CATEGORIE_BEBE['prix'])
                     ->setType(self::CATEGORIE_BEBE['type'])
                 ;
                 break;
             case $age <= self::CATEGORIE_ENFANT['age']:
+                $prix = self::CATEGORIE_ENFANT['prix'];
                 $billet
                     ->setPrix(self::CATEGORIE_ENFANT['prix'])
                     ->setType(self::CATEGORIE_ENFANT['type'])
                 ;
                 break;
             case $age >= self::CATEGORIE_SENIOR['age']:
+                $prix = self::CATEGORIE_SENIOR['prix'];
                 $billet
                     ->setPrix(self::CATEGORIE_SENIOR['prix'])
                     ->setType(self::CATEGORIE_SENIOR['type'])
                 ;
                 break;
             default:
+                $prix = self::CATEGORIE_NORMAL['prix'];
                 $billet
                     ->setPrix(self::CATEGORIE_NORMAL['prix'])
                     ->setType(self::CATEGORIE_NORMAL['type'])
                 ;
         }
+        return $prix;
     }
 }

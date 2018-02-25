@@ -18,6 +18,20 @@
         {{ billet.id }}
         {{ billet.nom }}
     {% endfor %}
-    <p>{{ prixCommande }}€</p>
+    <p>{{ commande.prix }}€</p>
+    <form method="post" id="payment-form">
+    <div class="form-row">
+    <form method="POST">
+        <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_3ePoHBikY5cLCGVv7E24usLG"
+                data-amount="{{ commande.caluclerPrixCentimes }}"
+                data-name="testLouvre"
+                data-description="Widget"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-currency="eur">
+        </script>
+    </form>
 
 {% endblock %}

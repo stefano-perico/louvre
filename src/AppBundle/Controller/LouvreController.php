@@ -34,7 +34,7 @@ class LouvreController extends Controller
     }
 
     /**
-     * @Route("/louvre")
+     * @Route("/")
      */
     public function accueilAction()
     {
@@ -80,7 +80,7 @@ class LouvreController extends Controller
                 $commandeRepo = $em->getRepository("AppBundle:Commande");
                 $billetsDispo = $commandeRepo->countBillets($commande);
                 $estDisponible = new EstDisponible();
-                if ($estDisponible->billetsDispo($billetsDispo) == true && $estDisponible->test($commande->getDateBillet() == false))
+                if ($estDisponible->billetsDispo($billetsDispo) == true)
                 {
                     $em->flush();
                     $this->addFlash('success', 'Billet bien enregistré.');
@@ -122,7 +122,7 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/recap/commande:{idCmd}", name="recap_cmd")
      */
-    public function recapAction(Request $request, $idCmd)
+    public function recapAction(Request $request, $idCmd, \Swift_Mailer $mailer)
     {
         $commandeRepo = $this->em->getRepository('AppBundle:Commande');
         $commande = $commandeRepo->find($idCmd);
@@ -140,9 +140,37 @@ class LouvreController extends Controller
                 "description" => "Example charge",
                 "source" => $token,
             ));
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('stefano0012@gmail.com')
+                ->setTo('stef.tcr@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                        ':louvre:mail.html.twig'
+                        ),
+                        'text/html'
+                    );
+            $mailer->send($message);
             return $this->render("louvre/paiement.html.twig");
         }
         return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande));
+    }
+
+    /**
+     * @Route("/louvre/test")
+     */
+    public function testAction(\Swift_Mailer $mailer)
+    {
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('stefano0012@gmail.com')
+            ->setTo('stef.tcr@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    ':louvre:mail.html.twig'
+                ),
+                'text/html'
+            );
+        $mailer->send($message);
+        return $this->render("louvre/paiement.html.twig");
     }
 
     /**

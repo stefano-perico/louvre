@@ -19,7 +19,6 @@ class CalculerPrix
     const CATEGORIE_ENFANT = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
     const CATEGORIE_NORMAL = array('prix' => 16, 'type' => "Plein Tarif");
 
-
     public function prixBillet(Billet $billet)
     {
         if ($billet->getDemiJournee() == true)

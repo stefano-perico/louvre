@@ -1,8 +1,11 @@
 {% extends '::basePanier.html.twig' %}
 
 {% block panier %}
+    <form name="form1" method="post" action="{{ path('test') }}">
+        <input type="text" name="date" class="datepicker">
+        <input type='submit' name='Submit' value='Send'>
+    </form>
 
- <p>ok!</p>
 
 {% endblock %}
 

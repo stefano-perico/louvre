@@ -17,6 +17,7 @@ use AppBundle\Form\CommandeType;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Repository\CommandesRepository;
 use AppBundle\Service\EstDisponible;
+use AppBundle\Service\JoursFeries;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,11 +27,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LouvreController extends Controller
 {
-    private $em;
-
-    public function __construct(EntityManager $em)
+    private function em()
     {
-        $this->em = $em;
+        $em = $this->getDoctrine()->getManager();
+        return $em;
     }
 
     /**
@@ -42,22 +42,12 @@ class LouvreController extends Controller
     }
 
     /**
-     * @Route("/louvre/selection")
-     */
-    public function selectionAction()
-    {
-
-        return $this->render(':louvre:selection.html.twig');
-    }
-
-    /**
      * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
      */
     public function panierAction(Request $request, $idUser)
     {
-        $em = $this->getDoctrine()->getManager();
         $commande = new Commande();
-        $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
+        $utilisateur = self::em()->getRepository("AppBundle:Utilisateur")->find($idUser);
         $form = $this->createForm(CommandeType::class, $commande);
 
         if ($request->isMethod('POST'))
@@ -72,17 +62,17 @@ class LouvreController extends Controller
                     $calculerPrix = new CalculerPrix();
                     $prix = $calculerPrix->prixBillet($billet);
                     $billet->setCommande($commande);
-                    $em->persist($billet);
+                    self::em()->persist($billet);
                     $total = $total + $prix;
                 }
                 $commande->setPrix($total);
-                $em->persist($commande);
-                $commandeRepo = $em->getRepository("AppBundle:Commande");
+                self::em()->persist($commande);
+                $commandeRepo = self::em()->getRepository("AppBundle:Commande");
                 $billetsDispo = $commandeRepo->countBillets($commande);
                 $estDisponible = new EstDisponible();
                 if ($estDisponible->billetsDispo($billetsDispo) == true)
                 {
-                    $em->flush();
+                    self::em()->flush();
                     $this->addFlash('success', 'Billet bien enregistré.');
                     return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
                 }
@@ -109,9 +99,8 @@ class LouvreController extends Controller
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($utilisateur);
-                $em->flush();
+                self::em()->persist($utilisateur);
+                self::em()->flush();
                 return $this->redirectToRoute('panier', array('idUser' => $utilisateur->getId()));
             }
         }
@@ -122,9 +111,9 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/recap/commande:{idCmd}", name="recap_cmd")
      */
-    public function recapAction(Request $request, $idCmd, \Swift_Mailer $mailer)
+    public function recapAction(Request $request, $idCmd, \Swift_Mailer $mailer, EntityManager $em)
     {
-        $commandeRepo = $this->em->getRepository('AppBundle:Commande');
+        $commandeRepo = $em->getRepository('AppBundle:Commande');
         $commande = $commandeRepo->find($idCmd);
         if ($request->isMethod('POST'))
         {
@@ -156,13 +145,14 @@ class LouvreController extends Controller
     }
 
     /**
-     * @Route("/louvre/test")
+     * @Route("/louvre/test", name="test")
      */
-    public function testAction(\Swift_Mailer $mailer)
+    public function testAction(\Swift_Mailer $mailer, EntityManager $em, Request $request, JoursFeries $joursFeries)
     {
-        $message = (new \Swift_Message('Hello Email'))
+
+         $message = (new \Swift_Message('Hello Email'))
             ->setFrom('stefano0012@gmail.com')
-            ->setTo('stef.tcr@gmail.com')
+            ->setTo('stefano0012@gmail.com')
             ->setBody(
                 $this->renderView(
                     ':louvre:mail.html.twig'
@@ -170,7 +160,22 @@ class LouvreController extends Controller
                 'text/html'
             );
         $mailer->send($message);
-        return $this->render("louvre/paiement.html.twig");
+
+
+    /**
+        $message = $this->renderView('louvre/mail.html.twig', array('test' => 'test'));
+        $headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        mail('stefano0012@gmail.com', 'symfony', $message, $headers);
+    **/
+        if ($request->isMethod('POST'))
+        {
+            $date = $request->request->get('date');
+            $joursFeries->test($date);
+            var_dump($joursFeries);
+
+        }
+            return $this->render("louvre/paiement.html.twig");
     }
 
     /**
@@ -180,8 +185,6 @@ class LouvreController extends Controller
     {
 
             return $this->render("louvre/paiement.html.twig");
-
-
 
     }
 

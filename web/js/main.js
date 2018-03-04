@@ -4,7 +4,16 @@ $(function() {
     });
 
     // Datepicker vue Panier
-    $(".datepicker").datepicker();
+    $(".datepicker").datepicker({
+        format: "dd-mm-yyyy",
+        startDate: "0d",
+        language: "fr",
+        daysOfWeekDisabled: "2,0",
+        autoclose: true,
+        todayHighlight: true,
+        endDate: '31-12-2018',
+        datesDisabled:['02-04-2018', '01-05-2018', '08-05-2018', '10-05-2018', '20-05-2018', '21-05-2018', '14-07-2018', '15-08-2018', '01-11-2018', '11-11-2018', '25-12-2018', '31-12-2018', '01-01-2019', '21-04-2019', '22-04-2019', '01-05-2019', '08-05-2109', '30-05-2019', '09-06-2019', '10-06-2019', '14-07-2019', '15-08-2019', '01-11-2019', '11-11-2019', '25-12-2019', '31-12-2019']
+    });
 
     // Ajout billets dans vue Panier
     // On récupère la balase <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.

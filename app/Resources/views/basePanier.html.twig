@@ -1,22 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<div class="container-fluid">
-    {% block flash %}
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-    {% endblock %}
+<section class="container-fluid">
     <div class="row">
-        <div class="col-sm-2">
+        <nav class="col-sm-2">
             {% block navPanier %}
                 <div class="well well-lg">
                     <ul class="list-group">
-                        <li><a href="{{ path('app_louvre_selection') }}">Selection</a></li>
                         <li><a href="{{ path('panier', {'idUser': 'x'}) }}">Panier</a></li>
                         <li><a href="{{ path('info_fac', {'idCmd': 'x', 'idUser': 'x'}) }}">informations de facturation</a></li>
                         <li><a href="{{ path('recap_cmd', {'idCmd': 'x', 'idUser': 'x', 'idAdresse': 'x'}) }}">Validation de la commande</a></li>
@@ -24,10 +14,10 @@
                     </ul>
                 </div>
             {% endblock %}
-        </div>
-        <div class="col-sm-10">
+        </nav>
+        <article class="col-sm-10">
             {% block panier %}{% endblock %}
-        </div>
+        </article>
     </div>
-</div>
+</section>
 {% endblock %}

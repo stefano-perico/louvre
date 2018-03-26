@@ -5,7 +5,22 @@
         <input type="text" name="date" class="datepicker">
         <input type='submit' name='Submit' value='Send'>
     </form>
-
-
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var dates = "{{ estDispo.jourFeries.jours_feries }}";
+        var myDates = dates.split(',');
+    // Datepicker vue Panier
+        $(".datepicker").datepicker({
+        format: "dd-mm-yyyy",
+        startDate: "0d",
+        language: "fr",
+        daysOfWeekDisabled: "2,0",
+        autoclose: true,
+        todayHighlight: true,
+        endDate: '31-12-2018',
+        datesDisabled:myDates
+        });
+    </script>
 {% endblock %}
 

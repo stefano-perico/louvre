@@ -34,7 +34,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EstDisponible
 {
+    public $jourFeries;
+
+
     const BILLET_MAX = 1000;
+
+    public function __construct(JoursFeries $joursFeries = null)
+    {
+        $this->jourFeries = $joursFeries;
+    }
 
     public function billetsDispo($nbBillets)
     {
@@ -54,6 +62,22 @@ class EstDisponible
         $reste = self::BILLET_MAX - (int)$commandes;
         return "Désoler mais, il ne reste que $reste billets";
     }
+
+    public function dateIsOpen($date)
+    {
+        $joutSemaine = date('N', strtotime($date));
+        $jourFeries = [$this->jourFeries->jours_feries()];
+        $isHoliday = in_array($date, $jourFeries);
+
+        if($joutSemaine == 2 OR $joutSemaine == 7 OR $isHoliday == true)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 
 

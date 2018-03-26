@@ -40,5 +40,7 @@ monolog:
 #swiftmailer:
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    spool: { type: memory }
+    transport: mail
+    username: 'stefano0012@gmail.com'
+    password: 'Thspfm1985!Adonis'
+

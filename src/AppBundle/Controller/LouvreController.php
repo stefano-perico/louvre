@@ -34,8 +34,9 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
      */
-    public function panierAction(Request $request, $idUser, Commande $commande, EntityManager $em)
+    public function panierAction(Request $request, $idUser, Commande $commande)
     {
+        $em = $this->getDoctrine()->getManager();
         $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
         $form = $this->createForm(CommandeType::class, $commande);
 
@@ -79,8 +80,9 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/info_facturation", name="info_fac")
      */
-    public function infoFacturationAction(Request $request, Utilisateur $utilisateur, EntityManager $em)
+    public function infoFacturationAction(Request $request, Utilisateur $utilisateur)
     {
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         if ($request->isMethod('POST'))
         {

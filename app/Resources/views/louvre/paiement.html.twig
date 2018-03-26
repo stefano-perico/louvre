@@ -11,7 +11,7 @@
         var dates = "{{ estDispo.jourFeries.jours_feries }}";
         var myDates = dates.split(',');
     // Datepicker vue Panier
-        $(".datepicker").datepicker({
+        $(".datepicker2").datepicker({
         format: "dd-mm-yyyy",
         startDate: "0d",
         language: "fr",
@@ -19,7 +19,7 @@
         autoclose: true,
         todayHighlight: true,
         endDate: '31-12-2018',
-        datesDisabled:myDates
+        datesDisabled:'26-03-2018'
         });
     </script>
 {% endblock %}

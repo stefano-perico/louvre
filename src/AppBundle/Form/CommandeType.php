@@ -26,7 +26,7 @@ class CommandeType extends AbstractType
             ->add('dateBillet', DateType::class,
                 array(
                     'widget'    => 'single_text',
-                    'attr'      => ['class' => 'datepicker'],
+                    'attr'      => ['class' => 'datepicker2'],
                     'html5'     => false,
                 )
             )

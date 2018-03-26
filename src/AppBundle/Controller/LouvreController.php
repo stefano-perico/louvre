@@ -34,8 +34,10 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
      */
-    public function panierAction(Request $request, $idUser, Commande $commande, EntityManager $em)
+    public function panierAction(Request $request, $idUser)
     {
+        $commande = new Commande();
+        $em = $this->getDoctrine()->getManager();
         $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
         $form = $this->createForm(CommandeType::class, $commande);
 
@@ -79,8 +81,10 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/info_facturation", name="info_fac")
      */
-    public function infoFacturationAction(Request $request, Utilisateur $utilisateur, EntityManager $em)
+    public function infoFacturationAction(Request $request)
     {
+        $utilisateur = new Utilisateur();
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         if ($request->isMethod('POST'))
         {
@@ -99,8 +103,9 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/recap/commande:{idCmd}", name="recap_cmd")
      */
-    public function recapAction(Request $request, \Swift_Mailer $mailer, EntityManager $em, $idCmd)
+    public function recapAction(Request $request, \Swift_Mailer $mailer, $idCmd)
     {
+        $em = $this->getDoctrine()->getManager();
         $commande = $em->getRepository('AppBundle:Commande')->find($idCmd);
         if ($request->isMethod('POST'))
         {

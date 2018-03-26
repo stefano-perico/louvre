@@ -86,14 +86,6 @@ class Billet
    private $commande;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * Get id
      *
      * @return integer

@@ -28,6 +28,7 @@ class CommandeType extends AbstractType
                     'widget'    => 'single_text',
                     'attr'      => ['class' => 'datepicker2'],
                     'html5'     => false,
+                    'format'    => 'dd-MM-yyyy',
                 )
             )
             ->add('billet', CollectionType::class,

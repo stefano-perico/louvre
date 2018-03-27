@@ -13,6 +13,21 @@
 {% endblock %}
 {% block javascripts %}
     <script>
+        // Datepicker vue Panier
+        var dates = "{{ estDispo.jourFeries.jours_feries }}";
+        var myDates = dates.split(',');
+
+        $(".datepicker2").datepicker({
+            format: "dd-mm-yyyy",
+            startDate: "0d",
+            language: "fr",
+            daysOfWeekDisabled: "2,0",
+            autoclose: true,
+            todayHighlight: true,
+            endDate: '31-12-2018',
+            datesDisabled:myDates
+        });
+
         // Ajout billets dans vue Panier
         // On récupère la balase <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
         var $container = $('div#appbundle_commandes_billet');

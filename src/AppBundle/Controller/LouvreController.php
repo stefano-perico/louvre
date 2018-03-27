@@ -34,7 +34,7 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
      */
-    public function panierAction(Request $request, $idUser)
+    public function panierAction(Request $request, EstDisponible $estDisponible, $idUser)
     {
         $commande = new Commande();
         $em = $this->getDoctrine()->getManager();
@@ -75,7 +75,7 @@ class LouvreController extends Controller
                 }
             }
         }
-        return $this->render(':louvre:panier.html.twig', array('form' => $form->createView()));
+        return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
     }
 
     /**
@@ -103,7 +103,7 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/recap/commande:{idCmd}", name="recap_cmd")
      */
-    public function recapAction(Request $request, \Swift_Mailer $mailer, $idCmd)
+    public function recapAction(Request $request, $idCmd)
     {
         $em = $this->getDoctrine()->getManager();
         $commande = $em->getRepository('AppBundle:Commande')->find($idCmd);
@@ -121,17 +121,17 @@ class LouvreController extends Controller
                 "description" => "Example charge",
                 "source" => $token,
             ));
+            $mailer = $this->get('mailer');
             $message = (new \Swift_Message('Hello Email'))
                 ->setFrom('stefano0012@gmail.com')
-                ->setTo('stef.tcr@gmail.com')
+                ->setTo('stefano0012@gmail.com')
                 ->setBody(
                     $this->renderView(
-                        ':louvre:mail.html.twig'
-                        ),
-                        'text/html'
-                    );
+                        ':louvre/mail:mail.html.twig'
+                    ),
+                    'text/html'
+                );
             $mailer->send($message);
-            return $this->render("louvre/paiement.html.twig");
         }
         return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande));
     }

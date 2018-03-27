@@ -21,7 +21,7 @@ class TestLouvreController extends Controller
             ->setTo('stefano0012@gmail.com')
             ->setBody(
                 $this->renderView(
-                    ':louvre:mail.html.twig'
+                    ':louvre/mail:mail.html.twig'
                 ),
                 'text/html'
             );
@@ -57,7 +57,7 @@ class TestLouvreController extends Controller
             ->setTo('stefano0012@gmail.com')
             ->setBody(
                 $this->renderView(
-                    ':louvre:mail.html.twig'
+                    ':louvre/mail:mail.html.twig'
                 ),
                 'text/html'
             );

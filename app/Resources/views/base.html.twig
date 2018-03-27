@@ -24,12 +24,14 @@
         </form>
     </div>
     <header class="header">
-        <img class="logo-icon" src="{{ asset('images/logo-louvre.jpg') }}">
-        <ul class="navi">
-            <li><a href="{{ path('info_fac') }}">Billeterie</a> </li>
-            <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
-            <li><a href="#">Login</a></li>
-        </ul>
+        <nav>
+            <img class="logo-icon" src="{{ asset('images/logo-louvre.jpg') }}">
+            <ul class="navi">
+                <li><a href="{{ path('info_fac') }}">Billeterie</a> </li>
+                <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
+            </ul>
+        </nav>
+
     </header>
 
     {% for label, messages in app.flashes %}

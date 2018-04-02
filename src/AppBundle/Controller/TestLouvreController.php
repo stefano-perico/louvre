@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Commande;
 use AppBundle\Service\EstDisponible;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,8 +14,11 @@ class TestLouvreController extends Controller
     /**
      * @Route("/louvre/test", name="test")
      */
-    public function testAction(Request $request, EstDisponible $estDisponible)
+    public function testAction()
     {
+        $commande = $this->getDoctrine()->getManager()->getRepository('AppBundle:Commande')->find(49);
+        return $this->render('louvre\mail\mail.html.twig', array('commande' => $commande));
+        /**
         $mailer = $this->get('mailer');
         $message = (new \Swift_Message('Hello Email'))
             ->setFrom('stefano0012@gmail.com')
@@ -26,6 +30,7 @@ class TestLouvreController extends Controller
                 'text/html'
             );
         $mailer->send($message);
+         **/
 
 
         /**
@@ -33,7 +38,7 @@ class TestLouvreController extends Controller
         $headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
         mail('stefano0012@gmail.com', 'symfony', $message, $headers);
-         **/
+
         if ($request->isMethod('POST'))
         {
             $date = $request->request->get('date');
@@ -44,6 +49,7 @@ class TestLouvreController extends Controller
             return 'Ok :';
         }
         return $this->render("louvre/paiement.html.twig", array('estDispo' => $estDisponible));
+        **/
     }
 
     /**

@@ -1,46 +1,188 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
-    <meta charset="UTF-8">
-    <title>Le titre du document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <style>
-        .bd-example {
-            position: relative;
-            padding: 1rem;
-            margin: 1rem -15px 0;
-            border: solid #f7f7f9;
-            border-width: .2rem 0 0;
-        }
-
-    </style>
+    <title>Titre de la page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 </head>
-<h1></h1>
-<h3>You did it! You registered!</h3>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<!-- corp du mail -->
+<table bgcolor="#343846" width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+        <td>
+            <!-- bloc header -->
+            <table align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                <!-- bloc d'espace -->
+                <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                </tr>
+                <!-- bloc logo du site -->
+                <tr>
+                    <td align="center" style="text-align: center;">
+                        <a href="http://projetstef.net">
+                            <img src="https://www.louvre.fr/sites/all/themes/louvre/img/data/logo-louvre.jpg" width="300" border="0" alt="logo_du_louvre">
+                        </a>
+                    </td>
+                </tr>
+                <!-- bloc d'espace -->
+                <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                </tr>
 
-Hi ! You're successfully registered.
+                <!-- bloc Titre principal -->
+                <tr>
+                    <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; font-size: 40px; color: #ffffff; mso-line-height-rule: exactly; line-height: 28px;">
+                        Bienvenue au Louvre
+                    </td>
+                </tr>
+                <!-- bloc d'espace -->
+                <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                </tr>
+                <!-- FIN DU BLOC titre -->
 
-<div class="container">
-    <div class="row justify-content-start">
-        <div class="col col-sm-3">
-            <div class="card mb-3" style="width: 230px" >
-                <img class="card-img-top" src="https://www.louvre.fr/sites/all/themes/louvre/img/data/logo-louvre.jpg" alt="logo_louvre">
-                <div class="card-body">
-                    <h5 class="card-title">MUSEE PLEIN TARIF</h5>
-                    <h6 class="card-subtitle text-muted">Stefano PERICO</h6>
-                    <p class="card-text">
-                        DATE : 15-01-03 <br>
-                        PRIX : 7.50€
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <!-- bloc text -->
+                <tr>
+                    <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; color: #aaaaaa; mso-line-height-rule: exactly; line-height: 26px;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse facere neque non nostrum odit placeat, praesentium sint veritatis! Consequuntur culpa earum est eveniet maiores neque odio placeat possimus provident quo.
+                    </td>
+                </tr>
+                <!-- bloc d'espace -->
+                <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                </tr>
+                <!-- FIN DU BLOC text -->
+            </table>
+            <!-- FIN DU BLOC header -->
+
+            <!-- bloc body -->
+            <table bgcolor="#414655" width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                <!-- séparation -->
+                <tr>
+                    <td height="30" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                </tr>
+
+                <!-- corp du bloc -->
+                <tr>
+                    <td>
+                        <table align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+                            <!-- titre du corp -->
+                            <tr>
+                                <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; font-size: 40px; color: #ffffff; mso-line-height-rule: exactly; line-height: 28px;">
+                                    Vos billets
+                                </td>
+                            </tr>
+
+                            <!-- bloc d'espace -->
+                            <tr>
+                                <td height="30" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                            </tr>
+
+                            <!-- bloc trait -->
+                            <tr>
+                                <td align="center">
+                                    <table align="center" width="96" border="0" cellpadding="0" cellspacing="0" bgcolor="#7fffd4">
+                                        <tbody>
+                                        <tr>
+                                            <td height="4" style="font-size: 4px; line-height: 4px"> &nbsp; </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- bloc d'espace -->
+                            <tr>
+                                <td height="15" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                            </tr>
+
+                            <!-- bloc des billets -->
+                            {% for billet in commande.billet %}
+                            <tr>
+                                <td style="border: 3px solid #2b2b2b">
+                                    <!-- colonne 1 -->
+                                    <table bgcolor="#f0f8ff" width="590" align="center" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                        <!-- séparation -->
+                                        <tr>
+                                            <td height="15" style="font-size: 30px; line-height: 10px"> &nbsp; </td>
+                                        </tr>
+                                        <!-- titre -->
+                                        <tr>
+                                            <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; font-size: 28px; color: #ffffff; mso-line-height-rule: exactly; line-height: 28px;">
+                                                <img src="https://www.louvre.fr/sites/all/themes/louvre/img/data/logo-louvre.jpg" border="0" alt="logo_du_louvre"><br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; font-size: 15px; color: #454545; mso-line-height-rule: exactly; line-height: 20px;">
+                                                www.louvre.fr
+                                            </td>
+                                        </tr>
+                                        <!-- séparation -->
+                                        <tr>
+                                            <td height="15" style="font-size: 30px; line-height: 10px"> &nbsp; </td>
+                                        </tr>
+                                        <!-- text -->
+                                        <tr>
+                                            <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; font-size: 25px; color: #454545; mso-line-height-rule: exactly; line-height: 28px;">
+                                                MUSEE {{ billet.type }}
+                                            </td>
+                                        </tr>
+                                        <!-- séparation -->
+                                        <tr>
+                                            <td height="15" style="font-size: 30px; line-height: 10px"> &nbsp; </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" style="font-family: Helvetica, sans-serif; padding-left: 10px;">
+                                                <b>PROPRIETAIRE :</b> {{ billet.prenom }} {{ billet.nom |upper}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" style="font-family: Helvetica, sans-serif; padding-left: 10px;">
+                                                <b>DATE :</b> {{ commande.dateBillet|date('d-m-Y') }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" style="font-family: Helvetica, sans-serif; padding-left: 10px;">
+                                                <b>PRIX :</b> {{ billet.prix }} €
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-family: Helvetica, sans-serif; padding: 0px 10px 10px 0px">
+                                                <i><b>id billet :</b> {{ billet.id }}</i>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- FIN colonne 1 -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="5" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                            </tr>
+                            {% endfor %}
+                            <!-- FIN DU BLOC billets -->
+
+                            <!-- separation -->
+                            <tr>
+                                <td height="30" style="font-size: 30px; line-height: 30px"> &nbsp; </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- FIN DU BLOC corp -->
+                </tbody>
+            </table>
+            <!-- FIN DU BLOC body -->
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 
-Thanks!
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+

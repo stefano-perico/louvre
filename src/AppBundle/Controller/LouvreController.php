@@ -127,7 +127,7 @@ class LouvreController extends Controller
                 ->setTo('stefano0012@gmail.com')
                 ->setBody(
                     $this->renderView(
-                        ':louvre/mail:mail.html.twig'
+                        ':louvre/mail:mail.html.twig', array('commande' => $commande)
                     ),
                     'text/html'
                 );

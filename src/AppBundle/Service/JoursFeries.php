@@ -51,11 +51,6 @@ class JoursFeries
         return implode(',', $jours_feries);
     }
 
-    public function getJoursFeriesJson($key)
-    {
-        $test = in_array($key, $this->jours_feries());
-        return $test;
-    }
 
 
 

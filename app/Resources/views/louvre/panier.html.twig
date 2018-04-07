@@ -3,18 +3,12 @@
     <div>
         {{ include(':louvre/form:formPanier.html.twig') }}
     </div>
-    <br>
-    <div>
-        <select class="selectpicker">
-            <option>Journée</option>
-            <option>Demi-journée</option>
-        </select>
-    </div>
+
 {% endblock %}
 {% block javascripts %}
     <script>
         // Datepicker vue Panier
-        var dates = "{{ estDispo.jourFeries.jours_feries }}";
+        var dates = "{{ estDispo }}";
         var myDates = dates.split(',');
 
         $(".datepicker2").datepicker({

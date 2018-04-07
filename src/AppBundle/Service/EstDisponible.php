@@ -8,59 +8,43 @@
 
 namespace AppBundle\Service;
 
-
-use AppBundle\AppBundle;
-use AppBundle\Entity\Billet;
+use AppBundle\Service\JoursFeries;
 use AppBundle\Entity\Commande;
-use AppBundle\Repository\BilletsRepository;
 use AppBundle\Repository\CommandesRepository;
-use Symfony\Component\HttpKernel\Tests\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\HttpFoundation\Request;
 
-
-use AppBundle\Entity\Utilisateur;
-use AppBundle\Form\BilletType;
-use AppBundle\Form\CommandeType;
-use AppBundle\Form\UtilisateurType;
-
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
-use AppBundle\Service\CalculerPrix;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class EstDisponible
 {
     public $jourFeries;
 
-
     const BILLET_MAX = 1000;
+    const JOURS_SEMAINE = array('lundi' => 1, 'mardi' => 2, 'mercredi' => 3, 'jeudi' => 4, 'vendredi' => 5, 'samedi' => 6, 'dimanche' => 7);
 
-    public function __construct(JoursFeries $joursFeries = null)
+    public function __construct(JoursFeries $joursFeries)
     {
         $this->jourFeries = $joursFeries;
     }
 
-    public function billetsDispo($nbBillets)
+    public function billetsDispo(Commande $commande, CommandesRepository $commandesRepository)
     {
-        if ($nbBillets >= self::BILLET_MAX)
+        $date = new \DateTime();
+        $dateBillet = $commande->getDateBillet();
+        if ($commandesRepository->countBillets($commande) >= self::BILLET_MAX OR $dateBillet < $date )
         {
             return false;
         }
+        elseif ($this->dateIsOpen($dateBillet->format('d-m-Y')))
+        {
+            return false;
+        }
+
         return true;
     }
 
-    public function resteBillets($commandes)
+    public function resteBillets()
     {
-        if ((int)$commandes >= self::BILLET_MAX)
-        {
             return "Désoler mais, il ne reste plus de billets pour cette date";
-        }
-        $reste = self::BILLET_MAX - (int)$commandes;
-        return "Désoler mais, il ne reste que $reste billets";
     }
 
     public function dateIsOpen($date)
@@ -69,7 +53,7 @@ class EstDisponible
         $jourFeries = [$this->jourFeries->jours_feries()];
         $isHoliday = in_array($date, $jourFeries);
 
-        if($joutSemaine == 2 OR $joutSemaine == 7 OR $isHoliday == true)
+        if($joutSemaine == self::JOURS_SEMAINE['mardi'] OR $joutSemaine == self::JOURS_SEMAINE['dimanche'] OR $isHoliday == true)
         {
             return true;
         }

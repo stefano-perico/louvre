@@ -33,6 +33,13 @@ services:
     mon_test:
         class: AppBundle\Repository\CommandesRepository
 
+    app.jours_feries:
+        class: AppBundle\Service\JoursFeries
+
+    app.est_disponible:
+        class: AppBundle\Service\EstDisponible
+        arguments:
+          - "@app.jours_feries"
 
 
 

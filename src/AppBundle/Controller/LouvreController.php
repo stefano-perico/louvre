@@ -59,23 +59,22 @@ class LouvreController extends Controller
                 $commande->setPrix($total);
                 $em->persist($commande);
                 $commandeRepo = $em->getRepository("AppBundle:Commande");
-                $billetsDispo = $commandeRepo->countBillets($commande);
-                $estDisponible = new EstDisponible();
-                if ($estDisponible->billetsDispo($billetsDispo) == true)
+                $estDisponible = $this->get('app.est_disponible:');
+                if ($estDisponible->billetsDispo($commande, $commandeRepo) == true)
                 {
                     $em->flush();
-                    $this->addFlash('success', 'Billet bien enregistré.');
+                    $this->addFlash('success', 'Billets bien enregistré.');
                     return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
                 }
                 else
                 {
-                    $infoDispo = $estDisponible->resteBillets($billetsDispo);
+                    $infoDispo = $estDisponible->resteBillets();
                     $this->addFlash('danger', $infoDispo);
-                    return $this->render(':louvre:panier.html.twig', array('form' => $form->createView()));
+                    return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible->jourFeries->jours_feries()));
                 }
             }
         }
-        return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
+        return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible->jourFeries->jours_feries()));
     }
 
     /**

@@ -40,18 +40,14 @@ class LouvreController extends Controller
         $em = $this->getDoctrine()->getManager();
         $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
         $form = $this->createForm(CommandeType::class, $commande);
-
-        if ($request->isMethod('POST'))
-        {
+        if ($request->isMethod('POST')){
             $form->handleRequest($request);
-            if ($form->isValid())
-            {
+            if ($form->isValid()){
                 $commande->setUtilisateur($utilisateur);
                 $total = 0;
-                foreach ($commande->getBillet() as $billet)
-                {
-                    $calculerPrix = new CalculerPrix();
-                    $prix = $calculerPrix->prixBillet($billet);
+                foreach ($commande->getBillet() as $billet){
+                    $calculerPrix = $this->get('app.calculer_prix');
+                    $prix = $calculerPrix->prixBillet($billet, $commande->getDateBillet());
                     $billet->setCommande($commande);
                     $em->persist($billet);
                     $total = $total + $prix;
@@ -59,22 +55,20 @@ class LouvreController extends Controller
                 $commande->setPrix($total);
                 $em->persist($commande);
                 $commandeRepo = $em->getRepository("AppBundle:Commande");
-                $estDisponible = $this->get('app.est_disponible:');
-                if ($estDisponible->billetsDispo($commande, $commandeRepo) == true)
-                {
+                $estDisponible = $this->get('app.est_disponible');
+                if ($estDisponible->billetsDispo($commande, $commandeRepo) == true){
                     $em->flush();
                     $this->addFlash('success', 'Billets bien enregistré.');
                     return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
                 }
-                else
-                {
+                else{
                     $infoDispo = $estDisponible->resteBillets();
                     $this->addFlash('danger', $infoDispo);
-                    return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible->jourFeries->jours_feries()));
+                    return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
                 }
             }
         }
-        return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible->jourFeries->jours_feries()));
+        return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
     }
 
     /**

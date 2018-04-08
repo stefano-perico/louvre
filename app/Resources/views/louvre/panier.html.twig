@@ -8,7 +8,7 @@
 {% block javascripts %}
     <script>
         // Datepicker vue Panier
-        var dates = "{{ estDispo }}";
+        var dates = "{{ estDispo.jourFeries.jours_feries }}";
         var myDates = dates.split(',');
 
         $(".datepicker2").datepicker({
@@ -18,7 +18,7 @@
             daysOfWeekDisabled: "2,0",
             autoclose: true,
             todayHighlight: true,
-            endDate: '31-12-2018',
+            endDate: "{{ estDispo.dateLimite }}",
             datesDisabled:myDates
         });
 

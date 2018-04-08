@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefa
- * Date: 10/12/2017
- * Time: 16:31
- */
 
 namespace AppBundle\Service;
 
 
 use AppBundle\Entity\Billet;
+use AppBundle\Entity\Commande;
+
 
 class CalculerPrix
 {
@@ -18,9 +14,15 @@ class CalculerPrix
     const CATEGORIE_REDUIT = array('prix' => 10, 'type' => 'Réduit');
     const CATEGORIE_ENFANT = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
     const CATEGORIE_NORMAL = array('prix' => 16, 'type' => "Plein Tarif");
+    const HEURE_LIMITE_JOURNEE = 14;
 
-    public function prixBillet(Billet $billet)
+
+    public function prixBillet(Billet $billet, \DateTime $dateBillet)
     {
+        if($this->isDemiJournee($dateBillet))
+        {
+            $billet->setDemiJournee(true);
+        }
         if ($billet->getDemiJournee() == true)
         {
             $prix = $this->setDemiJournee($billet);
@@ -107,5 +109,18 @@ class CalculerPrix
                 ;
         }
         return $prix;
+    }
+
+    private function isDemiJournee(\DateTime $dateBillet)
+    {
+        $dateDuJour = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $heureLimite = new \DateTime();
+        $heureLimite->setTime(self::HEURE_LIMITE_JOURNEE,0);
+        if($dateBillet->format('d-m-Y') == $dateDuJour->format('d-m-Y') ) {
+            if ($dateDuJour->format('h:i' > $heureLimite->format('h:i'))) {
+                return true;
+            }
+        }
+        return false;
     }
 }

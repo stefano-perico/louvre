@@ -41,7 +41,8 @@ services:
         arguments:
           - "@app.jours_feries"
 
-
+    app.calculer_prix:
+        class: AppBunble\Service\CalculerPrix
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

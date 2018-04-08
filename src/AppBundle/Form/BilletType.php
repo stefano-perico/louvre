@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,9 +20,15 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
+            ->add('nom', TextType::class, array(
+                'attr'  => ['class' => 'col-sm-6']
+            ))
+            ->add('prenom', TextType::class, array(
+                'attr'  => ['class' => 'col-sm-6']
+            ))
             ->add('dateNaissance', BirthdayType::class)
+            ->add('tarifReduit', CheckboxType::class,
+                array('label' => 'Tarif réduit'))
         ;
     }
     

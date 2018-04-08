@@ -19,7 +19,7 @@ class EstDisponible
     public $jourFeries;
 
     const BILLET_MAX = 1000;
-    const JOURS_SEMAINE = array('lundi' => 1, 'mardi' => 2, 'mercredi' => 3, 'jeudi' => 4, 'vendredi' => 5, 'samedi' => 6, 'dimanche' => 7);
+    const JOUR_FERME = array(2,7) ; // mardi et dimanche
 
     public function __construct(JoursFeries $joursFeries)
     {
@@ -53,11 +53,18 @@ class EstDisponible
         $jourFeries = [$this->jourFeries->jours_feries()];
         $isHoliday = in_array($date, $jourFeries);
 
-        if($joutSemaine == self::JOURS_SEMAINE['mardi'] OR $joutSemaine == self::JOURS_SEMAINE['dimanche'] OR $isHoliday == true)
+        if(in_array($joutSemaine,self::JOUR_FERME) OR $isHoliday == true)
         {
             return true;
         }
         return false;
+    }
+
+    public function dateLimite()
+    {
+        $dateLimite = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $dateLimite->add(new \DateInterval('P6M'));
+        return $dateLimite->format('d-m-Y');
     }
 
 

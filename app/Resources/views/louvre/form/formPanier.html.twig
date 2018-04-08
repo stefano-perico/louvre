@@ -1,5 +1,5 @@
 
-
+{%  form_theme form 'bootstrap_4_layout.html.twig' %}
     {{ form_start(form) }}
     {{ form_errors(form) }}
 
@@ -9,7 +9,7 @@
         {{ form_widget(form.dateBillet) }}
     </div>
     <br>
-    <div class="col-sm-10">
+    <div class="col-sm-10" id="test">
         {{ form_row(form.billet) }}
         <a href="#" id="add_billet" class="btn btn-success">Ajouter un billet</a>
     </div>

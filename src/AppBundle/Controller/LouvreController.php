@@ -34,11 +34,11 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
      */
-    public function panierAction(Request $request, EstDisponible $estDisponible, $idUser)
+    public function panierAction(Request $request, EstDisponible $estDisponible, CalculerPrix $calculerPrix, $idUser)
     {
         $commande = new Commande();
         $em = $this->getDoctrine()->getManager();
-        $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($idUser);
+        $utilisateur = $em->getRepository(Utilisateur::class)->find($idUser);
         $form = $this->createForm(CommandeType::class, $commande);
         if ($request->isMethod('POST')){
             $form->handleRequest($request);
@@ -46,17 +46,14 @@ class LouvreController extends Controller
                 $commande->setUtilisateur($utilisateur);
                 $total = 0;
                 foreach ($commande->getBillet() as $billet){
-                    $calculerPrix = $this->get('app.calculer_prix');
-                    $prix = $calculerPrix->prixBillet($billet, $commande->getDateBillet());
+                    $prix = $calculerPrix->prixBillet($billet, $commande);
                     $billet->setCommande($commande);
                     $em->persist($billet);
                     $total = $total + $prix;
                 }
                 $commande->setPrix($total);
                 $em->persist($commande);
-                $commandeRepo = $em->getRepository("AppBundle:Commande");
-                $estDisponible = $this->get('app.est_disponible');
-                if ($estDisponible->billetsDispo($commande, $commandeRepo) == true){
+                if ($estDisponible->billetsDispo($commande)){
                     $em->flush();
                     $this->addFlash('success', 'Billets bien enregistré.');
                     return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
@@ -89,7 +86,6 @@ class LouvreController extends Controller
                 return $this->redirectToRoute('panier', array('idUser' => $utilisateur->getId()));
             }
         }
-
         return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));
     }
 
@@ -99,7 +95,7 @@ class LouvreController extends Controller
     public function recapAction(Request $request, $idCmd)
     {
         $em = $this->getDoctrine()->getManager();
-        $commande = $em->getRepository('AppBundle:Commande')->find($idCmd);
+        $commande = $em->getRepository(Commande::class)->find($idCmd);
         if ($request->isMethod('POST'))
         {
             \Stripe\Stripe::setApiKey("sk_test_0qfLdJkutmeqc5EVVMWRQzI0");

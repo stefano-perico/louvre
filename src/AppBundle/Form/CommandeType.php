@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -31,6 +32,15 @@ class CommandeType extends AbstractType
                     'format'    => 'dd-MM-yyyy',
                 )
             )
+            ->add('demiJournee', ChoiceType::class,
+                array(
+                    'attr'      => ['class' => 'typeBilletJour'],
+                    'choices'   => array(
+                        'Journée'       => false,
+                        'Demi-journée'  => true
+                    )
+                )
+            )
             ->add('billet', CollectionType::class,
                 array(
                     'entry_type'    => BilletType::class,
@@ -38,7 +48,7 @@ class CommandeType extends AbstractType
                     'allow_delete'  => true
                 )
             )
-            ->add('Envoyer', SubmitType::class)
+            ->add('Valider', SubmitType::class)
         ;
     }
     

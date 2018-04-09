@@ -64,6 +64,13 @@ class Commande
     private $prix;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="demi_journee", type="boolean")
+     */
+    private $demiJournee = false;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -221,13 +228,6 @@ class Commande
         return $this->billet;
     }
 
-    public function prixCommande()
-    {
-        $test = $this->em->getRepository('AppBundle:Commande');
-        $prix = $test->sumBillet($this->id);
-        return $prix;
-    }
-
     /**
      * Set prix
      *
@@ -255,5 +255,31 @@ class Commande
     public function caluclerPrixCentimes()
     {
         return $this->getPrix() * 100;
+    }
+
+
+
+    /**
+     * Set demiJournee
+     *
+     * @param boolean $demiJournee
+     *
+     * @return Commande
+     */
+    public function setDemiJournee($demiJournee)
+    {
+        $this->demiJournee = $demiJournee;
+
+        return $this;
+    }
+
+    /**
+     * Get demiJournee
+     *
+     * @return boolean
+     */
+    public function getDemiJournee()
+    {
+        return $this->demiJournee;
     }
 }

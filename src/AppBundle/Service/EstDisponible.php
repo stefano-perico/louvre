@@ -11,26 +11,38 @@ namespace AppBundle\Service;
 use AppBundle\Service\JoursFeries;
 use AppBundle\Entity\Commande;
 use AppBundle\Repository\CommandesRepository;
-
+use Doctrine\ORM\EntityManager;
 
 
 class EstDisponible
 {
     public $jourFeries;
+    protected $em;
+
 
     const BILLET_MAX = 1000;
     const JOUR_FERME = array(2,7) ; // mardi et dimanche
+    const HEURE_LIMITE_JOURNEE = 14;
 
-    public function __construct(JoursFeries $joursFeries)
+    public function __construct(JoursFeries $joursFeries, EntityManager $em)
     {
         $this->jourFeries = $joursFeries;
+        $this->em = $em;
+
     }
 
-    public function billetsDispo(Commande $commande, CommandesRepository $commandesRepository)
+    public function getDate()
     {
-        $date = new \DateTime();
+        $date = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        return $date;
+    }
+
+    public function billetsDispo(Commande $commande)
+    {
+        $commandeRepo = $this->em->getRepository(Commande::class);
+        $nbBillets = $commandeRepo->countBillets($commande);
         $dateBillet = $commande->getDateBillet();
-        if ($commandesRepository->countBillets($commande) >= self::BILLET_MAX OR $dateBillet < $date )
+        if ($nbBillets >= self::BILLET_MAX OR $dateBillet < $this->getDate() )
         {
             return false;
         }
@@ -62,9 +74,13 @@ class EstDisponible
 
     public function dateLimite()
     {
-        $dateLimite = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-        $dateLimite->add(new \DateInterval('P6M'));
+        $dateLimite = $this->getDate()->add(new \DateInterval('P6M'));
         return $dateLimite->format('d-m-Y');
+    }
+
+    public function heureLimite()
+    {
+
     }
 
 

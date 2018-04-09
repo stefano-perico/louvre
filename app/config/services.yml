@@ -29,20 +29,11 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\Service\EstDisponible:
+        arguments: ['@AppBundle\Service\JoursFeries', '@doctrine.orm.entity_manager']
 
-    mon_test:
-        class: AppBundle\Repository\CommandesRepository
 
-    app.jours_feries:
-        class: AppBundle\Service\JoursFeries
 
-    app.est_disponible:
-        class: AppBundle\Service\EstDisponible
-        arguments:
-          - "@app.jours_feries"
-
-    app.calculer_prix:
-        class: AppBunble\Service\CalculerPrix
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

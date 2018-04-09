@@ -11,16 +11,32 @@
         var dates = "{{ estDispo.jourFeries.jours_feries }}";
         var myDates = dates.split(',');
 
-        $(".datepicker2").datepicker({
-            format: "dd-mm-yyyy",
-            startDate: "0d",
-            language: "fr",
-            daysOfWeekDisabled: "2,0",
-            autoclose: true,
-            todayHighlight: true,
-            endDate: "{{ estDispo.dateLimite }}",
-            datesDisabled:myDates
-        });
+        $(".datepicker2")
+            .datepicker({
+                format: "dd-mm-yyyy",
+                startDate: "0d",
+                language: "fr",
+                daysOfWeekDisabled: "2,0",
+                autoclose: true,
+                todayHighlight: true,
+                endDate: "{{ estDispo.dateLimite }}",
+                datesDisabled:myDates
+            })
+            .change(function () {
+                var date = new Date();
+                var heureActuel = date.getHours();
+                var heureLimite = '{{ constant('AppBundle\\Service\\EstDisponible::HEURE_LIMITE_JOURNEE') }}';
+                var todaysDate = '{{ estDispo.date | date('d-m-Y')}}';
+                var datePicker = $(this).val();
+                if (todaysDate === datePicker){
+                    if (heureActuel > heureLimite)
+                    {
+                        $('.typeBilletJour').val(1);
+                    }
+                }else{
+                    $('.typeBilletJour').val(0);
+                }
+            });
 
         // Ajout billets dans vue Panier
         // On récupère la balase <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.

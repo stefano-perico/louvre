@@ -64,6 +64,13 @@ class Commande
     private $prix;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="demi_journee", type="boolean")
+     */
+    private $demiJournee = false;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -221,10 +228,34 @@ class Commande
         return $this->billet;
     }
 
-    public function prixCommande()
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Commande
+     */
+    public function setPrix($prix)
     {
-        $test = $this->em->getRepository('AppBundle:Commande');
-        $prix = $test->sumBillet($this->id);
-        return $prix;
+        $this->prix = $prix;
+
+        return $this;
     }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    public function caluclerPrixCentimes()
+    {
+        return $this->getPrix() * 100;
+    }
+
+
 }

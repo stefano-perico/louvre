@@ -17,13 +17,14 @@ class CalculerPrix
     const HEURE_LIMITE_JOURNEE = 14;
 
 
-    public function prixBillet(Billet $billet, \DateTime $dateBillet)
+    public function prixBillet(Billet $billet, Commande $commande)
     {
+        $dateBillet = $commande->getDateBillet();
         if($this->isDemiJournee($dateBillet))
         {
-            $billet->setDemiJournee(true);
+            $commande->setDemiJournee(true);
         }
-        if ($billet->getDemiJournee() == true)
+        if ($commande->getDemiJournee() == true)
         {
             $prix = $this->setDemiJournee($billet);
             return $prix;

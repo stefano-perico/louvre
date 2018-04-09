@@ -67,13 +67,6 @@ class Billet
     private $tarifReduit = false;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="demi_journee", type="boolean")
-     */
-    private $demiJournee = false;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string")
@@ -294,28 +287,5 @@ class Billet
         return $this->type;
     }
 
-    /**
-     * Set demiJournee
-     *
-     * @param boolean $demiJournee
-     *
-     * @return Billet
-     */
-    public function setDemiJournee($demiJournee)
-    {
-        $this->demiJournee = $demiJournee;
-
-        return $this;
-    }
-
-    /**
-     * Get demiJournee
-     *
-     * @return boolean
-     */
-    public function getDemiJournee()
-    {
-        return $this->demiJournee;
-    }
 
 }

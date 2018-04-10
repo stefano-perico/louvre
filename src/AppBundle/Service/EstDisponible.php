@@ -41,12 +41,14 @@ class EstDisponible
     {
         $commandeRepo = $this->em->getRepository(Commande::class);
         $nbBillets = $commandeRepo->countBillets($commande);
-        $dateBillet = $commande->getDateBillet();
-        if ($nbBillets >= self::BILLET_MAX OR $dateBillet < $this->getDate() )
+        $dateBillet = $commande->getDateBillet()->format('dd-mm-Y');
+        $dateJour = $this->getDate()->format('dd-mm-Y');
+
+        if ($nbBillets >= self::BILLET_MAX OR $dateBillet < $dateJour )
         {
             return false;
         }
-        elseif ($this->dateIsOpen($dateBillet->format('d-m-Y')))
+        elseif ($this->dateIsOpen($dateBillet))
         {
             return false;
         }
@@ -78,10 +80,6 @@ class EstDisponible
         return $dateLimite->format('d-m-Y');
     }
 
-    public function heureLimite()
-    {
-
-    }
 
 
 

@@ -15,8 +15,13 @@
     </ul>
     <p>Récap billets</p>
     {% for billet in commande.billet %}
-        {{ billet.id }}
-        {{ billet.nom }}
+        <div>
+            id : {{ billet.id }} <br>
+            nom : {{ billet.nom }} <br>
+            prix : {{ billet.prix }} <br>
+            type : {{ billet.type }}
+        </div>
+
     {% endfor %}
     <p>{{ commande.prix }}€</p>
     <form method="post" id="payment-form">

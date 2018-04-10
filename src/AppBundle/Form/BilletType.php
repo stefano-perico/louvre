@@ -27,8 +27,11 @@ class BilletType extends AbstractType
                 'attr'  => ['class' => 'col-sm-6']
             ))
             ->add('dateNaissance', BirthdayType::class)
-            ->add('tarifReduit', CheckboxType::class,
-                array('label' => 'Tarif réduit'))
+            ->add('tarifReduit', CheckboxType::class, array(
+                'label' => 'Tarif réduit',
+                'compound' => false,
+                'required' => false
+            ))
         ;
     }
     

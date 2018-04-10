@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="31ddc352-00f5-48ba-8c13-499a3fd29cc1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/louvre/recapPanier.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/louvre/recapPanier.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/BilletType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/BilletType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/EstDisponible.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Service/EstDisponible.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -308,7 +304,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -419,12 +415,20 @@
       <workItem from="1523264697447" duration="282000" />
       <workItem from="1523265010909" duration="10029000" />
       <workItem from="1523292476104" duration="3653000" />
-      <workItem from="1523368801063" duration="570000" />
+      <workItem from="1523368801063" duration="1036000" />
     </task>
+    <task id="LOCAL-00001" summary="nettoyage du code, ajout checkbox dans BilletType (true or false)">
+      <created>1523369650529</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1523369650530</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="405856000" />
+    <option name="totallyTimeSpent" value="406322000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -445,7 +449,7 @@
       <window_info anchor="bottom" id="Run" order="3" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32905984" />
       <window_info anchor="bottom" x="30" y="336" width="900" height="366" id="Terminal" order="11" weight="0.4159544" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19060403" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19060403" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.1932886" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32839224" />
@@ -496,8 +500,38 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="nettoyage du code, ajout checkbox dans BilletType (true or false)" />
+    <option name="LAST_COMMIT_MESSAGE" value="nettoyage du code, ajout checkbox dans BilletType (true or false)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

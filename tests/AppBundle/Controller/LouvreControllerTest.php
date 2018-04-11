@@ -5,6 +5,7 @@ namespace Tests\AppBundle\Controller;
 
 use AppBundle\Controller\LouvreController;
 use AppBundle\Entity\Billet;
+use AppBundle\Entity\Commande;
 use AppBundle\Service\CalculerPrix;
 use AppBundle\Service\EstDisponible;
 use PHPUnit\Framework\TestCase;
@@ -15,6 +16,7 @@ class LouvreControllerTest extends WebTestCase
     private $client;
     private $calculerPrix;
     private $billet;
+    private $commande;
 
     const CATEGORIE_BEBE = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
     const CATEGORIE_SENIOR = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
@@ -28,6 +30,7 @@ class LouvreControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->calculerPrix = new CalculerPrix();
         $this->billet = new Billet();
+        $this->commande = new Commande();
     }
 
     public function testInfoFacturationAction()
@@ -40,24 +43,24 @@ class LouvreControllerTest extends WebTestCase
 
     public function testPrixBebe()
     {
+        $date =  new \DateTime();
+        $dateN = $date->setDate(2018, 03, 11);
+        $dateN->format('dd-mm-Y');
+
+        $dateBillet = new \DateTime('now');
+
+        $commande = $this->commande
+            ->setDateBillet($dateBillet);
         $billetTest = $this->billet
-            ->setDemiJournee(false)
-            ->setDateNaissance(new \DateTime("2015-11-01"))
+            ->setDateNaissance($date)
             ->setTarifReduit(false)
         ;
-        $this->calculerPrix->prixBillet($billetTest);
+        $this->calculerPrix->prixBillet($billetTest, $commande);
         $prix = $billetTest->getPrix();
         $this->assertEquals(self::CATEGORIE_BEBE['prix'], $prix);
     }
 
-    public function testDispoBillets()
-    {
-        $nbBillets = 1001;
-        $dispo = new EstDisponible();
-        $test = $dispo->billetsDispo($nbBillets);
 
-        $this->assertEquals(false, $test);
-    }
 
 
 

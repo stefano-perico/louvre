@@ -18,34 +18,34 @@
 
 </head>
 <body>
-    <div class="search-bar">
-        <form method="GET" action="" class="js-sea-search sea-search">
-            <input type="search" name="q" placeholder="Search Sea Creatures" autocomplete="off" class="search-input">
-        </form>
-    </div>
     <header class="header">
-        <nav>
-            <img class="logo-icon" src="{{ asset('images/logo-louvre.jpg') }}">
-            <ul class="navi">
-                <li><a href="{{ path('info_fac') }}">Billeterie</a> </li>
-                <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
-            </ul>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container justify-content-between">
+                <a class="py-2" href="{{ path('accueil') }}">
+                    <img class="logo-icon" src="{{ asset('images/logo-louvre.jpg') }}">
+                </a>
+                <a class="btn btn-secondary btn-lg" href="{{ path('info_fac') }}">Billetterie</a>
+            </div>
         </nav>
-
-    </header>
-
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <aside class="alert alert-{{ label }}">
-                {{ message }}
-            </aside>
+     </header>
+    <aside>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <aside class="alert alert-{{ label }}">
+                    {{ message }}
+                </aside>
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
+    </aside>
 
-    {% block body %}{% endblock %}
+    <section class="container">
+        {% block body %}{% endblock %}
+    </section>
 
+    <footer class="footer">
 
-    <div class="footer"></div>
+    </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -54,7 +54,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
     <script src="https://js.stripe.com/v3/"></script>
-
     <script src="{{ asset('js/main.js') }}"></script>
     {% block javascripts %}{% endblock %}
 </body>

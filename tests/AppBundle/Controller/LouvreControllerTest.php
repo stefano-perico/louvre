@@ -18,11 +18,6 @@ class LouvreControllerTest extends WebTestCase
     private $billet;
     private $commande;
 
-    const CATEGORIE_BEBE = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
-    const CATEGORIE_SENIOR = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
-    const CATEGORIE_REDUIT = array('prix' => 10, 'type' => 'Réduit');
-    const CATEGORIE_ENFANT = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
-    const CATEGORIE_NORMAL = array('prix' => 16, 'type' => "Plein Tarif");
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
@@ -35,30 +30,33 @@ class LouvreControllerTest extends WebTestCase
 
     public function testInfoFacturationAction()
     {
-        $this->client->request('GET', '/louvre/info_facturation');
+        $this->client->request('GET', 'louvre/info_facturation');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testAccueilAction()
+    {
+        $this->client->request('GET', '');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testPanierAction()
+    {
+        $this->client->request('GET', 'louvre/panier/utilisateur:1');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testRecapAction()
+    {
+        $this->client->request('GET', 'louvre/recap/commande:2');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
 
-    public function testPrixBebe()
-    {
-        $date =  new \DateTime();
-        $dateN = $date->setDate(2018, 03, 11);
-        $dateN->format('dd-mm-Y');
-
-        $dateBillet = new \DateTime('now');
-
-        $commande = $this->commande
-            ->setDateBillet($dateBillet);
-        $billetTest = $this->billet
-            ->setDateNaissance($date)
-            ->setTarifReduit(false)
-        ;
-        $this->calculerPrix->prixBillet($billetTest, $commande);
-        $prix = $billetTest->getPrix();
-        $this->assertEquals(self::CATEGORIE_BEBE['prix'], $prix);
-    }
 
 
 

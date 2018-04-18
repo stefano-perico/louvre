@@ -196,7 +196,7 @@ class Billet
 
     public function getAge()
     {
-        $age = $this->getDateNaissance()->diff(new \DateTime())->format('%Y');
+        $age = $this->getDateNaissance()->diff(new \DateTime('now', new \DateTimeZone('Europe/Paris')))->format('%Y');
         return $age;
     }
 

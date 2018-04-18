@@ -1,6 +1,33 @@
-{% extends '::basePanier.html.twig' %}
-{% block panier %}
-    <div class="well">
-        {{ form(form) }}
-    </div>
+{% extends 'base.html.twig' %}
+{% block body %}
+    <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom) }}
+                </div>
+             <div class="col-md-6 mb-3">
+                 {{ form_label(form.prenom) }}
+                 {{ form_widget(form.prenom) }}
+             </div>
+         </div>
+        <div class="mb-3">
+            {{ form_label(form.adresse) }}
+            {{ form_widget(form.adresse) }}
+        </div>
+        <div class="row">
+            <div class="col-md-9 mb-3">
+                {{ form_label(form.ville) }}
+                {{ form_widget(form.ville) }}
+            </div>
+            <div class="col-md-3 mb-3">
+                {{ form_label(form.codePostal) }}
+                {{ form_widget(form.codePostal) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </article>
 {% endblock %}

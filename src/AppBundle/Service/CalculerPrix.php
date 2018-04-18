@@ -46,6 +46,13 @@ class CalculerPrix
     {
         switch ($age = $billet->getAge())
         {
+            case $age >= self::CATEGORIE_SENIOR['age']:
+                $prix = self::CATEGORIE_SENIOR['prix']/2;
+                $billet
+                    ->setPrix(self::CATEGORIE_SENIOR['prix']/2)
+                    ->setType(self::CATEGORIE_SENIOR['type'])
+                ;
+                break;
             case $age <= self::CATEGORIE_BEBE['age']:
                 $prix = self::CATEGORIE_BEBE['prix'];
                 $billet
@@ -58,13 +65,6 @@ class CalculerPrix
                 $billet
                     ->setPrix(self::CATEGORIE_ENFANT['prix']/2)
                     ->setType(self::CATEGORIE_ENFANT['type'])
-                ;
-                break;
-            case $age >= self::CATEGORIE_SENIOR['age']:
-                $prix = self::CATEGORIE_SENIOR['prix']/2;
-                $billet
-                    ->setPrix(self::CATEGORIE_SENIOR['prix']/2)
-                    ->setType(self::CATEGORIE_SENIOR['type'])
                 ;
                 break;
             default:
@@ -81,6 +81,13 @@ class CalculerPrix
     {
         switch ($age = $billet->getAge())
         {
+            case $age >= self::CATEGORIE_SENIOR['age']:
+                $prix = self::CATEGORIE_SENIOR['prix'];
+                $billet
+                    ->setPrix(self::CATEGORIE_SENIOR['prix'])
+                    ->setType(self::CATEGORIE_SENIOR['type'])
+                ;
+                break;
             case $age <= self::CATEGORIE_BEBE['age']:
                 $prix = self::CATEGORIE_BEBE['prix'];
                 $billet
@@ -93,13 +100,6 @@ class CalculerPrix
                 $billet
                     ->setPrix(self::CATEGORIE_ENFANT['prix'])
                     ->setType(self::CATEGORIE_ENFANT['type'])
-                ;
-                break;
-            case $age >= self::CATEGORIE_SENIOR['age']:
-                $prix = self::CATEGORIE_SENIOR['prix'];
-                $billet
-                    ->setPrix(self::CATEGORIE_SENIOR['prix'])
-                    ->setType(self::CATEGORIE_SENIOR['type'])
                 ;
                 break;
             default:

@@ -1,42 +1,73 @@
-{% extends '::basePanier.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block panier %}
+{% block body %}
+    <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <h2>Récaputilatif de votre commande</h2>
+        <p>Bonjour Mr <b>{{ commande.utilisateur.nom |upper }}, {{ commande.utilisateur.prenom|capitalize }}</b></p>
+        <p>Votre commande pour visiter le <b>Louvre</b> le <b>{{ commande.dateBillet|date('d/m/Y') }}</b> est presque fini.</p>
+        <p>Un fois votre commande validé
+            {% if commande.billet|length > 1 %}
+                vos billets seront envoyés
+            {% else %}
+                votre billet sera envoyé
+            {% endif %}
+            à l'adresse mail suivante: <b>{{ commande.utilisateur.email }}</b>
+        </p>
 
-    <h2>Récaputilatif de votre commande</h2>
-    <p>Bonjour Mr {{ commande.utilisateur.nom }}, {{ commande.utilisateur.prenom }}</p>
-    <p>Vous souhaitez visiter le Louvre le {{ commande.dateBillet|date('d/m/Y') }}</p>
-    <p>Un fois votre commande validé une facture vous sera envoyez à l'adresse mail suivante {{ commande.utilisateur.email }}</p>
-    <p>Votre adesse de facturation est la suivante</p>
-    <ul>
-        <li>Adresse : {{ commande.utilisateur.adresse }}</li>
-        <li>Code postal : {{ commande.utilisateur.codePostal }}</li>
-        <li>Ville : {{ commande.utilisateur.ville }}</li>
-        <li>Pays : {{ commande.utilisateur.pays }}</li>
-    </ul>
-    <p>Récap billets</p>
-    {% for billet in commande.billet %}
-        <div>
-            id : {{ billet.id }} <br>
-            nom : {{ billet.nom }} <br>
-            prix : {{ billet.prix }} <br>
-            type : {{ billet.type }}
+        <form id="btn_stripe" class="float-right" method="POST">
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_3ePoHBikY5cLCGVv7E24usLG"
+                    data-amount="{{ commande.caluclerPrixCentimes }}"
+                    data-name="Musée du Louvre"
+                    data-description="Paris"
+                    data-image="{{ asset('images/logo-louvre.jpg') }}"
+                    data-locale="fr"
+                    data-currency="eur"
+                    data-label="Payer"
+                    data-allow-remember-me="false"
+            >
+            </script>
+        </form>
+
+    </article>
+
+    <section class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <div class="table-responsive">
+            {% if commande.billet|length > 1 %}
+                <h2>Récapitulatif de vos billets</h2>
+            {% else %}
+                <h2>Récapitulatif de votre billet</h2>
+            {% endif %}
+
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Type</th>
+                    <th>Prix</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for billet in commande.billet %}
+                        <td>{{ billet.nom }}</td>
+                        <td>{{ billet.prenom }}</td>
+                        <td>{{ billet.type }}</td>
+                        <td>{{ billet.prix }} €</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
         </div>
+        <span class="float-right"><b>Total de votre commande: {{ commande.prix }} €</b></span>
+    </section>
 
-    {% endfor %}
-    <p>{{ commande.prix }}€</p>
-    <form method="post" id="payment-form">
-    <div class="form-row">
-    <form method="POST">
-        <script
-                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_3ePoHBikY5cLCGVv7E24usLG"
-                data-amount="{{ commande.caluclerPrixCentimes }}"
-                data-name="testLouvre"
-                data-description="Widget"
-                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                data-locale="auto"
-                data-currency="eur">
-        </script>
-    </form>
+
+
+
+
+
 
 {% endblock %}

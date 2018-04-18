@@ -1,23 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<section class="container-fluid">
-    <div class="row">
-        <nav class="col-sm-2">
-            {% block navPanier %}
-                <div class="well well-lg">
-                    <ul class="list-group">
-                        <li><a href="{{ path('panier', {'idUser': 'x'}) }}">Panier</a></li>
-                        <li><a href="{{ path('info_fac', {'idCmd': 'x', 'idUser': 'x'}) }}">informations de facturation</a></li>
-                        <li><a href="{{ path('recap_cmd', {'idCmd': 'x', 'idUser': 'x', 'idAdresse': 'x'}) }}">Validation de la commande</a></li>
-
-                    </ul>
-                </div>
-            {% endblock %}
-        </nav>
-        <article class="col-sm-10">
-            {% block panier %}{% endblock %}
-        </article>
-    </div>
+<section class="container">
+    <article class="col-md">
+        {% block panier %}{% endblock %}
+    </article>
 </section>
 {% endblock %}

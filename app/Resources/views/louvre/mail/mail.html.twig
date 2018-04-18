@@ -46,7 +46,13 @@
                 <!-- bloc text -->
                 <tr>
                     <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; color: #aaaaaa; mso-line-height-rule: exactly; line-height: 26px;">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse facere neque non nostrum odit placeat, praesentium sint veritatis! Consequuntur culpa earum est eveniet maiores neque odio placeat possimus provident quo.
+                        Bonjour,<br/>
+                        Votre commande vient d'être validé. Vos billets sont payées. Nous vous rappelons que ces places sont non annulables et non reportables.
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="font-family: Helvetica, sans-serif; text-align: center; color: #aaaaaa; mso-line-height-rule: exactly; line-height: 26px;">
+                        Merci d'imprimer vos billets pour accéder au musée du Louvre:
                     </td>
                 </tr>
                 <!-- bloc d'espace -->
@@ -152,7 +158,7 @@
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-family: Helvetica, sans-serif; padding: 0px 10px 10px 0px">
-                                                <i><b>id billet :</b> {{ billet.id }}</i>
+                                                <i><b>id billet :</b> {{ billet.prenom|slice(0,2) }}{{ billet.nom|slice(0,2) }}{{ billet.id }}</i>
                                             </td>
                                         </tr>
                                         </tbody>

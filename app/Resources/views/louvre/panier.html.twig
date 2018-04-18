@@ -1,8 +1,40 @@
 {% extends '::basePanier.html.twig' %}
 {% block panier %}
-    <div>
-        {{ include(':louvre/form:formPanier.html.twig') }}
-    </div>
+
+    <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.dateBillet, "Date de la visite") }}
+                {{ form_errors(form.dateBillet) }}
+                {{ form_widget(form.dateBillet) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.demiJournee) }}
+                {{ form_errors(form.demiJournee) }}
+                {{ form_widget(form.demiJournee) }}
+            </div>
+        </div>
+        <br>
+        {{ form_label(form.billet) }}
+        {{ form_errors(form.billet) }}
+        {{ form_widget(form.billet) }}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_row(form.Valider) }}
+            </div>
+        </div>
+
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </article>
+
 
 {% endblock %}
 {% block javascripts %}

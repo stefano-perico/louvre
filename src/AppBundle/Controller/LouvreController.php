@@ -24,7 +24,7 @@ class LouvreController extends Controller
  
 
     /**
-     * @Route("/")
+     * @Route("/", name="accueil")
      */
     public function accueilAction()
     {

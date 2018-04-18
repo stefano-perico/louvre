@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form;
 
-use function Sodium\add;
+use AppBundle\Entity\Commande;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -48,8 +48,11 @@ class CommandeType extends AbstractType
                     'allow_delete'  => true
                 )
             )
-            ->add('Valider', SubmitType::class)
+            ->add('Valider', SubmitType::class, array(
+                'attr' => array('class' => 'btn-success btn-lg float-right')
+            ))
         ;
+
     }
     
     /**
@@ -58,7 +61,7 @@ class CommandeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Commande'
+            'data_class' => Commande::class
         ));
     }
 

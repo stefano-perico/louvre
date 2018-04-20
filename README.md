@@ -3,6 +3,7 @@ louvre
 **Note de cadrage projet Louvre**
 
 Rappel des enjeux et objectifs
+
 Le musée du Louvre veux créer un système de réservation et de gestion des tickets en ligne pour diminuer les longes files d’attente et tirer parti de l’usage croissant des smartphones.
 
 Objectifs

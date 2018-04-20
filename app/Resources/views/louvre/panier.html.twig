@@ -1,39 +1,73 @@
-{% extends '::basePanier.html.twig' %}
-{% block panier %}
+{% extends 'base.html.twig' %}
+{% block body %}
 
     <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                {{ form_label(form.dateBillet, "Date de la visite") }}
-                {{ form_errors(form.dateBillet) }}
-                {{ form_widget(form.dateBillet) }}
+        <div class="col-md-8">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.dateBillet, "Date de la visite") }}
+                    {{ form_errors(form.dateBillet) }}
+                    {{ form_widget(form.dateBillet) }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.demiJournee) }}
+                    {{ form_errors(form.demiJournee) }}
+                    {{ form_widget(form.demiJournee) }}
+                </div>
             </div>
-            <div class="col-md-6 mb-3">
-                {{ form_label(form.demiJournee) }}
-                {{ form_errors(form.demiJournee) }}
-                {{ form_widget(form.demiJournee) }}
+            <br>
+            {{ form_label(form.billet) }}
+            {{ form_errors(form.billet) }}
+            {{ form_widget(form.billet) }}
+            <div class="row">
+                <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>"Tarif réduit", il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form_row(form.Valider) }}
+                </div>
             </div>
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
         </div>
-        <br>
-        {{ form_label(form.billet) }}
-        {{ form_errors(form.billet) }}
-        {{ form_widget(form.billet) }}
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
-            </div>
-            <div class="col-md-6 mb-3">
-                {{ form_row(form.Valider) }}
-            </div>
-        </div>
-
-
-        {{ form_rest(form) }}
-        {{ form_end(form) }}
     </article>
+
+    <aside class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <h2>Tarifs</h2>
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Billet « normal » à partir de 12 ans</td>
+                <td>16 €</td>
+            </tr>
+            <tr>
+                <td>Billet « enfant » à partir de 4 ans et jusqu’à 12 ans</td>
+                <td>8 €</td>
+            </tr>
+            <tr>
+                <td>Billet « senior » à partir de 60 ans</td>
+                <td>12 €</td>
+            </tr>
+            <tr>
+                <td>Billet « réduit »</td>
+                <td>10 €</td>
+            </tr>
+            </tbody>
+        </table>
+        <span> <i>Pour les enfants de moins de 4ans l'entrée est gratuite</i></span>
+    </aside>
 
 
 {% endblock %}
@@ -71,10 +105,10 @@
             });
 
         // Ajout billets dans vue Panier
-        // On récupère la balase <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
+        // On récupère la balise <div> en question qui contient l'attribut "data-prototype".
         var $container = $('div#appbundle_commandes_billet');
 
-        // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+        // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement.
         var index = $container.find(':input').length;
 
         // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
@@ -135,5 +169,13 @@
                 return false;
             });
         }
+
+        $('.form-check-input').change(function () {
+            if($('.form-check-input').is(':checked')){
+                $('#alert_demiTarif').show();
+            }else{
+                $('#alert_demiTarif').hide();
+            }
+        });
     </script>
 {% endblock %}

@@ -10,12 +10,12 @@ use PHPUnit\Framework\TestCase;
 class CalcuerPrixTest extends TestCase
 {
     const DATE_VISITE = '2018-06-02';
-    const CATEGORIE_BEBE = array('age' => '2014-05-02', 'prix' => 0, 'type' => 'Gratuit'); // <= 4
-    const CATEGORIE_SENIOR = array('age' => '1957-05-02', 'prix' => 12, 'type' => 'Senior'); // >= 60
-    const CATEGORIE_ENFANT = array('age' => '2006-05-02', 'prix' => 8, 'type' => 'Enfant'); // <= 12
-    const CATEGORIE_REDUIT = array('prix' => 10, 'type' => 'Réduit');
-    const CATEGORIE_NORMAL = array('age' => '1985-02-07', 'prix' => 16, 'type' => "Plein Tarif");
 
+    protected $bebe = array('age' => '2014-05-02', 'prix' => 0, 'type' => 'Gratuit'); // <= 4
+    protected $senior = array('age' => '1957-05-02', 'prix' => 12, 'type' => 'Senior'); // >= 60
+    protected $reduit = array('prix' => 10, 'type' => 'Réduit');
+    protected $enfant = array('age' => '2006-05-02', 'prix' => 8, 'type' => 'Enfant'); // <= 12
+    protected $normal = array('age' => '1985-02-07', 'prix' => 16, 'type' => "Plein Tarif");
 
     /**
      * @dataProvider prixPourBillets
@@ -39,10 +39,10 @@ class CalcuerPrixTest extends TestCase
     public function prixPourBillets()
     {
         return [
-            [self::CATEGORIE_BEBE['age'], 0],     // Tarif bébé
-            [self::CATEGORIE_SENIOR['age'], 12],   // Tarif sénior
-            [self::CATEGORIE_ENFANT['age'], 8],    // Tarif Enfant
-            [self::CATEGORIE_NORMAL['age'], 16]    // Tarif Normal
+            [$this->bebe['age'], 0],     // Tarif bébé
+            [$this->senior['age'], 12],   // Tarif sénior
+            [$this->enfant['age'], 8],    // Tarif Enfant
+            [$this->normal['age'], 16]    // Tarif Normal
         ];
     }
 
@@ -69,9 +69,9 @@ class CalcuerPrixTest extends TestCase
     public function prixPourBilletsReduit()
     {
         return [
-            [self::CATEGORIE_SENIOR['age'], 10],   // Tarif sénior
-            [self::CATEGORIE_ENFANT['age'], 10],    // Tarif Enfant
-            [self::CATEGORIE_NORMAL['age'], 10]    // Tarif Normal
+            [$this->senior['age'], 10],   // Tarif sénior
+            [$this->enfant['age'], 10],    // Tarif Enfant
+            [$this->normal['age'], 10]    // Tarif Normal
         ];
     }
 
@@ -98,10 +98,10 @@ class CalcuerPrixTest extends TestCase
     public function prixPourBilletsDemi()
     {
         return [
-            [self::CATEGORIE_BEBE['age'], 0],     // Tarif bébé
-            [self::CATEGORIE_SENIOR['age'], 6],    // Tarif sénior
-            [self::CATEGORIE_ENFANT['age'], 4],    // Tarif Enfant
-            [self::CATEGORIE_NORMAL['age'], 8]     // Tarif Normal
+            [$this->bebe['age'], 0],     // Tarif bébé
+            [$this->senior['age'], 6],    // Tarif sénior
+            [$this->enfant['age'], 4],    // Tarif Enfant
+            [$this->normal['age'], 8]     // Tarif Normal
         ];
     }
 

@@ -9,13 +9,14 @@ use AppBundle\Entity\Commande;
 
 class CalculerPrix
 {
-    const CATEGORIE_BEBE = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
-    const CATEGORIE_SENIOR = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
-    const CATEGORIE_REDUIT = array('prix' => 10, 'type' => 'Réduit');
-    const CATEGORIE_ENFANT = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
-    const CATEGORIE_NORMAL = array('prix' => 16, 'type' => "Plein Tarif");
     const HEURE_LIMITE_JOURNEE = 14;
 
+    protected $bebe = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
+    protected $senior = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
+    protected $reduit = array('prix' => 10, 'type' => 'Réduit');
+    protected $enfant = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
+    protected $normal = array('prix' => 16, 'type' => "Plein Tarif");
+    
 
     public function prixBillet(Billet $billet, Commande $commande)
     {
@@ -24,18 +25,27 @@ class CalculerPrix
         {
             $commande->setDemiJournee(true);
         }
-        if ($commande->getDemiJournee() == true)
+        if ($billet->getTarifReduit() == true)
         {
-            $prix = $this->setDemiJournee($billet);
+            if ($commande->getDemiJournee() == true)
+            {
+                $prix = $this->reduit['prix']/2;
+                $billet
+                    ->setPrix($this->reduit['prix']/2)
+                    ->setType($this->reduit['type']. ', Demi journée')
+                ;
+                return $prix;
+            }
+            $prix = $this->reduit['prix'];
+            $billet
+                ->setPrix($this->reduit['prix'])
+                ->setType($this->reduit['type'])
+            ;
             return $prix;
         }
-        elseif ($billet->getTarifReduit() == true)
+        elseif ($commande->getDemiJournee() == true)
         {
-            $prix = self::CATEGORIE_REDUIT['prix'];
-            $billet
-                ->setPrix(self::CATEGORIE_REDUIT['prix'])
-                ->setType(self::CATEGORIE_REDUIT['type'])
-            ;
+            $prix = $this->setDemiJournee($billet);
             return $prix;
         }
         $prix = $this->setPrixJournee($billet);
@@ -46,32 +56,32 @@ class CalculerPrix
     {
         switch ($age = $billet->getAge())
         {
-            case $age >= self::CATEGORIE_SENIOR['age']:
-                $prix = self::CATEGORIE_SENIOR['prix']/2;
+            case $age >= $this->senior['age']:
+                $prix = $this->senior['prix']/2;
                 $billet
-                    ->setPrix(self::CATEGORIE_SENIOR['prix']/2)
-                    ->setType(self::CATEGORIE_SENIOR['type'])
+                    ->setPrix($this->senior['prix']/2)
+                    ->setType($this->senior['type']. ', Demi journée')
                 ;
                 break;
-            case $age <= self::CATEGORIE_BEBE['age']:
-                $prix = self::CATEGORIE_BEBE['prix'];
+            case $age <= $this->bebe['age']:
+                $prix = $this->bebe['prix'];
                 $billet
-                    ->setPrix(self::CATEGORIE_BEBE['prix'])
-                    ->setType(self::CATEGORIE_BEBE['type'])
+                    ->setPrix($this->bebe['prix'])
+                    ->setType($this->bebe['type']. ', Demi journée')
                 ;
                 break;
-            case $age <= self::CATEGORIE_ENFANT['age']:
-                $prix = self::CATEGORIE_ENFANT['prix']/2;
+            case $age <= $this->enfant['age']:
+                $prix = $this->enfant['prix']/2;
                 $billet
-                    ->setPrix(self::CATEGORIE_ENFANT['prix']/2)
-                    ->setType(self::CATEGORIE_ENFANT['type'])
+                    ->setPrix($this->enfant['prix']/2)
+                    ->setType($this->enfant['type']. ', Demi journée')
                 ;
                 break;
             default:
-                $prix = self::CATEGORIE_NORMAL['prix']/2;
+                $prix = $this->normal['prix']/2;
                 $billet
-                    ->setPrix(self::CATEGORIE_NORMAL['prix']/2)
-                    ->setType(self::CATEGORIE_NORMAL['type'])
+                    ->setPrix($this->normal['prix']/2)
+                    ->setType($this->normal['type']. ', Demi journée')
                 ;
         }
         return $prix;
@@ -81,32 +91,32 @@ class CalculerPrix
     {
         switch ($age = $billet->getAge())
         {
-            case $age >= self::CATEGORIE_SENIOR['age']:
-                $prix = self::CATEGORIE_SENIOR['prix'];
+            case $age >= $this->senior['age']:
+                $prix = $this->senior['prix'];
                 $billet
-                    ->setPrix(self::CATEGORIE_SENIOR['prix'])
-                    ->setType(self::CATEGORIE_SENIOR['type'])
+                    ->setPrix($this->senior['prix'])
+                    ->setType($this->senior['type'])
                 ;
                 break;
-            case $age <= self::CATEGORIE_BEBE['age']:
-                $prix = self::CATEGORIE_BEBE['prix'];
+            case $age <= $this->bebe['age']:
+                $prix = $this->bebe['prix'];
                 $billet
-                    ->setPrix(self::CATEGORIE_BEBE['prix'])
-                    ->setType(self::CATEGORIE_BEBE['type'])
+                    ->setPrix($this->bebe['prix'])
+                    ->setType($this->bebe['type'])
                 ;
                 break;
-            case $age <= self::CATEGORIE_ENFANT['age']:
-                $prix = self::CATEGORIE_ENFANT['prix'];
+            case $age <= $this->enfant['age']:
+                $prix = $this->enfant['prix'];
                 $billet
-                    ->setPrix(self::CATEGORIE_ENFANT['prix'])
-                    ->setType(self::CATEGORIE_ENFANT['type'])
+                    ->setPrix($this->enfant['prix'])
+                    ->setType($this->enfant['type'])
                 ;
                 break;
             default:
-                $prix = self::CATEGORIE_NORMAL['prix'];
+                $prix = $this->normal['prix'];
                 $billet
-                    ->setPrix(self::CATEGORIE_NORMAL['prix'])
-                    ->setType(self::CATEGORIE_NORMAL['type'])
+                    ->setPrix($this->normal['prix'])
+                    ->setType($this->normal['type'])
                 ;
         }
         return $prix;

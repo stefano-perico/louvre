@@ -3,8 +3,6 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -29,7 +27,7 @@ class UtilisateurType extends AbstractType
             ->add('ville', TextType::class)
             ->add('pays', TextType::class)
             ->add('Valider', SubmitType::class, array(
-                'attr' => array('class' => 'btn-success btn-lg')
+                'attr' => array('class' => 'btn-success btn-lg float-right')
             ))
         ;
     }

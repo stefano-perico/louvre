@@ -8,21 +8,18 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Service\JoursFeries;
 use AppBundle\Entity\Commande;
-use AppBundle\Repository\CommandesRepository;
 use Doctrine\ORM\EntityManager;
 
 
 class EstDisponible
 {
+    const BILLET_MAX = 1000;
+    const HEURE_LIMITE_JOURNEE = 14;
+
+    protected $joursFerme = ['2','7']; // mardi et dimanche
     public $jourFeries;
     protected $em;
-
-
-    const BILLET_MAX = 1000;
-    const JOUR_FERME = array(2,7) ; // mardi et dimanche
-    const HEURE_LIMITE_JOURNEE = 14;
 
     public function __construct(JoursFeries $joursFeries, EntityManager $em)
     {
@@ -41,8 +38,8 @@ class EstDisponible
     {
         $commandeRepo = $this->em->getRepository(Commande::class);
         $nbBillets = $commandeRepo->countBillets($commande);
-        $dateBillet = $commande->getDateBillet()->format('dd-mm-Y');
-        $dateJour = $this->getDate()->format('dd-mm-Y');
+        $dateBillet = $commande->getDateBillet()->format('d-m-Y');
+        $dateJour = $this->getDate()->format('d-m-Y');
 
         if ($nbBillets >= self::BILLET_MAX OR $dateBillet < $dateJour )
         {
@@ -58,7 +55,7 @@ class EstDisponible
 
     public function resteBillets()
     {
-            return "Désoler mais, il ne reste plus de billets pour cette date";
+            return "Désoler mais, il n'est pas possible de commander de billets pour cette date";
     }
 
     public function dateIsOpen($date)
@@ -67,7 +64,7 @@ class EstDisponible
         $jourFeries = [$this->jourFeries->jours_feries()];
         $isHoliday = in_array($date, $jourFeries);
 
-        if(in_array($joutSemaine,self::JOUR_FERME) OR $isHoliday == true)
+        if(in_array($joutSemaine, $this->joursFerme) OR $isHoliday == true)
         {
             return true;
         }

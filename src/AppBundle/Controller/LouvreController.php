@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefa
- * Date: 16/10/2017
- * Time: 18:57
- */
 
 namespace AppBundle\Controller;
 
@@ -13,7 +7,6 @@ use AppBundle\Entity\Utilisateur;
 use AppBundle\Form\CommandeType;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Service\EstDisponible;
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +14,6 @@ use AppBundle\Service\CalculerPrix;
 
 class LouvreController extends Controller
 {
- 
 
     /**
      * @Route("/", name="accueil")
@@ -121,8 +113,18 @@ class LouvreController extends Controller
                     'text/html'
                 );
             $mailer->send($message);
+            $this->addFlash('success', 'Votre commande a bien été validée');
+            return $this->render(':louvre:validation.html.twig');
         }
         return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande));
+    }
+
+    /**
+     * @Route("/louvre/validation"), name="validation")
+     */
+    public function validationCommandeAction()
+    {
+        return $this->render(':louvre:validation.html.twig');
     }
 
 

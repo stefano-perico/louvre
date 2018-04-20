@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <div class="jumbotron">
+            <h2>Bienvenue sur la billetterie du musée du Louvre</h2>
+            <p>Afin de pouvoir passer votre commande de billet, merci de renseigner les informations ci-dessous</p>
+        </div>
+
         {{ form_start(form) }}
         {{ form_errors(form) }}
          <div class="row">
@@ -18,13 +23,17 @@
             {{ form_widget(form.adresse) }}
         </div>
         <div class="row">
-            <div class="col-md-9 mb-3">
+            <div class="col-md-4 mb-3">
                 {{ form_label(form.ville) }}
                 {{ form_widget(form.ville) }}
             </div>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-4 mb-3">
                 {{ form_label(form.codePostal) }}
                 {{ form_widget(form.codePostal) }}
+            </div>
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.pays) }}
+                {{ form_widget(form.pays) }}
             </div>
         </div>
         {{ form_rest(form) }}

@@ -48,7 +48,7 @@ class LouvreController extends Controller
                 if ($estDisponible->billetsDispo($commande)){
                     $em->flush();
                     $this->addFlash('success', 'Billets bien enregistré.');
-                    return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId()));
+                    return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId(), 'idUser' => $idUser));
                 }
                 else{
                     $infoDispo = $estDisponible->resteBillets();
@@ -82,20 +82,18 @@ class LouvreController extends Controller
     }
 
     /**
-     * @Route("/louvre/recap/commande:{idCmd}", name="recap_cmd")
+     * @Route("/louvre/recap/commande:{idCmd}/utilisateur:{idUser}", name="recap_cmd")
      */
-    public function recapAction(Request $request, $idCmd)
+    public function recapAction(Request $request, $idCmd, $idUser)
     {
         $em = $this->getDoctrine()->getManager();
         $commande = $em->getRepository(Commande::class)->find($idCmd);
+        $utilisateur = $em->getRepository(Utilisateur::class)->find($idUser);
         if ($request->isMethod('POST'))
         {
             \Stripe\Stripe::setApiKey("sk_test_0qfLdJkutmeqc5EVVMWRQzI0");
-            // Token is created using Checkout or Elements!
-            // Get the payment token ID submitted by the form:
             $token = $request->request->get("stripeToken");
             $prix = $commande->caluclerPrixCentimes();
-            // Charge the user's card:
             \Stripe\Charge::create(array(
                 "amount" => $prix,
                 "currency" => "eur",
@@ -103,9 +101,8 @@ class LouvreController extends Controller
                 "source" => $token,
             ));
             $mailer = $this->get('mailer');
-            $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('stefano0012@gmail.com')
-                ->setTo('stefano0012@gmail.com')
+            $message = (new \Swift_Message('Louvre'))
+                ->setTo($utilisateur->getEmail())
                 ->setBody(
                     $this->renderView(
                         ':louvre/mail:mail.html.twig', array('commande' => $commande)
@@ -114,13 +111,13 @@ class LouvreController extends Controller
                 );
             $mailer->send($message);
             $this->addFlash('success', 'Votre commande a bien été validée');
-            return $this->render(':louvre:validation.html.twig');
+            return $this->redirectToRoute('validation_cmd');
         }
         return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande));
     }
 
     /**
-     * @Route("/louvre/validation"), name="validation")
+     * @Route("/louvre/validation", name="validation_cmd")
      */
     public function validationCommandeAction()
     {

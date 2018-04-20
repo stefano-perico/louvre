@@ -35,4 +35,5 @@ Préconisations d’architecture
                 -> Informations de la visite
                     -> Récapitulatif de la commande et paiement
                         -> Validation du paiement
+                        
 

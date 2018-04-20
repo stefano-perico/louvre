@@ -68,3 +68,5 @@ swiftmailer:
     transport: mail
     username: 'stefano0012@gmail.com'
     password: 'Thspfm1985!Adonis'
+    delivery_address: ['stefano0012@gmail.com']
+    sender_address: 'stefano0012@gmail.com'

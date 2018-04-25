@@ -98,7 +98,7 @@ class CalcuerPrixTest extends TestCase
     public function prixPourBilletsDemi()
     {
         return [
-            [$this->bebe['age'], 0],     // Tarif bébé
+            [$this->bebe['age'], 0],      // Tarif bébé
             [$this->senior['age'], 6],    // Tarif sénior
             [$this->enfant['age'], 4],    // Tarif Enfant
             [$this->normal['age'], 8]     // Tarif Normal

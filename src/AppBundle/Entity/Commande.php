@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Commande
@@ -31,14 +33,14 @@ class Commande
 
     /**
      * @var \DateTime
-     *
+     * @Assert\DateTime()
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\DateTime()
      * @ORM\Column(name="dateBillet", type="date")
      */
     private $dateBillet;
@@ -64,7 +66,7 @@ class Commande
 
     /**
      * @var bool
-     *
+     * @Assert\Type(bool)
      * @ORM\Column(name="demi_journee", type="boolean")
      */
     private $demiJournee = false;
@@ -280,5 +282,47 @@ class Commande
     public function getDemiJournee()
     {
         return $this->demiJournee;
+    }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function isDateBilletValid(ExecutionContextInterface $context)
+    {
+        $year = $this->getDateBillet()->format('Y');
+        $base = new \DateTime("$year-03-21");
+        $days = easter_days($year);
+        $base->add(new \DateInterval("P{$days}D"));
+
+        $dimanche_paques = $base->format('d-m-Y');
+        $lundi_paques = date("d-m-Y", strtotime("$dimanche_paques +1 day"));
+        $jeudi_ascension = date("d-m-Y", strtotime("$dimanche_paques +39 day"));
+        $lundi_pentecote = date("d-m-Y", strtotime("$dimanche_paques +50 day"));
+
+        $jours_feries = array
+        (
+            $dimanche_paques,
+            $lundi_paques
+        ,   $jeudi_ascension
+        ,   $lundi_pentecote
+
+        ,    "01-01-$year"         //    Nouvel an
+        ,    "01-05-$year"         //    Fête du travail
+        ,    "08-05-$year"        //    Armistice 1945
+        ,    "14-07-$year"         //    Fête nationale
+        ,    "15-08-$year"         //    Assomption
+        ,    "01-11-$year"         //    Toussaint
+        ,    "11-11-$year"         //    Armistice 1918
+        ,    "25-12-$year"         //    Noël
+        );
+
+        if (in_array($this->getDateBillet()->format('d-m-Y'), $jours_feries))
+        {
+            $context
+                ->buildViolation('Ce jour est fériés, merci de choisir une autre date')
+                ->atPath('dateBillet')
+                ->addViolation()
+            ;
+        }
     }
 }

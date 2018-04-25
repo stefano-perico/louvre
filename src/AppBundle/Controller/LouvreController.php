@@ -24,6 +24,27 @@ class LouvreController extends Controller
     }
 
     /**
+     * @Route("/louvre/info_facturation", name="info_fac")
+     */
+    public function infoFacturationAction(Request $request)
+    {
+        $utilisateur = new Utilisateur();
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        if ($request->isMethod('POST'))
+        {
+            $form->handleRequest($request);
+            if ($form->isValid())
+            {
+                $em->persist($utilisateur);
+                $em->flush();
+                return $this->redirectToRoute('panier', array('idUser' => $utilisateur->getId()));
+            }
+        }
+        return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
      * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
      */
     public function panierAction(Request $request, EstDisponible $estDisponible, CalculerPrix $calculerPrix, $idUser)
@@ -33,8 +54,7 @@ class LouvreController extends Controller
         $utilisateur = $em->getRepository(Utilisateur::class)->find($idUser);
         $form = $this->createForm(CommandeType::class, $commande);
         if ($request->isMethod('POST')){
-            $form->handleRequest($request);
-            if ($form->isValid()){
+            if ($form->handleRequest($request)->isValid()){
                 $commande->setUtilisateur($utilisateur);
                 $total = 0;
                 foreach ($commande->getBillet() as $billet){
@@ -58,27 +78,6 @@ class LouvreController extends Controller
             }
         }
         return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
-    }
-
-    /**
-     * @Route("/louvre/info_facturation", name="info_fac")
-     */
-    public function infoFacturationAction(Request $request)
-    {
-        $utilisateur = new Utilisateur();
-        $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
-        if ($request->isMethod('POST'))
-        {
-            $form->handleRequest($request);
-            if ($form->isValid())
-            {
-                $em->persist($utilisateur);
-                $em->flush();
-                return $this->redirectToRoute('panier', array('idUser' => $utilisateur->getId()));
-            }
-        }
-        return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));
     }
 
     /**

@@ -51,7 +51,14 @@ class LouvreControllerTest extends WebTestCase
 
     public function testRecapAction()
     {
-        $this->client->request('GET', 'louvre/recap/commande:2');
+        $this->client->request('GET', 'louvre/recap/commande:2/utilisateur:2');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testValidationAction()
+    {
+        $this->client->request('GET', 'louvre/validation');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }

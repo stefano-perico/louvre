@@ -64,7 +64,7 @@ class EstDisponible
         $jourFeries = [$this->jourFeries->jours_feries()];
         $isHoliday = in_array($date, $jourFeries);
 
-        if(in_array($joutSemaine, $this->joursFerme) OR $isHoliday == true)
+        if(in_array($joutSemaine, $this->joursFerme) /**  OR $isHoliday == true */)
         {
             return true;
         }

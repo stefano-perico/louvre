@@ -32,6 +32,9 @@ services:
     AppBundle\Service\EstDisponible:
         arguments: ['@AppBundle\Service\JoursFeries', '@doctrine.orm.entity_manager']
 
+    AppBundle\Service\GestionCommande:
+        arguments: ['@doctrine.orm.entity_manager', '@session']
+
 
 
 

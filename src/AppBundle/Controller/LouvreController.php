@@ -7,10 +7,12 @@ use AppBundle\Entity\Utilisateur;
 use AppBundle\Form\CommandeType;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Service\EstDisponible;
+use AppBundle\Service\GestionCommande;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\CalculerPrix;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class LouvreController extends Controller
 {
@@ -26,8 +28,9 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/info_facturation", name="info_fac")
      */
-    public function infoFacturationAction(Request $request)
+    public function infoFacturationAction(Request $request, GestionCommande $gestionCommande, Session $session)
     {
+        $commande = $gestionCommande;
         $utilisateur = new Utilisateur();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
@@ -36,27 +39,30 @@ class LouvreController extends Controller
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $em->persist($utilisateur);
-                $em->flush();
-                return $this->redirectToRoute('panier', array('idUser' => $utilisateur->getId()));
+                $commande->setUtilisateur($utilisateur);
+
+                return $this->redirectToRoute('panier');
             }
         }
         return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/louvre/panier/utilisateur:{idUser}", name="panier")
+     * @Route("/louvre/panier", name="panier")
      */
-    public function panierAction(Request $request, EstDisponible $estDisponible, CalculerPrix $calculerPrix, $idUser)
+    public function panierAction(Request $request, EstDisponible $estDisponible, GestionCommande $gestionCommande)
     {
         $commande = new Commande();
+
         $em = $this->getDoctrine()->getManager();
-        $utilisateur = $em->getRepository(Utilisateur::class)->find($idUser);
         $form = $this->createForm(CommandeType::class, $commande);
         if ($request->isMethod('POST')){
             if ($form->handleRequest($request)->isValid()){
-                $commande->setUtilisateur($utilisateur);
-                $total = 0;
+                $gestionCommande->setCommande($commande);
+
+                //$gestionCommande->calculPrix($commande);
+                /**
+                 * $total = 0;
                 foreach ($commande->getBillet() as $billet){
                     $prix = $calculerPrix->prixBillet($billet, $commande);
                     $billet->setCommande($commande);
@@ -65,10 +71,12 @@ class LouvreController extends Controller
                 }
                 $commande->setPrix($total);
                 $em->persist($commande);
+                 */
                 if ($estDisponible->billetsDispo($commande)){
                     $em->flush();
+
                     $this->addFlash('success', 'Billets bien enregistré.');
-                    return $this->redirectToRoute('recap_cmd', array('idCmd' => $commande->getId(), 'idUser' => $idUser));
+                    return $this->redirectToRoute('recap_cmd');
                 }
                 else{
                     $infoDispo = $estDisponible->resteBillets();
@@ -121,6 +129,14 @@ class LouvreController extends Controller
     public function validationCommandeAction()
     {
         return $this->render(':louvre:validation.html.twig');
+    }
+
+    /**
+     * @Route("louvre/test")
+     */
+    public function testAction(GestionCommande $gestionCommande)
+    {
+
     }
 
 

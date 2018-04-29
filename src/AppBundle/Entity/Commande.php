@@ -53,9 +53,9 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"})
-     * @ORM\JoinColumn()
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $billet;
+    private $billets;
 
     /**
      * @var float
@@ -66,7 +66,7 @@ class Commande
 
     /**
      * @var bool
-     * @Assert\Type(bool)
+     *
      * @ORM\Column(name="demi_journee", type="boolean")
      */
     private $demiJournee = false;
@@ -202,9 +202,9 @@ class Commande
      *
      * @return Commande
      */
-    public function addBillet(\AppBundle\Entity\Billet $billet)
+    public function addBillets(\AppBundle\Entity\Billet $billet)
     {
-        $this->billet[] = $billet;
+        $this->billets[] = $billet;
         $billet->setCommande($this);
         return $this;
     }
@@ -214,9 +214,9 @@ class Commande
      *
      * @param \AppBundle\Entity\Billet $billet
      */
-    public function removeBillet(\AppBundle\Entity\Billet $billet)
+    public function removeBillets(\AppBundle\Entity\Billet $billet)
     {
-        $this->billet->removeElement($billet);
+        $this->billets->removeElement($billet);
     }
 
     /**
@@ -224,9 +224,9 @@ class Commande
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBillet()
+    public function getBillets()
     {
-        return $this->billet;
+        return $this->billets;
     }
 
     /**

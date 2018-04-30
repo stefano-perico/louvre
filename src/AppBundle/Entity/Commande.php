@@ -53,7 +53,7 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $billets;
 
@@ -76,7 +76,7 @@ class Commande
      */
     public function __construct()
     {
-        $this->billet = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->billets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -20,8 +20,10 @@ class LouvreController extends Controller
     /**
      * @Route("/", name="accueil")
      */
-    public function accueilAction()
+    public function accueilAction(GestionCommande $commande)
     {
+        $commande->remove();
+
         return $this->render(':louvre:accueil.html.twig');
     }
 
@@ -53,49 +55,25 @@ class LouvreController extends Controller
     public function panierAction(Request $request, EstDisponible $estDisponible, GestionCommande $gestionCommande)
     {
         $commande = new Commande();
-
-        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(CommandeType::class, $commande);
         if ($request->isMethod('POST')){
             if ($form->handleRequest($request)->isValid()){
+                $commande->setUtilisateur($gestionCommande->getUtilisateur());
                 $gestionCommande->setCommande($commande);
-
-                //$gestionCommande->calculPrix($commande);
-                /**
-                 * $total = 0;
-                foreach ($commande->getBillet() as $billet){
-                    $prix = $calculerPrix->prixBillet($billet, $commande);
-                    $billet->setCommande($commande);
-                    $em->persist($billet);
-                    $total = $total + $prix;
-                }
-                $commande->setPrix($total);
-                $em->persist($commande);
-                 */
-                if ($estDisponible->billetsDispo($commande)){
-                    $em->flush();
-
-                    $this->addFlash('success', 'Billets bien enregistré.');
-                    return $this->redirectToRoute('recap_cmd');
-                }
-                else{
-                    $infoDispo = $estDisponible->resteBillets();
-                    $this->addFlash('danger', $infoDispo);
-                    return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
-                }
+                return $this->redirectToRoute('recap_cmd');
             }
         }
         return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
     }
 
     /**
-     * @Route("/louvre/recap/commande:{idCmd}/utilisateur:{idUser}", name="recap_cmd")
+     * @Route("/louvre/recap", name="recap_cmd")
      */
-    public function recapAction(Request $request, $idCmd, $idUser)
+    public function recapAction(Request $request, GestionCommande $gestionCommande)
     {
-        $em = $this->getDoctrine()->getManager();
-        $commande = $em->getRepository(Commande::class)->find($idCmd);
-        $utilisateur = $em->getRepository(Utilisateur::class)->find($idUser);
+
+        $commande = $gestionCommande->getCommande();
+
         if ($request->isMethod('POST'))
         {
             \Stripe\Stripe::setApiKey("sk_test_0qfLdJkutmeqc5EVVMWRQzI0");
@@ -109,7 +87,7 @@ class LouvreController extends Controller
             ));
             $mailer = $this->get('mailer');
             $message = (new \Swift_Message('Louvre'))
-                ->setTo($utilisateur->getEmail())
+                ->setTo($commande->getUtilisateur()->getEmail())
                 ->setBody(
                     $this->renderView(
                         ':louvre/mail:mail.html.twig', array('commande' => $commande)

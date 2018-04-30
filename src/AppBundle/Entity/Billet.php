@@ -74,7 +74,7 @@ class Billet
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="billet", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commande", inversedBy="billets")
      * @ORM\JoinColumn(name="commande_id", referencedColumnName="id")
      */
    private $commande;

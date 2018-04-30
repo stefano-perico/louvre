@@ -33,7 +33,7 @@ services:
         arguments: ['@AppBundle\Service\JoursFeries', '@doctrine.orm.entity_manager']
 
     AppBundle\Service\GestionCommande:
-        arguments: ['@doctrine.orm.entity_manager', '@session']
+        arguments: ['@doctrine.orm.entity_manager', '@session', '@AppBundle\Service\CalculerPrix']
 
 
 

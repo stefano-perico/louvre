@@ -36,7 +36,7 @@ class CommandeType extends AbstractType
                     )
                 )
             )
-            ->add('billet', CollectionType::class,
+            ->add('billets', CollectionType::class,
                 array(
                     'entry_type'    => BilletType::class,
                     'allow_add'     => true,

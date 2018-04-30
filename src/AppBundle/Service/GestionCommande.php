@@ -13,12 +13,13 @@ class GestionCommande
 {
     private $em;
     private $session;
+    private $calculerPrix;
 
-
-    public function __construct(EntityManager $em, Session $session)
+    public function __construct(EntityManager $em, Session $session, CalculerPrix $calculerPrix)
     {
         $this->em = $em;
         $this->session = $session;
+        $this->calculerPrix = $calculerPrix;
     }
 
 
@@ -28,7 +29,9 @@ class GestionCommande
         {
             $this->setCommande(new Commande);
         }
-        return $this->session->get('commande');
+        $commande = $this->session->get('commande');
+        $this->setPrix($commande);
+        return $commande;
     }
 
     public function setCommande(Commande $commande)
@@ -46,6 +49,22 @@ class GestionCommande
     {
         $this->session->set('utilisateur', $utilisateur);
         return $this;
+    }
+
+    public function remove()
+    {
+        $this->session->clear();
+    }
+
+    public function setPrix(Commande $commande)
+    {
+        $total = 0;
+        foreach ($commande->getBillets() as $billet)
+        {
+            $prix = $this->calculerPrix->prixBillet($billet, $commande);
+            $total = $total + $prix;
+        }
+        $commande->setPrix($total);
     }
 
 

@@ -18,9 +18,9 @@
                 </div>
             </div>
             <br>
-            {{ form_label(form.billet) }}
-            {{ form_errors(form.billet) }}
-            {{ form_widget(form.billet) }}
+            {{ form_label(form.billets) }}
+            {{ form_errors(form.billets) }}
+            {{ form_widget(form.billets) }}
             <div class="row">
                 <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -106,7 +106,7 @@
 
         // Ajout billets dans vue Panier
         // On récupère la balise <div> en question qui contient l'attribut "data-prototype".
-        var $container = $('div#appbundle_commandes_billet');
+        var $container = $('div#appbundle_commandes_billets');
 
         // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement.
         var index = $container.find(':input').length;

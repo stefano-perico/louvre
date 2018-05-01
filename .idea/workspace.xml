@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31ddc352-00f5-48ba-8c13-499a3fd29cc1" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Service/StripeService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config_dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config_dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -103,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LouvreController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LouvreController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
+            <state relative-caret-position="234">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
               <folding>
                 <element signature="e#40#70#0#PHP" expanded="true" />
               </folding>
@@ -115,7 +108,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mail.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mail.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1768">
@@ -136,8 +129,8 @@
       <file leaf-file-name="GestionCommande.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="73" column="61" selection-start-line="73" selection-start-column="61" selection-end-line="73" selection-end-column="61" />
+            <state relative-caret-position="498">
+              <caret line="78" column="1" lean-forward="true" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
               <folding>
                 <element signature="e#39#69#0#PHP" expanded="true" />
               </folding>
@@ -271,8 +264,8 @@
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/recapPanier.html.twig" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" />
       </list>
     </option>
   </component>
@@ -661,7 +654,7 @@
       <workItem from="1525001897047" duration="2867000" />
       <workItem from="1525019274587" duration="65000" />
       <workItem from="1525019352001" duration="97000" />
-      <workItem from="1525019467429" duration="19777000" />
+      <workItem from="1525019467429" duration="20217000" />
     </task>
     <task id="LOCAL-00001" summary="nettoyage du code, ajout checkbox dans BilletType (true or false)">
       <created>1523369650529</created>
@@ -712,7 +705,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525079283720</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Création du service StripeService ajout du paiement dans la gestion de commande en passant par le service StripeService ; suppression du payement et du token dans le controler.">
+      <created>1525189945017</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1525189945017</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -724,7 +724,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="533048000" />
+    <option name="totallyTimeSpent" value="533488000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -740,10 +740,10 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16174497" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16174497" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32905984" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32763532" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="8" side_tool="true" visible="true" weight="0.32763532" />
       <window_info anchor="right" id="Database" order="3" weight="0.39597315" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32893288" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32905984" />
@@ -836,7 +836,8 @@
     <MESSAGE value="changement swift_mailer" />
     <MESSAGE value="sauvgarde projet" />
     <MESSAGE value="ajout de CalculerPrix dans GestionCommande, calcule et setPrix Ok." />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout de CalculerPrix dans GestionCommande, calcule et setPrix Ok." />
+    <MESSAGE value="Création du service StripeService ajout du paiement dans la gestion de commande en passant par le service StripeService ; suppression du payement et du token dans le controler." />
+    <option name="LAST_COMMIT_MESSAGE" value="Création du service StripeService ajout du paiement dans la gestion de commande en passant par le service StripeService ; suppression du payement et du token dans le controler." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1146,10 +1147,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1768">
+          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="73" column="61" selection-start-line="73" selection-start-column="61" selection-end-line="73" selection-end-column="61" />
+        <state relative-caret-position="498">
+          <caret line="78" column="1" lean-forward="true" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
           <folding>
             <element signature="e#39#69#0#PHP" expanded="true" />
           </folding>
@@ -1158,18 +1166,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
+        <state relative-caret-position="234">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
           <folding>
             <element signature="e#40#70#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1768">
-          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
         </state>
       </provider>
     </entry>

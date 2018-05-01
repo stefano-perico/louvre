@@ -11,8 +11,7 @@ use AppBundle\Service\GestionCommande;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\CalculerPrix;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class LouvreController extends Controller
 {
@@ -30,19 +29,16 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/info_facturation", name="info_fac")
      */
-    public function infoFacturationAction(Request $request, GestionCommande $gestionCommande, Session $session)
+    public function infoFacturationAction(Request $request, GestionCommande $gestionCommande)
     {
-        $commande = $gestionCommande;
         $utilisateur = new Utilisateur();
-        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         if ($request->isMethod('POST'))
         {
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $commande->setUtilisateur($utilisateur);
-
+                $gestionCommande->setUtilisateur($utilisateur);
                 return $this->redirectToRoute('panier');
             }
         }
@@ -76,15 +72,14 @@ class LouvreController extends Controller
 
         if ($request->isMethod('POST'))
         {
-            \Stripe\Stripe::setApiKey("sk_test_0qfLdJkutmeqc5EVVMWRQzI0");
+            if (!$request->request->has('stripeToken'))
+            {
+                return new BadRequestHttpException("il n'y a pas de token Stripe pour créer le payement");
+            }
             $token = $request->request->get("stripeToken");
-            $prix = $commande->caluclerPrixCentimes();
-            \Stripe\Charge::create(array(
-                "amount" => $prix,
-                "currency" => "eur",
-                "description" => "Example charge",
-                "source" => $token,
-            ));
+            $gestionCommande->payment($token);
+
+
             $mailer = $this->get('mailer');
             $message = (new \Swift_Message('Louvre'))
                 ->setTo($commande->getUtilisateur()->getEmail())

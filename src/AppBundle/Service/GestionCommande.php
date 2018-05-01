@@ -14,12 +14,14 @@ class GestionCommande
     private $em;
     private $session;
     private $calculerPrix;
+    private $stripe;
 
-    public function __construct(EntityManager $em, Session $session, CalculerPrix $calculerPrix)
+    public function __construct(EntityManager $em, Session $session, CalculerPrix $calculerPrix, StripeService $stripe)
     {
         $this->em = $em;
         $this->session = $session;
         $this->calculerPrix = $calculerPrix;
+        $this->stripe = $stripe;
     }
 
 
@@ -65,6 +67,12 @@ class GestionCommande
             $total = $total + $prix;
         }
         $commande->setPrix($total);
+    }
+
+    public function payment($token)
+    {
+        $prix = $this->getCommande()->caluclerPrixCentimes();
+        $this->stripe->charge($token, $prix);
     }
 
 

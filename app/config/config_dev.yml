@@ -40,7 +40,9 @@ monolog:
 #swiftmailer:
 # Swiftmailer Configuration
 swiftmailer:
-    transport: mail
-    username: 'stefano0012@gmail.com'
-    password: 'Thspfm1985!Adonis'
+    transport: '%mailer_transport%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    delivery_address: ['%delivery_address%']
+    sender_address: '%sender_address%'
 

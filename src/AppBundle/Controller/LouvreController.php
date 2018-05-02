@@ -107,8 +107,20 @@ class LouvreController extends Controller
     /**
      * @Route("louvre/test")
      */
-    public function testAction(GestionCommande $gestionCommande)
+    public function testAction()
     {
+        $mailer = $this->get('mailer');
+        $message = (new \Swift_Message('Louvre'))
+            ->setTo('stefano0012@gmail.com')
+            ->setBody(
+
+                $this->renderView(
+                    'base.html.twig'
+                ),
+                'text/html'
+            );
+        $mailer->send($message);
+        $this->addFlash('success', 'Votre commande a bien été validée');
 
     }
 

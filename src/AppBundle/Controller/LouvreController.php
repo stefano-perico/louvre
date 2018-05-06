@@ -65,11 +65,9 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/recap", name="recap_cmd")
      */
-    public function recapAction(Request $request, GestionCommande $gestionCommande)
+    public function recapAction(Request $request, GestionCommande $gestionCommande, \Swift_Mailer $mailer)
     {
-
         $commande = $gestionCommande->getCommande();
-
         if ($request->isMethod('POST'))
         {
             if (!$request->request->has('stripeToken'))
@@ -78,18 +76,17 @@ class LouvreController extends Controller
             }
             $token = $request->request->get("stripeToken");
             $gestionCommande->payment($token);
-
-
-            $mailer = $this->get('mailer');
             $message = (new \Swift_Message('Louvre'))
                 ->setTo($commande->getUtilisateur()->getEmail())
                 ->setBody(
-                    $this->renderView(
-                        ':louvre/mail:mail.html.twig', array('commande' => $commande)
-                    ),
+                    $this->renderView(':louvre/mail:mail.html.twig', array('commande' => $commande)),
                     'text/html'
                 );
             $mailer->send($message);
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($commande);
+            $em->flush();
             $this->addFlash('success', 'Votre commande a bien été validée');
             return $this->redirectToRoute('validation_cmd');
         }

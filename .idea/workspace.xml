@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31ddc352-00f5-48ba-8c13-499a3fd29cc1" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Service/MailerService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/config/config_dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config_dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/services.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Billet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Billet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Commande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Commande.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -62,37 +68,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="recapPanier.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/louvre/recapPanier.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="65" column="27" lean-forward="true" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="988">
-              <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="StripeService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/StripeService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
+            <state relative-caret-position="494">
               <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
             </state>
           </provider>
@@ -101,39 +80,84 @@
       <file leaf-file-name="LouvreController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="105" selection-start-line="105" selection-end-line="105" />
+            <state relative-caret-position="398">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="e#40#70#0#PHP" expanded="true" />
-                <element signature="e#3885#3901#1#PHP" expanded="true" />
+                <element signature="e#705#732#1#PHP" expanded="true" />
+                <element signature="e#1348#1383#0#PHP" expanded="true" />
+                <element signature="e#2069#2095#0#PHP" expanded="true" />
+                <element signature="e#2997#3026#0#PHP" expanded="true" />
+                <element signature="e#3347#3378#0#PHP" expanded="true" />
+                <element signature="e#3577#3607#1#PHP" expanded="true" />
+                <element signature="e#3915#3931#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mail.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig">
+      <file leaf-file-name="Commande.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Commande.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1768">
-              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state relative-caret-position="-1036">
+              <caret line="210" lean-forward="true" selection-start-line="210" selection-end-line="210" />
+              <folding>
+                <element signature="e#36#68#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config_dev.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+      <file leaf-file-name="Billet.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Billet.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="43" selection-start-line="43" selection-end-line="46" selection-end-column="38" />
+            <state relative-caret-position="-6730">
+              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <file leaf-file-name="Utilisateur.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Utilisateur.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="34" />
+            <state relative-caret-position="-3168">
+              <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="commandes" pinned="false" current-in-tab="false">
+        <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/commandes">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utilisateurs" pinned="false" current-in-tab="false">
+        <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/utilisateurs">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="billets" pinned="false" current-in-tab="false">
+        <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/billets">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MailerService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/MailerService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="520">
+              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -141,20 +165,8 @@
       <file leaf-file-name="GestionCommande.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="78" column="1" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
-              <folding>
-                <element signature="e#39#69#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="34" column="38" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="38" />
+            <state relative-caret-position="2080">
+              <caret line="80" selection-start-line="80" selection-end-line="80" />
             </state>
           </provider>
         </entry>
@@ -218,7 +230,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Resources/views/louvre/mail.html.twig" />
         <option value="$PROJECT_DIR$/web/config.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/paiement.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/mail/billet/billet.html.twig.html" />
@@ -253,22 +264,23 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Validator/Constraints/JoursFermee.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/gestionCommande.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Billet.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/CommandeType.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/panier.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Commande.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/CalculerPrix.php" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/Stripe.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/StripeService.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/recapPanier.html.twig" />
-        <option value="$PROJECT_DIR$/app/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
+        <option value="$PROJECT_DIR$/app/config/services.yml" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Service/MailerService.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Billet.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Commande.php" />
       </list>
     </option>
   </component>
@@ -658,6 +670,8 @@
       <workItem from="1525019274587" duration="65000" />
       <workItem from="1525019352001" duration="97000" />
       <workItem from="1525019467429" duration="23983000" />
+      <workItem from="1525279722256" duration="3669000" />
+      <workItem from="1525361656442" duration="7061000" />
     </task>
     <task id="LOCAL-00001" summary="nettoyage du code, ajout checkbox dans BilletType (true or false)">
       <created>1523369650529</created>
@@ -734,7 +748,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="537254000" />
+    <option name="totallyTimeSpent" value="547984000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -747,18 +761,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="781" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33425796" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32905984" />
-      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32763532" />
-      <window_info anchor="right" id="Database" order="3" weight="0.39597315" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32893288" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32905984" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32897604" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.24973147" />
       <window_info anchor="bottom" x="30" y="336" width="900" height="366" id="Terminal" order="11" weight="0.4159544" />
+      <window_info anchor="bottom" id="Database Console" order="12" weight="0.32763532" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19597316" />
+      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" weight="0.3489933" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.24973147" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -768,7 +783,6 @@
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32893288" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Database Console" order="12" weight="0.32897604" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3278867" />
     </layout>
     <layout-to-restore>
@@ -945,13 +959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/commandes">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/commandes.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -994,24 +1001,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Utilisateur.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4134">
-          <caret line="159" column="24" selection-start-line="159" selection-start-column="20" selection-end-line="159" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/JoursFeries.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1456">
           <caret line="56" column="1" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Billet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="239" column="21" selection-start-line="239" selection-start-column="21" selection-end-line="239" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1029,28 +1022,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/CalculerPrix.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
           <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Commande.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="212" column="20" selection-start-line="212" selection-start-column="14" selection-end-line="212" selection-end-column="20" />
-          <folding>
-            <element signature="e#36#68#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1087,9 +1064,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/main.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="590">
@@ -1104,44 +1078,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/payum.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/louvre/recapPanier.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
+        <state relative-caret-position="832">
           <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/StripeService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="34" column="38" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/louvre/mail/mail.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1768">
+        <state relative-caret-position="1326">
           <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="78" column="1" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
-          <folding>
-            <element signature="e#39#69#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1154,33 +1101,119 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-          <folding>
-            <element signature="e#40#70#0#PHP" expanded="true" />
-            <element signature="e#3885#3901#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="43" selection-start-line="43" selection-end-line="46" selection-end-column="38" />
+        <state relative-caret-position="208">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="65" column="27" lean-forward="true" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="27" />
+        <state relative-caret-position="1716">
+          <caret line="66" selection-start-line="66" selection-end-line="71" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1014">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1040">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/StripeService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2080">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/MailerService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller/ControllerTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="261" lean-forward="true" selection-start-line="261" selection-end-line="261" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/commandes">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/utilisateurs">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Billet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6730">
+          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Utilisateur.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3168">
+          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+          <folding>
+            <element signature="e#40#70#0#PHP" expanded="true" />
+            <element signature="e#705#732#1#PHP" expanded="true" />
+            <element signature="e#1348#1383#0#PHP" expanded="true" />
+            <element signature="e#2069#2095#0#PHP" expanded="true" />
+            <element signature="e#2997#3026#0#PHP" expanded="true" />
+            <element signature="e#3347#3378#0#PHP" expanded="true" />
+            <element signature="e#3577#3607#1#PHP" expanded="true" />
+            <element signature="e#3915#3931#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/billets">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Commande.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1036">
+          <caret line="210" lean-forward="true" selection-start-line="210" selection-end-line="210" />
+          <folding>
+            <element signature="e#36#68#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

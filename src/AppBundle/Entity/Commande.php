@@ -144,7 +144,7 @@ class Commande
      */
     public function createdAt()
     {
-        $this->setDate(new \DateTime());
+        $this->setDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
     }
 
     /**
@@ -227,6 +227,17 @@ class Commande
     public function getBillets()
     {
         return $this->billets;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setBilletsCommandeId()
+    {
+        foreach ($this->getBillets() as $billet)
+        {
+            $this->addBillets($billet);
+        }
     }
 
     /**

@@ -75,5 +75,11 @@ class GestionCommande
         $this->stripe->charge($token, $prix);
     }
 
+    public function sendMailCommande()
+    {
+        // TODO créer un fonction qui envoie le mail de confirmation de la commmande
+
+    }
+
 
 }

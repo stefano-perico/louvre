@@ -233,7 +233,7 @@ class Billet
      *
      * @return Billet
      */
-    public function setCommande(\AppBundle\Entity\Commande $commande = null)
+    public function setCommande(\AppBundle\Entity\Commande $commande)
     {
         $this->commande = $commande;
 

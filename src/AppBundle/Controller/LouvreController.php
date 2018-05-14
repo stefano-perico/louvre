@@ -8,6 +8,7 @@ use AppBundle\Form\CommandeType;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Service\EstDisponible;
 use AppBundle\Service\GestionCommande;
+use AppBundle\Service\StripeService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,6 +68,7 @@ class LouvreController extends Controller
      */
     public function recapAction(Request $request, GestionCommande $gestionCommande, \Swift_Mailer $mailer)
     {
+        $em = $this->getDoctrine()->getManager();
         $commande = $gestionCommande->getCommande();
         if ($request->isMethod('POST'))
         {
@@ -76,19 +78,19 @@ class LouvreController extends Controller
             }
             $token = $request->request->get("stripeToken");
             $gestionCommande->payment($token);
-            $message = (new \Swift_Message('Louvre'))
-                ->setTo($commande->getUtilisateur()->getEmail())
-                ->setBody(
-                    $this->renderView(':louvre/mail:mail.html.twig', array('commande' => $commande)),
-                    'text/html'
-                );
-            $mailer->send($message);
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($commande);
-            $em->flush();
-            $this->addFlash('success', 'Votre commande a bien été validée');
-            return $this->redirectToRoute('validation_cmd');
+            if ($commande->getValide() == true)
+            {
+                $message = (new \Swift_Message('Louvre'))
+                    ->setTo($commande->getUtilisateur()->getEmail())
+                    ->setBody(
+                        $this->renderView(':louvre/mail:mail.html.twig', array('commande' => $commande)),
+                        'text/html'
+                    );
+                $em->persist($commande);
+                $em->flush();
+                $mailer->send($message);
+                return $this->redirectToRoute('validation_cmd');
+            }
         }
         return $this->render(':louvre:recapPanier.html.twig', array('commande' => $commande));
     }
@@ -104,21 +106,53 @@ class LouvreController extends Controller
     /**
      * @Route("louvre/test")
      */
-    public function testAction()
+    public function testAction(StripeService $stripe, Request $request)
     {
-        $mailer = $this->get('mailer');
-        $message = (new \Swift_Message('Louvre'))
-            ->setTo('stefano0012@gmail.com')
-            ->setBody(
 
-                $this->renderView(
-                    'base.html.twig'
-                ),
-                'text/html'
-            );
-        $mailer->send($message);
-        $this->addFlash('success', 'Votre commande a bien été validée');
+        $prix = 100;
+        if ($request->isMethod('POST'))
+        {
+            if (!$request->request->has('stripeToken'))
+            {
+                return new BadRequestHttpException("il n'y a pas de token Stripe pour créer le payement");
+            }
+            $token = $request->request->get('stripeToken');
+            try
+            {
+                $charge = \Stripe\Charge::create([
+                    "amount" => $prix,
+                    "currency" => "eur",
+                    "description" => "Example charge",
+                    "source" => $token,
+                ]);
+                $this->addFlash('success', 'Votre commande a bien été validée');
+            }
+            catch (\Stripe\Error\Card $exception) {
+                $body = $exception->getJsonBody();
+                $err = $body['error'];
+                $this->addFlash('danger', $err['type'] . ' ' . $err['code'] . ' ' . $err['message']);
+            }
+            catch (\Stripe\Error\RateLimit $exception){
 
+            }
+            catch (\Stripe\Error\InvalidRequest $exception){
+
+            }
+            catch (\Stripe\Error\Authentication $exception){
+
+            }
+            catch (\Stripe\Error\ApiConnection $exception){
+
+            }
+            catch (\Stripe\Error\Base $exception){
+
+            }
+            catch (\Exception $exception){
+
+            }
+
+        }
+       return $this->render(':louvre:test.html.twig', array('prix' => $prix));
     }
 
 

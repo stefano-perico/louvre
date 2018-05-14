@@ -72,6 +72,7 @@
 
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     <script>
         // Datepicker vue Panier
         var dates = "{{ estDispo.jourFeries.jours_feries }}";

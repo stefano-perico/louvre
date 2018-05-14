@@ -29,7 +29,7 @@ class Commande
      *
      * @ORM\Column(name="valide", type="boolean")
      */
-    private $valide = 1;
+    private $valide = false;
 
     /**
      * @var \DateTime
@@ -232,7 +232,7 @@ class Commande
     /**
      * @ORM\PrePersist()
      */
-    public function setBilletsCommandeId()
+    public function setBilletsCommande()
     {
         foreach ($this->getBillets() as $billet)
         {

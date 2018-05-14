@@ -7,6 +7,7 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Commande;
 use AppBundle\Entity\Utilisateur;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class GestionCommande
@@ -16,12 +17,14 @@ class GestionCommande
     private $calculerPrix;
     private $stripe;
 
+
     public function __construct(EntityManager $em, Session $session, CalculerPrix $calculerPrix, StripeService $stripe)
     {
         $this->em = $em;
         $this->session = $session;
         $this->calculerPrix = $calculerPrix;
         $this->stripe = $stripe;
+
     }
 
 
@@ -73,6 +76,19 @@ class GestionCommande
     {
         $prix = $this->getCommande()->caluclerPrixCentimes();
         $this->stripe->charge($token, $prix);
+        if (!empty($this->stripe->getErrors()))
+        {
+            foreach ($this->stripe->getErrors() as $error)
+            {
+                $this->session->getFlashBag()->add('danger', $error);
+            }
+        }
+        else
+        {
+            $commande = $this->getCommande();
+            $commande->setValide(true);
+            $this->session->getFlashBag()->add('success', 'Votre commande a bien été validée');
+        }
     }
 
     public function sendMailCommande()

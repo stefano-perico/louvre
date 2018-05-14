@@ -8,18 +8,15 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     {{ form_label(form.dateBillet, "Date de la visite") }}
-                    {{ form_errors(form.dateBillet) }}
                     {{ form_widget(form.dateBillet) }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form_label(form.demiJournee) }}
-                    {{ form_errors(form.demiJournee) }}
                     {{ form_widget(form.demiJournee) }}
                 </div>
             </div>
             <br>
             {{ form_label(form.billets) }}
-            {{ form_errors(form.billets) }}
             {{ form_widget(form.billets) }}
             <div class="row">
                 <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">

@@ -43,11 +43,7 @@ class CommandeType extends AbstractType
                     'allow_delete'  => true
                 )
             )
-            ->add('Valider', SubmitType::class, array(
-                'attr' => array('class' => 'btn-success btn-lg float-right')
-            ))
         ;
-
     }
     
     /**

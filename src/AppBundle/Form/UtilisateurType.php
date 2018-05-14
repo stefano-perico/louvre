@@ -26,9 +26,6 @@ class UtilisateurType extends AbstractType
             ->add('codePostal')
             ->add('ville', TextType::class)
             ->add('pays', TextType::class)
-            ->add('Valider', SubmitType::class, array(
-                'attr' => array('class' => 'btn-success btn-lg float-right')
-            ))
         ;
     }
     

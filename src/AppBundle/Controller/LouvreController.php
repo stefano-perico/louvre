@@ -34,14 +34,11 @@ class LouvreController extends Controller
     {
         $utilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
-        if ($request->isMethod('POST'))
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
         {
-            $form->handleRequest($request);
-            if ($form->isValid())
-            {
-                $gestionCommande->setUtilisateur($utilisateur);
-                return $this->redirectToRoute('panier');
-            }
+            $gestionCommande->setUtilisateur($utilisateur);
+            return $this->redirectToRoute('panier');
         }
         return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));
     }
@@ -53,12 +50,12 @@ class LouvreController extends Controller
     {
         $commande = new Commande();
         $form = $this->createForm(CommandeType::class, $commande);
-        if ($request->isMethod('POST')){
-            if ($form->handleRequest($request)->isValid()){
-                $commande->setUtilisateur($gestionCommande->getUtilisateur());
-                $gestionCommande->setCommande($commande);
-                return $this->redirectToRoute('recap_cmd');
-            }
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $commande->setUtilisateur($gestionCommande->getUtilisateur());
+            $gestionCommande->setCommande($commande);
+            return $this->redirectToRoute('recap_cmd');
         }
         return $this->render(':louvre:panier.html.twig', array('form' => $form->createView(), 'estDispo' => $estDisponible));
     }

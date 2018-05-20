@@ -90,12 +90,5 @@ class GestionCommande
             $this->session->getFlashBag()->add('success', 'Votre commande a bien été validée');
         }
     }
-
-    public function sendMailCommande()
-    {
-        // TODO créer un fonction qui envoie le mail de confirmation de la commmande
-
-    }
-
-
+    
 }

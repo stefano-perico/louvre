@@ -3,64 +3,107 @@
 namespace Tests\AppBundle\Controller;
 
 
-use AppBundle\Controller\LouvreController;
+
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Commande;
 use AppBundle\Service\CalculerPrix;
-use AppBundle\Service\EstDisponible;
-use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class LouvreControllerTest extends WebTestCase
 {
-    private $client;
-    private $calculerPrix;
-    private $billet;
-    private $commande;
 
-
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function testAccueilActionIsUp()
     {
-        parent::__construct($name, $data, $dataName);
-        $this->client = static::createClient();
-        $this->calculerPrix = new CalculerPrix();
-        $this->billet = new Billet();
-        $this->commande = new Commande();
-    }
+        $client = static::createClient();
+        $client->request('GET', '/');
 
-    public function testInfoFacturationAction()
-    {
-        $this->client->request('GET', 'louvre/info_facturation');
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testAccueilAction()
     {
-        $this->client->request('GET', '');
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('html:contains("Bienvenue au Louvre")')->count());
+    }
+
+    public function testInfoFacturationActionIsUp()
+    {
+        $client = static::createClient();
+        $client->request('GET', 'louvre/info_facturation');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testInfoFacturationAction()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/');
+
+        $link = $crawler->selectLink('Billetterie')->link();
+        $crawler = $client->click($link);
+
+        $form = $crawler->selectButton('Valider')->form();
+        $form['appbundle_utilisateurs[nom]'] = 'John';
+        $form['appbundle_utilisateurs[prenom]'] = 'Doe';
+        $form['appbundle_utilisateurs[adresse]'] = '36 rue de la rue';
+        $form['appbundle_utilisateurs[ville]'] = 'ville';
+        $form['appbundle_utilisateurs[codePostal]'] = '92000';
+        $form['appbundle_utilisateurs[pays]'] = 'France';
+        $form['appbundle_utilisateurs[email]'] = 'email@email.fr';
+        $form['appbundle_utilisateurs[telephone]'] = '01 70 01 01 01';
+        $client->submit($form);
+
+        $crawler = $client->followRedirect();
+
+        $this->assertSame(1, $crawler->filter('aside.alert.alert-success')->count());
+    }
+
+    public function testPanierActionIsUp()
+    {
+        $client = static::createClient();
+        $client->request('GET', 'louvre/panier');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testPanierAction()
     {
-        $this->client->request('GET', 'louvre/panier/utilisateur:1');
+        $client = static::createClient();
+        $crawler = $client->request('GET', 'louvre/panier');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $form = $crawler->selectButton('Valider')->form();
+        $form->setValues([
+            'appbundle_commandes[dateBillet]'                       =>  '30-06-2018',
+            'appbundle_commandes[billets][0][nom]'                  =>  'Doe',
+            'appbundle_commandes[billets][0][prenom]'               => 'John',
+            'appbundle_commandes[billets][0][dateNaissance][month]' => '1',
+            'appbundle_commandes[billets][0][dateNaissance][day]'   => '1',
+            'appbundle_commandes[billets][0][dateNaissance][year]'  => '1998'
+        ]);
+
+        $client->submit($form);
+
+        $client->followRedirect();
+
+        echo $client->getResponse()->getContent();
     }
 
-    public function testRecapAction()
+    public function testRecapActionIsUp()
     {
-        $this->client->request('GET', 'louvre/recap/commande:2/utilisateur:2');
+        $client = static::createClient();
+        $client->request('GET','louvre/recap');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testValidationAction()
+    public function testValidationActionIsUp()
     {
-        $this->client->request('GET', 'louvre/validation');
+        $client = static::createClient();
+        $client->request('GET', 'louvre/validation');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
 

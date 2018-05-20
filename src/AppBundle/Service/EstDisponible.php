@@ -61,7 +61,7 @@ class EstDisponible
     public function dateIsOpen($date)
     {
         $joutSemaine = date('N', strtotime($date));
-        $jourFeries = [$this->jourFeries->jours_feries()];
+        $jourFeries = $this->jourFeries->jours_feries();
         $isHoliday = in_array($date, $jourFeries);
 
         if(in_array($joutSemaine, $this->joursFerme) /**  OR $isHoliday == true */)

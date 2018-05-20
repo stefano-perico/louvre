@@ -41,7 +41,7 @@ class Commande
     /**
      * @var \DateTime
      * @Assert\DateTime()
-     * @LouvreAssert\JoursFermee()
+     * @LouvreAssert\JoursFerme()
      * @ORM\Column(name="dateBillet", type="date")
      */
     private $dateBillet;

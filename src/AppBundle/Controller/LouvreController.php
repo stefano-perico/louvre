@@ -38,6 +38,7 @@ class LouvreController extends Controller
         if ($form->isSubmitted() && $form->isValid())
         {
             $gestionCommande->setUtilisateur($utilisateur);
+            $this->addFlash('success', 'Vos informations de facturations ont bien été enregistrées');
             return $this->redirectToRoute('panier');
         }
         return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));

@@ -24,9 +24,17 @@ class JoursFeries
         return $base->format('d-m-Y');
     }
 
-    public function jours_feries()
+    public function jours_feries(\DateTime $date = null)
     {
-        $annee = $this->annee;
+        if ($date == null)
+        {
+            $annee = $this->annee;
+        }
+        else
+        {
+            $annee = $date->format('Y');
+        }
+
         $dimanche_paques = $this->get_easter_datetime();
         $lundi_paques = date("d-m-Y", strtotime("$dimanche_paques +1 day"));
         $jeudi_ascension = date("d-m-Y", strtotime("$dimanche_paques +39 day"));
@@ -48,7 +56,11 @@ class JoursFeries
         ,    "25-12-$annee"         //    Noël
         );
         ;
-        return implode(',', $jours_feries);
+        return $jours_feries;
+    }
+
+    public function getJoursFeriesDatePicker(){
+        return implode(",", $this->jours_feries());
     }
 
 

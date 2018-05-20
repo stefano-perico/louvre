@@ -72,7 +72,7 @@
     {{ parent() }}
     <script>
         // Datepicker vue Panier
-        var dates = "{{ estDispo.jourFeries.jours_feries }}";
+        var dates = "{{ estDispo.jourFeries.getJoursFeriesDatePicker }}";
         var myDates = dates.split(',');
 
         $(".datepicker2")

@@ -32,7 +32,7 @@
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <aside class="alert alert-{{ label }}">
-                    {{ message }}
+                    {{ message | trans }}
                 </aside>
             {% endfor %}
         {% endfor %}

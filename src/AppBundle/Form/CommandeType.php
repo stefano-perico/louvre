@@ -22,14 +22,12 @@ class CommandeType extends AbstractType
             ->add('dateBillet', DateType::class,
                 array(
                     'widget'    => 'single_text',
-                    'attr'      => ['class' => 'datepicker2'],
                     'html5'     => false,
                     'format'    => 'dd-MM-yyyy',
                 )
             )
             ->add('demiJournee', ChoiceType::class,
                 array(
-                    'attr'      => ['class' => 'typeBilletJour'],
                     'choices'   => array(
                         'Journée'       => false,
                         'Demi-journée'  => true

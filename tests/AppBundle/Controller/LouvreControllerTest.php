@@ -68,34 +68,12 @@ class LouvreControllerTest extends WebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testPanierAction()
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', 'louvre/panier');
-
-        $form = $crawler->selectButton('Valider')->form();
-        $form->setValues([
-            'appbundle_commandes[dateBillet]'                       =>  '30-06-2018',
-            'appbundle_commandes[billets][0][nom]'                  =>  'Doe',
-            'appbundle_commandes[billets][0][prenom]'               => 'John',
-            'appbundle_commandes[billets][0][dateNaissance][month]' => '1',
-            'appbundle_commandes[billets][0][dateNaissance][day]'   => '1',
-            'appbundle_commandes[billets][0][dateNaissance][year]'  => '1998'
-        ]);
-
-        $client->submit($form);
-
-        $client->followRedirect();
-
-        echo $client->getResponse()->getContent();
-    }
-
     public function testRecapActionIsUp()
     {
         $client = static::createClient();
         $client->request('GET','louvre/recap');
 
-         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testValidationActionIsUp()

@@ -32,6 +32,15 @@ services:
     AppBundle\Service\EstDisponible:
         arguments: ['@AppBundle\Service\JoursFeries', '@doctrine.orm.entity_manager']
 
+    AppBundle\Service\GestionCommande:
+        arguments: ['@doctrine.orm.entity_manager', '@session', '@AppBundle\Service\CalculerPrix', '@AppBundle\Service\StripeService']
+
+    AppBundle\Service\StripeService:
+        arguments: ['%stripe_secret_key%']
+        public: true
+
+    AppBundle\Service\MailerService:
+        arguments: ['@Swift_Mailer']
 
 
 

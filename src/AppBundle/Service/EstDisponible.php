@@ -45,10 +45,6 @@ class EstDisponible
         {
             return false;
         }
-        elseif ($this->dateIsOpen($dateBillet))
-        {
-            return false;
-        }
 
         return true;
     }
@@ -56,19 +52,6 @@ class EstDisponible
     public function resteBillets()
     {
             return "Désoler mais, il n'est pas possible de commander de billets pour cette date";
-    }
-
-    public function dateIsOpen($date)
-    {
-        $joutSemaine = date('N', strtotime($date));
-        $jourFeries = [$this->jourFeries->jours_feries()];
-        $isHoliday = in_array($date, $jourFeries);
-
-        if(in_array($joutSemaine, $this->joursFerme) /**  OR $isHoliday == true */)
-        {
-            return true;
-        }
-        return false;
     }
 
     public function dateLimite()

@@ -8,19 +8,16 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     {{ form_label(form.dateBillet, "Date de la visite") }}
-                    {{ form_errors(form.dateBillet) }}
-                    {{ form_widget(form.dateBillet) }}
+                    {{ form_widget(form.dateBillet, {'attr': {'class': 'datepicker2'}}) }}
                 </div>
                 <div class="col-md-6 mb-3">
-                    {{ form_label(form.demiJournee) }}
-                    {{ form_errors(form.demiJournee) }}
-                    {{ form_widget(form.demiJournee) }}
+                    {{ form_label(form.demiJournee, "Type de billet") }}
+                    {{ form_widget(form.demiJournee, {'attr': {'class': 'typeBilletJour'}}) }}
                 </div>
             </div>
             <br>
-            {{ form_label(form.billet) }}
-            {{ form_errors(form.billet) }}
-            {{ form_widget(form.billet) }}
+            {{ form_label(form.billets) }}
+            {{ form_widget(form.billets) }}
             <div class="row">
                 <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -30,7 +27,7 @@
                     <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
                 </div>
                 <div class="col-md-6 mb-3">
-                    {{ form_row(form.Valider) }}
+                    <input type="submit" value="Valider" class='btn-success btn-lg float-right'>
                 </div>
             </div>
             {{ form_rest(form) }}
@@ -72,9 +69,10 @@
 
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     <script>
         // Datepicker vue Panier
-        var dates = "{{ estDispo.jourFeries.jours_feries }}";
+        var dates = "{{ estDispo.jourFeries.getJoursFeriesDatePicker }}";
         var myDates = dates.split(',');
 
         $(".datepicker2")
@@ -106,7 +104,7 @@
 
         // Ajout billets dans vue Panier
         // On récupère la balise <div> en question qui contient l'attribut "data-prototype".
-        var $container = $('div#appbundle_commandes_billet');
+        var $container = $('div#appbundle_commandes_billets');
 
         // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement.
         var index = $container.find(':input').length;

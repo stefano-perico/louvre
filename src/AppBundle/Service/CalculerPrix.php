@@ -52,7 +52,7 @@ class CalculerPrix
         return $prix;
     }
 
-    public function setDemiJournee(Billet $billet)
+    private function setDemiJournee(Billet $billet)
     {
         switch ($age = $billet->getAge())
         {
@@ -87,7 +87,7 @@ class CalculerPrix
         return $prix;
     }
 
-    public function setPrixJournee(Billet $billet)
+    private function setPrixJournee(Billet $billet)
     {
         switch ($age = $billet->getAge())
         {

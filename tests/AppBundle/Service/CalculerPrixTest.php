@@ -7,7 +7,7 @@ use AppBundle\Entity\Commande;
 use AppBundle\Service\CalculerPrix;
 use PHPUnit\Framework\TestCase;
 
-class CalcuerPrixTest extends TestCase
+class CalculerPrixTest extends TestCase
 {
     const DATE_VISITE = '2018-06-02';
 

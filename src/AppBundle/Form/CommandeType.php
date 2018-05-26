@@ -22,32 +22,26 @@ class CommandeType extends AbstractType
             ->add('dateBillet', DateType::class,
                 array(
                     'widget'    => 'single_text',
-                    'attr'      => ['class' => 'datepicker2'],
                     'html5'     => false,
                     'format'    => 'dd-MM-yyyy',
                 )
             )
             ->add('demiJournee', ChoiceType::class,
                 array(
-                    'attr'      => ['class' => 'typeBilletJour'],
                     'choices'   => array(
                         'Journée'       => false,
                         'Demi-journée'  => true
                     )
                 )
             )
-            ->add('billet', CollectionType::class,
+            ->add('billets', CollectionType::class,
                 array(
                     'entry_type'    => BilletType::class,
                     'allow_add'     => true,
                     'allow_delete'  => true
                 )
             )
-            ->add('Valider', SubmitType::class, array(
-                'attr' => array('class' => 'btn-success btn-lg float-right')
-            ))
         ;
-
     }
     
     /**

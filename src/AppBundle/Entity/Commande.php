@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use AppBundle\Validator\Constraints as LouvreAssert;
 
 /**
  * Commande
@@ -29,7 +29,7 @@ class Commande
      *
      * @ORM\Column(name="valide", type="boolean")
      */
-    private $valide = 1;
+    private $valide = false;
 
     /**
      * @var \DateTime
@@ -41,6 +41,7 @@ class Commande
     /**
      * @var \DateTime
      * @Assert\DateTime()
+     * @LouvreAssert\JoursFerme()
      * @ORM\Column(name="dateBillet", type="date")
      */
     private $dateBillet;
@@ -53,9 +54,9 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"})
-     * @ORM\JoinColumn()
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $billet;
+    private $billets;
 
     /**
      * @var float
@@ -66,7 +67,7 @@ class Commande
 
     /**
      * @var bool
-     * @Assert\Type(bool)
+     *
      * @ORM\Column(name="demi_journee", type="boolean")
      */
     private $demiJournee = false;
@@ -76,7 +77,7 @@ class Commande
      */
     public function __construct()
     {
-        $this->billet = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->billets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -144,7 +145,7 @@ class Commande
      */
     public function createdAt()
     {
-        $this->setDate(new \DateTime());
+        $this->setDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
     }
 
     /**
@@ -202,9 +203,9 @@ class Commande
      *
      * @return Commande
      */
-    public function addBillet(\AppBundle\Entity\Billet $billet)
+    public function addBillets(\AppBundle\Entity\Billet $billet)
     {
-        $this->billet[] = $billet;
+        $this->billets[] = $billet;
         $billet->setCommande($this);
         return $this;
     }
@@ -214,9 +215,9 @@ class Commande
      *
      * @param \AppBundle\Entity\Billet $billet
      */
-    public function removeBillet(\AppBundle\Entity\Billet $billet)
+    public function removeBillets(\AppBundle\Entity\Billet $billet)
     {
-        $this->billet->removeElement($billet);
+        $this->billets->removeElement($billet);
     }
 
     /**
@@ -224,9 +225,20 @@ class Commande
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBillet()
+    public function getBillets()
     {
-        return $this->billet;
+        return $this->billets;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setBilletsCommande()
+    {
+        foreach ($this->getBillets() as $billet)
+        {
+            $this->addBillets($billet);
+        }
     }
 
     /**
@@ -284,45 +296,4 @@ class Commande
         return $this->demiJournee;
     }
 
-    /**
-     * @Assert\Callback()
-     */
-    public function isDateBilletValid(ExecutionContextInterface $context)
-    {
-        $year = $this->getDateBillet()->format('Y');
-        $base = new \DateTime("$year-03-21");
-        $days = easter_days($year);
-        $base->add(new \DateInterval("P{$days}D"));
-
-        $dimanche_paques = $base->format('d-m-Y');
-        $lundi_paques = date("d-m-Y", strtotime("$dimanche_paques +1 day"));
-        $jeudi_ascension = date("d-m-Y", strtotime("$dimanche_paques +39 day"));
-        $lundi_pentecote = date("d-m-Y", strtotime("$dimanche_paques +50 day"));
-
-        $jours_feries = array
-        (
-            $dimanche_paques,
-            $lundi_paques
-        ,   $jeudi_ascension
-        ,   $lundi_pentecote
-
-        ,    "01-01-$year"         //    Nouvel an
-        ,    "01-05-$year"         //    Fête du travail
-        ,    "08-05-$year"        //    Armistice 1945
-        ,    "14-07-$year"         //    Fête nationale
-        ,    "15-08-$year"         //    Assomption
-        ,    "01-11-$year"         //    Toussaint
-        ,    "11-11-$year"         //    Armistice 1918
-        ,    "25-12-$year"         //    Noël
-        );
-
-        if (in_array($this->getDateBillet()->format('d-m-Y'), $jours_feries))
-        {
-            $context
-                ->buildViolation('Ce jour est fériés, merci de choisir une autre date')
-                ->atPath('dateBillet')
-                ->addViolation()
-            ;
-        }
-    }
 }

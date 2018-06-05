@@ -8,7 +8,6 @@ use AppBundle\Form\CommandeType;
 use AppBundle\Form\UtilisateurType;
 use AppBundle\Service\EstDisponible;
 use AppBundle\Service\GestionCommande;
-use AppBundle\Service\StripeService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +22,6 @@ class LouvreController extends Controller
     public function accueilAction(GestionCommande $commande)
     {
         $commande->remove();
-
         return $this->render(':louvre:accueil.html.twig');
     }
 
@@ -96,62 +94,18 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/validation", name="validation_cmd")
      */
-    public function validationCommandeAction()
+    public function validationCommandeAction(GestionCommande $commande)
     {
+        $commande->remove();
         return $this->render(':louvre:validation.html.twig');
     }
 
     /**
-     * @Route("louvre/test")
+     * @Route("test")
      */
-    public function testAction(StripeService $stripe, Request $request)
+    public function test()
     {
-
-        $prix = 100;
-        if ($request->isMethod('POST'))
-        {
-            if (!$request->request->has('stripeToken'))
-            {
-                return new BadRequestHttpException("il n'y a pas de token Stripe pour créer le payement");
-            }
-            $token = $request->request->get('stripeToken');
-            try
-            {
-                $charge = \Stripe\Charge::create([
-                    "amount" => $prix,
-                    "currency" => "eur",
-                    "description" => "Example charge",
-                    "source" => $token,
-                ]);
-                $this->addFlash('success', 'Votre commande a bien été validée');
-            }
-            catch (\Stripe\Error\Card $exception) {
-                $body = $exception->getJsonBody();
-                $err = $body['error'];
-                $this->addFlash('danger', $err['type'] . ' ' . $err['code'] . ' ' . $err['message']);
-            }
-            catch (\Stripe\Error\RateLimit $exception){
-
-            }
-            catch (\Stripe\Error\InvalidRequest $exception){
-
-            }
-            catch (\Stripe\Error\Authentication $exception){
-
-            }
-            catch (\Stripe\Error\ApiConnection $exception){
-
-            }
-            catch (\Stripe\Error\Base $exception){
-
-            }
-            catch (\Exception $exception){
-
-            }
-
-        }
-       return $this->render(':louvre:test.html.twig', array('prix' => $prix));
+        return $this->render(':Exception:error500.html.twig');
     }
-
 
 }

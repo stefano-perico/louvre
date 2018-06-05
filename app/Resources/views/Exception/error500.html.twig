@@ -1,0 +1,29 @@
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Page Not Found :(</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="{{ asset('css/stylesException.css') }}">
+    <script src="{{ asset('js/Exception.js') }}"></script>
+</head>
+
+
+<body>
+
+<div class="unicorn"></div>
+
+<div class="container">
+
+    <h1>500 Internal Server Error</h1>
+
+    <div class="warning">
+        <p>The server encountred something unexpected that didn't allow it to complete the request. We apologize.</p>
+        <a href="javascript:history.back()">Please go back to the previous page</a>
+        <a href="{{ path('accueil') }}">Or go to the home page of the Louvre</a>
+    </div>
+
+</div><!-- /.container -->
+</body>
+</html>
+

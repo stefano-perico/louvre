@@ -169,7 +169,7 @@ background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcm
 
     .unicorn {
         height: 150px;
-        margin: 20px 0 0 0px !important;
+        margin: 20px 0 0 0px;
     }
     .four-oh-four {
         height:40px;

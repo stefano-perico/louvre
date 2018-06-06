@@ -100,12 +100,4 @@ class LouvreController extends Controller
         return $this->render(':louvre:validation.html.twig');
     }
 
-    /**
-     * @Route("test")
-     */
-    public function test()
-    {
-        return $this->render(':Exception:error500.html.twig');
-    }
-
 }

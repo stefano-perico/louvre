@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31ddc352-00f5-48ba-8c13-499a3fd29cc1" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/Exception/error404.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/Exception/error500.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/css/stylesException.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/js/Exception.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/louvre.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/louvre.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/parameters.yml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/parameters.yml.dist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/symfony_requirements" beforeDir="false" afterPath="$PROJECT_DIR$/bin/symfony_requirements" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/MailerService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/stylesException.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/stylesException.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/notes.react.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,10 +48,10 @@
       <file leaf-file-name="LouvreController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2496">
-              <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+            <state relative-caret-position="32">
+              <caret line="28" column="39" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="39" />
               <folding>
-                <element signature="e#3896#3927#1#PHP" expanded="true" />
+                <element signature="e#40#70#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,11 +76,6 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file leaf-file-name="logo-louvre.jpg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/images/logo-louvre.jpg">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
       <file leaf-file-name="louvre-102840_1280.jpg" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/images/louvre-102840_1280.jpg">
           <provider selected="true" editor-type-id="images" />
@@ -95,29 +84,35 @@
       <file leaf-file-name="stylesException.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/css/stylesException.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="124" column="13" selection-start-line="124" selection-start-column="1" selection-end-line="124" selection-end-column="13" />
-              <folding>
-                <element signature="e#7919#8714#1" expanded="true" />
-              </folding>
+            <state relative-caret-position="415">
+              <caret line="175" column="31" lean-forward="true" selection-start-line="175" selection-start-column="31" selection-end-line="175" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="error500.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GestionCommande.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="error500.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/Exception/error500.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="544">
+              <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LouvreControllerTest.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LouvreControllerTest.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+            <state relative-caret-position="128">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -125,7 +120,7 @@
       <file leaf-file-name="Exception.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/Exception.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="256">
               <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -147,7 +142,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>time</find>
       <find>Est</find>
       <find>phpu</find>
       <find>swiftmailer</find>
@@ -177,6 +171,7 @@
       <find>uni</find>
       <find>lou</find>
       <find>four-oh-four</find>
+      <find>impo</find>
     </findStrings>
     <replaceStrings>
       <replace>$this-&gt;$bebe</replace>
@@ -224,14 +219,12 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Validator/Constraints/JoursFerme.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Commande.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/StripeService.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/JoursFeries.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Validator/Constraints/JoursFermeValidator.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/EstDisponible.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/BilletType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Form/CommandeType.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/panier.html.twig" />
-        <option value="$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/Translations/messages.en.yml" />
         <option value="$PROJECT_DIR$/app/Resources/views/louvre/accueil.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/translations/messages.fr.yml" />
@@ -244,9 +237,11 @@
         <option value="$PROJECT_DIR$/web/css/cssError.css" />
         <option value="$PROJECT_DIR$/web/js/Exception.js" />
         <option value="$PROJECT_DIR$/app/Resources/views/Exception/error404.html.twig" />
-        <option value="$PROJECT_DIR$/web/css/stylesException.css" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/Exception/error500.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php" />
+        <option value="$PROJECT_DIR$/web/css/stylesException.css" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php" />
+        <option value="$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php" />
       </list>
     </option>
   </component>
@@ -647,7 +642,9 @@
       <workItem from="1527615958709" duration="17000" />
       <workItem from="1528137021358" duration="771000" />
       <workItem from="1528139222917" duration="620000" />
-      <workItem from="1528213059374" duration="8794000" />
+      <workItem from="1528213059374" duration="8981000" />
+      <workItem from="1528265423969" duration="422000" />
+      <workItem from="1528277947083" duration="1238000" />
     </task>
     <task id="LOCAL-00001" summary="nettoyage du code, ajout checkbox dans BilletType (true or false)">
       <created>1523369650529</created>
@@ -754,7 +751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527437639687</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="ajout page d'erreur 404 et 500 custome">
+      <created>1528232617225</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1528232617226</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -766,7 +770,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="622601000" />
+    <option name="totallyTimeSpent" value="624448000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -782,18 +786,18 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4994709" visible="true" weight="0.09929843" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4994709" visible="true" weight="0.16945493" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.25291005" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32698414" />
       <window_info anchor="right" id="Database" order="3" weight="0.3527508" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32893288" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.32804233" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32905984" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.32804233" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973147" />
       <window_info anchor="bottom" x="30" y="336" width="900" height="366" id="Terminal" order="11" weight="0.4159544" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info id="Favorites" order="2" sideWeight="0.5005291" side_tool="true" weight="0.37182948" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -885,21 +889,15 @@
     <MESSAGE value="ajout du validator JoursFermee dans l'Entité Commande" />
     <MESSAGE value="Ajout du validator pour les dates&#10;Ajout de setErrors dans stripe" />
     <MESSAGE value="modification mail" />
-    <option name="LAST_COMMIT_MESSAGE" value="modification mail" />
+    <MESSAGE value="ajout page d'erreur 404 et 500 custome" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout page d'erreur 404 et 500 custome" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="10" />
+      <option name="time" value="11" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Utilisateur.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3770">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://1e6d89e4-bc71-4ae7-97e8-1bbc03807ce3/schema/louvre/table/billets">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1130,13 +1128,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
@@ -1161,7 +1152,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/Exception.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="256">
           <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -1176,37 +1167,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+        <state relative-caret-position="32">
+          <caret line="28" column="39" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="39" />
+          <folding>
+            <element signature="e#40#70#0#PHP" expanded="true" />
+          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/notes.react.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1505" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/css/stylesException.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="124" column="13" selection-start-line="124" selection-start-column="1" selection-end-line="124" selection-end-column="13" />
-          <folding>
-            <element signature="e#7919#8714#1" expanded="true" />
-          </folding>
+        <state relative-caret-position="415">
+          <caret line="175" column="31" lean-forward="true" selection-start-line="175" selection-start-column="31" selection-end-line="175" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/LouvreController.php">
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/GestionCommande.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2496">
-          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-          <folding>
-            <element signature="e#3896#3927#1#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="285">
+          <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/Exception/error500.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="544">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/AppBundle/Controller/LouvreControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

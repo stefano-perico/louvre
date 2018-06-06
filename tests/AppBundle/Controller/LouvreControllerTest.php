@@ -3,10 +3,6 @@
 namespace Tests\AppBundle\Controller;
 
 
-
-use AppBundle\Entity\Billet;
-use AppBundle\Entity\Commande;
-use AppBundle\Service\CalculerPrix;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class LouvreControllerTest extends WebTestCase
@@ -71,9 +67,9 @@ class LouvreControllerTest extends WebTestCase
     public function testRecapActionIsUp()
     {
         $client = static::createClient();
-        $client->request('GET','louvre/recap');
+        $crawler = $client->request('GET','louvre/recap');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('h1:contains("500 Internal Server Error")')->count());
     }
 
     public function testValidationActionIsUp()

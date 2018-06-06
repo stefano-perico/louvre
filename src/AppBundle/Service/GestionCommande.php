@@ -83,12 +83,9 @@ class GestionCommande
                 $this->session->getFlashBag()->add('danger', $error);
             }
         }
-        else
-        {
-            $commande = $this->getCommande();
-            $commande->setValide(true);
-            $this->session->getFlashBag()->add('success', 'Votre commande a bien été validée');
-        }
+        $commande = $this->getCommande();
+        $commande->setValide(true);
+        $this->session->getFlashBag()->add('success', 'Votre commande a bien été validée');
     }
     
 }

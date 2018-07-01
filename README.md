@@ -1,6 +1,6 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aee0a17192e64837a60c0665687e55b3)](https://www.codacy.com/app/stefano-perico/louvre?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stefano-perico/louvre&amp;utm_campaign=Badge_Grade)
+
 louvre
-======
-**Note de cadrage projet Louvre**
 
 Rappel des enjeux et objectifs
 

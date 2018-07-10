@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculerPrixTest extends TestCase
 {
-    const DATE_VISITE = '2018-06-02';
+    const DATE_VISITE = '2018-08-02';
 
     protected $bebe = array('age' => '2014-05-02', 'prix' => 0, 'type' => 'Gratuit'); // <= 4
     protected $senior = array('age' => '1957-05-02', 'prix' => 12, 'type' => 'Senior'); // >= 60

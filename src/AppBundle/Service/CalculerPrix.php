@@ -11,11 +11,11 @@ class CalculerPrix
 {
     const HEURE_LIMITE_JOURNEE = 14;
 
-    protected $bebe = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
-    protected $senior = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
-    protected $reduit = array('prix' => 10, 'type' => 'Réduit');
-    protected $enfant = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
-    protected $normal = array('prix' => 16, 'type' => "Plein Tarif");
+    private $bebe = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
+    private $senior = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
+    private $reduit = array('prix' => 10, 'type' => 'Réduit');
+    private $enfant = array('age' => 12, 'prix' => 8, 'type' => 'Enfant');
+    private $normal = array('prix' => 16, 'type' => "Plein Tarif");
     
 
     public function prixBillet(Billet $billet, Commande $commande)

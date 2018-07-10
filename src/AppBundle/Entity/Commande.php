@@ -265,7 +265,7 @@ class Commande
         return $this->prix;
     }
 
-    public function caluclerPrixCentimes()
+    public function calculatePriceInCent()
     {
         return $this->getPrix() * 100;
     }
@@ -294,6 +294,18 @@ class Commande
     public function getDemiJournee()
     {
         return $this->demiJournee;
+    }
+
+    public function calculateOrderPrice()
+    {
+        $total = 0;
+        foreach ($this->getBillets() as $ticket)
+        {
+            $price = $ticket->getPrix();
+            $total = $total + $price;
+        }
+        $this->setPrix($total);
+        return $this;
     }
 
 }

@@ -7,14 +7,14 @@ namespace AppBundle\Service;
 
 class JoursFeries
 {
-    protected $annee;
+    private $annee;
 
     public function __construct()
     {
         $this->annee = date('Y');
     }
 
-    protected function get_easter_datetime()
+    protected function getEasterDatetime()
     {
         $year = $this->annee;
         $base = new \DateTime("$year-03-21");
@@ -35,16 +35,16 @@ class JoursFeries
             $annee = $date->format('Y');
         }
 
-        $dimanche_paques = $this->get_easter_datetime();
-        $lundi_paques = date("d-m-Y", strtotime("$dimanche_paques +1 day"));
-        $jeudi_ascension = date("d-m-Y", strtotime("$dimanche_paques +39 day"));
-        $lundi_pentecote = date("d-m-Y", strtotime("$dimanche_paques +50 day"));
-        $jours_feries = array
+        $dimanchePaques = $this->getEasterDatetime();
+        $lundiPaques = date("d-m-Y", strtotime("$dimanchePaques +1 day"));
+        $jeudiAscension = date("d-m-Y", strtotime("$dimanchePaques +39 day"));
+        $lundiPentecote = date("d-m-Y", strtotime("$dimanchePaques +50 day"));
+        $joursFeries = array
         (
-            $dimanche_paques,
-            $lundi_paques
-        ,   $jeudi_ascension
-        ,   $lundi_pentecote
+            $dimanchePaques,
+            $lundiPaques
+        ,   $jeudiAscension
+        ,   $lundiPentecote
 
         ,    "01-01-$annee"         //    Nouvel an
         ,    "01-05-$annee"         //    Fête du travail
@@ -56,7 +56,7 @@ class JoursFeries
         ,    "25-12-$annee"         //    Noël
         );
         ;
-        return $jours_feries;
+        return $joursFeries;
     }
 
     public function getJoursFeriesDatePicker(){

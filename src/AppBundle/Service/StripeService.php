@@ -12,6 +12,7 @@ class StripeService
     public function __construct($stripeSecretKey)
     {
         Stripe::setApiKey($stripeSecretKey);
+
     }
 
     public function charge($token, $prix)
@@ -28,17 +29,6 @@ class StripeService
         }
         catch (\Stripe\Error\Card $exception) {
             $this->setErrors($exception);
-            /**
-            $body = $exception->getJsonBody();
-            $err = $body['error'];
-
-            print ('Type is:' . $err['type'] . "\n");
-            print ('Code is:' . $err['code'] . "\n");
-            //print ('Param is:' . $err['param'] . "\n");
-            print ('Message is:' . $err['message'] . "\n");
-
-            $this->errors[] = $err['message'];
-             *  */
         }
         catch (\Stripe\Error\RateLimit $exception){
             $this->setErrors($exception);
@@ -69,7 +59,7 @@ class StripeService
         return $this->errors;
     }
 
-    public function setErrors($exception)
+    private function setErrors($exception)
     {
         $body = $exception->getJsonBody();
         $err = $body['error'];

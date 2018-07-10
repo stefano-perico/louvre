@@ -14,6 +14,8 @@ class LouvreControllerTest extends WebTestCase
         $client->request('GET', '/');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        echo $client->getResponse()->getContent();
+
     }
 
     public function testAccueilAction()
@@ -22,6 +24,9 @@ class LouvreControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertSame(1, $crawler->filter('html:contains("Bienvenue au Louvre")')->count());
+
+        echo $client->getResponse()->getContent();
+
     }
 
     public function testInfoFacturationActionIsUp()
@@ -30,6 +35,7 @@ class LouvreControllerTest extends WebTestCase
         $client->request('GET', 'louvre/info_facturation');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        echo $client->getResponse()->getContent();
     }
 
     public function testInfoFacturationAction()
@@ -54,6 +60,7 @@ class LouvreControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
 
         $this->assertSame(1, $crawler->filter('aside.alert.alert-success')->count());
+        echo $client->getResponse()->getContent();
     }
 
     public function testPanierActionIsUp()
@@ -62,14 +69,17 @@ class LouvreControllerTest extends WebTestCase
         $client->request('GET', 'louvre/panier');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        echo $client->getResponse()->getContent();
     }
 
     public function testRecapActionIsUp()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET','louvre/recap');
+        $client->request('GET','louvre/recap');
 
-        $this->assertSame(1, $crawler->filter('h1:contains("500 Internal Server Error")')->count());
+        $this->assertSame(500, $client->getResponse()->getStatusCode());
+
+
     }
 
     public function testValidationActionIsUp()
@@ -78,6 +88,7 @@ class LouvreControllerTest extends WebTestCase
         $client->request('GET', 'louvre/validation');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        echo $client->getResponse()->getContent();
     }
 
 

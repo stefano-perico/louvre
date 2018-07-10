@@ -2,7 +2,7 @@
 
 {% block body %}
     <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
-        <h2>Récaputilatif de votre commande</h2>
+        <h2>Récapitulatif de votre commande</h2>
         <p>Bonjour Mr <b>{{ commande.utilisateur.nom |upper }}, {{ commande.utilisateur.prenom|capitalize }}</b></p>
         <p>Votre commande pour visiter le <b>Louvre</b> le <b>{{ commande.dateBillet|date('d/m/Y') }}</b> est presque fini.</p>
         <p>Un fois votre commande validé
@@ -17,8 +17,8 @@
         <form id="btn_stripe" class="float-right" method="POST">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_3ePoHBikY5cLCGVv7E24usLG"
-                    data-amount="{{ commande.caluclerPrixCentimes }}"
+                    data-key="{{ token }}"
+                    data-amount="{{ commande.calculatePriceInCent }}"
                     data-name="Musée du Louvre"
                     data-description="Paris"
                     data-image="{{ asset('images/logo-louvre.jpg') }}"
@@ -29,7 +29,6 @@
             >
             </script>
         </form>
-
     </article>
 
     <section class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
@@ -63,11 +62,4 @@
         </div>
         <span class="float-right"><b>Total de votre commande: {{ commande.prix }} €</b></span>
     </section>
-
-
-
-
-
-
-
 {% endblock %}

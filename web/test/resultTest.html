@@ -1,0 +1,770 @@
+PHPUnit 5.7.27 by Sebastian Bergmann and contributors.
+
+.<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>
+         louvre     </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" type="image/jpg" href="/images/logo-louvre.jpg">
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container justify-content-between">
+                <a class="py-2" href="/">
+                    <img class="logo-icon" src="/images/logo-louvre.jpg">
+                </a>
+                <a class="btn btn-secondary btn-lg" href="/louvre/info_facturation">Billetterie</a>
+            </div>
+        </nav>
+     </header>
+    <aside>
+            </aside>
+
+    <section class="container">
+            <article id="img_accueil" class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 font-weight-normal">Bienvenue au Louvre</h1>
+            <a class="btn btn-info btn-lg" href="/louvre/info_facturation">Billetterie</a>
+        </div>
+    </article>
+
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+            <div class="my-3 py-3">
+                <h2 class="display-5">En Famille</h2>
+                <p class="lead">Activités enfants pour les vacances de Pâques.</p>
+            </div>
+            <img src="https://www.louvre.fr/sites/default/files/imagecache/278x175/medias/medias_images/images/louvre-atelier-enfants-d-ou-vient-la-lumiere-278-175-px.jpg?1523005411">
+        </div>
+        <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+            <div class="my-3 p-3">
+                <h2 class="display-5">Canson présente</h2> 
+                <p class="lead">Un jour, une oeuvre.</p>
+            </div>
+            <img src="https://www.louvre.fr/sites/default/files/imagecache/278x175/medias/medias_images/images/louvre-jean-simeon-chardin-autoportrait.jpg?1320489016">
+        </div>
+    </div>
+    </section>
+
+    <footer class="footer">
+
+    </footer>
+
+
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
+
+.<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>
+         louvre     </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" type="image/jpg" href="/images/logo-louvre.jpg">
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container justify-content-between">
+                <a class="py-2" href="/">
+                    <img class="logo-icon" src="/images/logo-louvre.jpg">
+                </a>
+                <a class="btn btn-secondary btn-lg" href="/louvre/info_facturation">Billetterie</a>
+            </div>
+        </nav>
+     </header>
+    <aside>
+            </aside>
+
+    <section class="container">
+            <article id="img_accueil" class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 font-weight-normal">Bienvenue au Louvre</h1>
+            <a class="btn btn-info btn-lg" href="/louvre/info_facturation">Billetterie</a>
+        </div>
+    </article>
+
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+        <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+            <div class="my-3 py-3">
+                <h2 class="display-5">En Famille</h2>
+                <p class="lead">Activités enfants pour les vacances de Pâques.</p>
+            </div>
+            <img src="https://www.louvre.fr/sites/default/files/imagecache/278x175/medias/medias_images/images/louvre-atelier-enfants-d-ou-vient-la-lumiere-278-175-px.jpg?1523005411">
+        </div>
+        <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+            <div class="my-3 p-3">
+                <h2 class="display-5">Canson présente</h2> 
+                <p class="lead">Un jour, une oeuvre.</p>
+            </div>
+            <img src="https://www.louvre.fr/sites/default/files/imagecache/278x175/medias/medias_images/images/louvre-jean-simeon-chardin-autoportrait.jpg?1320489016">
+        </div>
+    </div>
+    </section>
+
+    <footer class="footer">
+
+    </footer>
+
+
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
+
+.<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>
+         louvre     </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" type="image/jpg" href="/images/logo-louvre.jpg">
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container justify-content-between">
+                <a class="py-2" href="/">
+                    <img class="logo-icon" src="/images/logo-louvre.jpg">
+                </a>
+                <a class="btn btn-secondary btn-lg" href="/louvre/info_facturation">Billetterie</a>
+            </div>
+        </nav>
+     </header>
+    <aside>
+            </aside>
+
+    <section class="container">
+            <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <div class="jumbotron">
+            <h2>Bienvenue sur la billetterie du musée du Louvre</h2>
+            <p>Afin de pouvoir passer votre commande de billet, merci de renseigner les informations ci-dessous</p>
+        </div>
+
+        <form name="appbundle_utilisateurs" method="post">
+        
+         <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="appbundle_utilisateurs_nom" class="form-control-label required">Nom</label>
+                    <input type="text" id="appbundle_utilisateurs_nom" name="appbundle_utilisateurs[nom]" required="required" class="form-control" />
+                </div>
+             <div class="col-md-6 mb-3">
+                 <label for="appbundle_utilisateurs_prenom" class="form-control-label required">Prenom</label>
+                 <input type="text" id="appbundle_utilisateurs_prenom" name="appbundle_utilisateurs[prenom]" required="required" class="form-control" />
+             </div>
+         </div>
+        <div class="mb-3">
+            <label for="appbundle_utilisateurs_adresse" class="form-control-label required">Adresse</label>
+            <input type="text" id="appbundle_utilisateurs_adresse" name="appbundle_utilisateurs[adresse]" required="required" class="form-control" />
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="appbundle_utilisateurs_ville" class="form-control-label required">Ville</label>
+                <input type="text" id="appbundle_utilisateurs_ville" name="appbundle_utilisateurs[ville]" required="required" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="appbundle_utilisateurs_codePostal" class="form-control-label required">Code postal</label>
+                <input type="text" id="appbundle_utilisateurs_codePostal" name="appbundle_utilisateurs[codePostal]" required="required" maxlength="45" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="appbundle_utilisateurs_pays" class="form-control-label required">Pays</label>
+                <input type="text" id="appbundle_utilisateurs_pays" name="appbundle_utilisateurs[pays]" required="required" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group"><label for="appbundle_utilisateurs_email" class="form-control-label required">Email</label><input type="email" id="appbundle_utilisateurs_email" name="appbundle_utilisateurs[email]" required="required" class="form-control" /></div><div class="form-group"><label for="appbundle_utilisateurs_telephone" class="form-control-label required">Telephone</label><input type="tel" id="appbundle_utilisateurs_telephone" name="appbundle_utilisateurs[telephone]" required="required" class="form-control" /></div><input type="hidden" id="appbundle_utilisateurs__token" name="appbundle_utilisateurs[_token]" value="L4r85CI9G_Uqii7T8tzkuYa_TN7WVh_dNky-2ic-CAg" />
+            <input type="submit" value="Valider" class='btn-success btn-lg float-right'>
+
+        </form>
+    </article>
+    </section>
+
+    <footer class="footer">
+
+    </footer>
+
+
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
+
+.<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>
+         louvre     </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" type="image/jpg" href="/images/logo-louvre.jpg">
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container justify-content-between">
+                <a class="py-2" href="/">
+                    <img class="logo-icon" src="/images/logo-louvre.jpg">
+                </a>
+                <a class="btn btn-secondary btn-lg" href="/louvre/info_facturation">Billetterie</a>
+            </div>
+        </nav>
+     </header>
+    <aside>
+                                    <aside class="alert alert-success">
+                    Vos informations de facturations ont bien été enregistrées
+                </aside>
+                        </aside>
+
+    <section class="container">
+        
+    <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <div class="col-md-8">
+            <form name="appbundle_commandes" method="post">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="appbundle_commandes_dateBillet" class="form-control-label required">Date de la visite</label>
+                    <input type="text" id="appbundle_commandes_dateBillet" name="appbundle_commandes[dateBillet]" required="required" class="datepicker2 form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-control-label required" for="appbundle_commandes_demiJournee">Type de billet</label>
+                    <select id="appbundle_commandes_demiJournee" name="appbundle_commandes[demiJournee]" class="typeBilletJour form-control"><option value="0" selected="selected">Journée</option><option value="1">Demi-journée</option></select>
+                </div>
+            </div>
+            <br>
+            <legend class="col-form-label required">Billets</legend>
+            <div id="appbundle_commandes_billets" data-prototype="&lt;fieldset class=&quot;form-group&quot;&gt;&lt;legend class=&quot;col-form-label required&quot;&gt;__name__label__&lt;/legend&gt;&lt;div id=&quot;appbundle_commandes_billets___name__&quot;&gt;&lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;appbundle_commandes_billets___name___nom&quot; class=&quot;form-control-label required&quot;&gt;Nom&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;appbundle_commandes_billets___name___nom&quot; name=&quot;appbundle_commandes[billets][__name__][nom]&quot; required=&quot;required&quot; class=&quot;form-control&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;appbundle_commandes_billets___name___prenom&quot; class=&quot;form-control-label required&quot;&gt;Prenom&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;appbundle_commandes_billets___name___prenom&quot; name=&quot;appbundle_commandes[billets][__name__][prenom]&quot; required=&quot;required&quot; class=&quot;form-control&quot; /&gt;&lt;/div&gt;&lt;fieldset class=&quot;form-group&quot;&gt;&lt;legend class=&quot;col-form-label required&quot;&gt;Date naissance&lt;/legend&gt;&lt;div id=&quot;appbundle_commandes_billets___name___dateNaissance&quot; class=&quot;form-inline&quot;&gt;            &lt;div class=&quot;sr-only&quot;&gt;
+                &lt;label class=&quot;form-control-label required&quot; for=&quot;appbundle_commandes_billets___name___dateNaissance_year&quot;&gt;Année&lt;/label&gt;
+                &lt;label class=&quot;form-control-label required&quot; for=&quot;appbundle_commandes_billets___name___dateNaissance_month&quot;&gt;Mois&lt;/label&gt;
+                &lt;label class=&quot;form-control-label required&quot; for=&quot;appbundle_commandes_billets___name___dateNaissance_day&quot;&gt;Jour&lt;/label&gt;
+            &lt;/div&gt;&lt;select id=&quot;appbundle_commandes_billets___name___dateNaissance_year&quot; name=&quot;appbundle_commandes[billets][__name__][dateNaissance][year]&quot; class=&quot;form-control&quot;&gt;&lt;option value=&quot;1898&quot;&gt;1898&lt;/option&gt;&lt;option value=&quot;1899&quot;&gt;1899&lt;/option&gt;&lt;option value=&quot;1900&quot;&gt;1900&lt;/option&gt;&lt;option value=&quot;1901&quot;&gt;1901&lt;/option&gt;&lt;option value=&quot;1902&quot;&gt;1902&lt;/option&gt;&lt;option value=&quot;1903&quot;&gt;1903&lt;/option&gt;&lt;option value=&quot;1904&quot;&gt;1904&lt;/option&gt;&lt;option value=&quot;1905&quot;&gt;1905&lt;/option&gt;&lt;option value=&quot;1906&quot;&gt;1906&lt;/option&gt;&lt;option value=&quot;1907&quot;&gt;1907&lt;/option&gt;&lt;option value=&quot;1908&quot;&gt;1908&lt;/option&gt;&lt;option value=&quot;1909&quot;&gt;1909&lt;/option&gt;&lt;option value=&quot;1910&quot;&gt;1910&lt;/option&gt;&lt;option value=&quot;1911&quot;&gt;1911&lt;/option&gt;&lt;option value=&quot;1912&quot;&gt;1912&lt;/option&gt;&lt;option value=&quot;1913&quot;&gt;1913&lt;/option&gt;&lt;option value=&quot;1914&quot;&gt;1914&lt;/option&gt;&lt;option value=&quot;1915&quot;&gt;1915&lt;/option&gt;&lt;option value=&quot;1916&quot;&gt;1916&lt;/option&gt;&lt;option value=&quot;1917&quot;&gt;1917&lt;/option&gt;&lt;option value=&quot;1918&quot;&gt;1918&lt;/option&gt;&lt;option value=&quot;1919&quot;&gt;1919&lt;/option&gt;&lt;option value=&quot;1920&quot;&gt;1920&lt;/option&gt;&lt;option value=&quot;1921&quot;&gt;1921&lt;/option&gt;&lt;option value=&quot;1922&quot;&gt;1922&lt;/option&gt;&lt;option value=&quot;1923&quot;&gt;1923&lt;/option&gt;&lt;option value=&quot;1924&quot;&gt;1924&lt;/option&gt;&lt;option value=&quot;1925&quot;&gt;1925&lt;/option&gt;&lt;option value=&quot;1926&quot;&gt;1926&lt;/option&gt;&lt;option value=&quot;1927&quot;&gt;1927&lt;/option&gt;&lt;option value=&quot;1928&quot;&gt;1928&lt;/option&gt;&lt;option value=&quot;1929&quot;&gt;1929&lt;/option&gt;&lt;option value=&quot;1930&quot;&gt;1930&lt;/option&gt;&lt;option value=&quot;1931&quot;&gt;1931&lt;/option&gt;&lt;option value=&quot;1932&quot;&gt;1932&lt;/option&gt;&lt;option value=&quot;1933&quot;&gt;1933&lt;/option&gt;&lt;option value=&quot;1934&quot;&gt;1934&lt;/option&gt;&lt;option value=&quot;1935&quot;&gt;1935&lt;/option&gt;&lt;option value=&quot;1936&quot;&gt;1936&lt;/option&gt;&lt;option value=&quot;1937&quot;&gt;1937&lt;/option&gt;&lt;option value=&quot;1938&quot;&gt;1938&lt;/option&gt;&lt;option value=&quot;1939&quot;&gt;1939&lt;/option&gt;&lt;option value=&quot;1940&quot;&gt;1940&lt;/option&gt;&lt;option value=&quot;1941&quot;&gt;1941&lt;/option&gt;&lt;option value=&quot;1942&quot;&gt;1942&lt;/option&gt;&lt;option value=&quot;1943&quot;&gt;1943&lt;/option&gt;&lt;option value=&quot;1944&quot;&gt;1944&lt;/option&gt;&lt;option value=&quot;1945&quot;&gt;1945&lt;/option&gt;&lt;option value=&quot;1946&quot;&gt;1946&lt;/option&gt;&lt;option value=&quot;1947&quot;&gt;1947&lt;/option&gt;&lt;option value=&quot;1948&quot;&gt;1948&lt;/option&gt;&lt;option value=&quot;1949&quot;&gt;1949&lt;/option&gt;&lt;option value=&quot;1950&quot;&gt;1950&lt;/option&gt;&lt;option value=&quot;1951&quot;&gt;1951&lt;/option&gt;&lt;option value=&quot;1952&quot;&gt;1952&lt;/option&gt;&lt;option value=&quot;1953&quot;&gt;1953&lt;/option&gt;&lt;option value=&quot;1954&quot;&gt;1954&lt;/option&gt;&lt;option value=&quot;1955&quot;&gt;1955&lt;/option&gt;&lt;option value=&quot;1956&quot;&gt;1956&lt;/option&gt;&lt;option value=&quot;1957&quot;&gt;1957&lt;/option&gt;&lt;option value=&quot;1958&quot;&gt;1958&lt;/option&gt;&lt;option value=&quot;1959&quot;&gt;1959&lt;/option&gt;&lt;option value=&quot;1960&quot;&gt;1960&lt;/option&gt;&lt;option value=&quot;1961&quot;&gt;1961&lt;/option&gt;&lt;option value=&quot;1962&quot;&gt;1962&lt;/option&gt;&lt;option value=&quot;1963&quot;&gt;1963&lt;/option&gt;&lt;option value=&quot;1964&quot;&gt;1964&lt;/option&gt;&lt;option value=&quot;1965&quot;&gt;1965&lt;/option&gt;&lt;option value=&quot;1966&quot;&gt;1966&lt;/option&gt;&lt;option value=&quot;1967&quot;&gt;1967&lt;/option&gt;&lt;option value=&quot;1968&quot;&gt;1968&lt;/option&gt;&lt;option value=&quot;1969&quot;&gt;1969&lt;/option&gt;&lt;option value=&quot;1970&quot;&gt;1970&lt;/option&gt;&lt;option value=&quot;1971&quot;&gt;1971&lt;/option&gt;&lt;option value=&quot;1972&quot;&gt;1972&lt;/option&gt;&lt;option value=&quot;1973&quot;&gt;1973&lt;/option&gt;&lt;option value=&quot;1974&quot;&gt;1974&lt;/option&gt;&lt;option value=&quot;1975&quot;&gt;1975&lt;/option&gt;&lt;option value=&quot;1976&quot;&gt;1976&lt;/option&gt;&lt;option value=&quot;1977&quot;&gt;1977&lt;/option&gt;&lt;option value=&quot;1978&quot;&gt;1978&lt;/option&gt;&lt;option value=&quot;1979&quot;&gt;1979&lt;/option&gt;&lt;option value=&quot;1980&quot;&gt;1980&lt;/option&gt;&lt;option value=&quot;1981&quot;&gt;1981&lt;/option&gt;&lt;option value=&quot;1982&quot;&gt;1982&lt;/option&gt;&lt;option value=&quot;1983&quot;&gt;1983&lt;/option&gt;&lt;option value=&quot;1984&quot;&gt;1984&lt;/option&gt;&lt;option value=&quot;1985&quot;&gt;1985&lt;/option&gt;&lt;option value=&quot;1986&quot;&gt;1986&lt;/option&gt;&lt;option value=&quot;1987&quot;&gt;1987&lt;/option&gt;&lt;option value=&quot;1988&quot;&gt;1988&lt;/option&gt;&lt;option value=&quot;1989&quot;&gt;1989&lt;/option&gt;&lt;option value=&quot;1990&quot;&gt;1990&lt;/option&gt;&lt;option value=&quot;1991&quot;&gt;1991&lt;/option&gt;&lt;option value=&quot;1992&quot;&gt;1992&lt;/option&gt;&lt;option value=&quot;1993&quot;&gt;1993&lt;/option&gt;&lt;option value=&quot;1994&quot;&gt;1994&lt;/option&gt;&lt;option value=&quot;1995&quot;&gt;1995&lt;/option&gt;&lt;option value=&quot;1996&quot;&gt;1996&lt;/option&gt;&lt;option value=&quot;1997&quot;&gt;1997&lt;/option&gt;&lt;option value=&quot;1998&quot;&gt;1998&lt;/option&gt;&lt;option value=&quot;1999&quot;&gt;1999&lt;/option&gt;&lt;option value=&quot;2000&quot;&gt;2000&lt;/option&gt;&lt;option value=&quot;2001&quot;&gt;2001&lt;/option&gt;&lt;option value=&quot;2002&quot;&gt;2002&lt;/option&gt;&lt;option value=&quot;2003&quot;&gt;2003&lt;/option&gt;&lt;option value=&quot;2004&quot;&gt;2004&lt;/option&gt;&lt;option value=&quot;2005&quot;&gt;2005&lt;/option&gt;&lt;option value=&quot;2006&quot;&gt;2006&lt;/option&gt;&lt;option value=&quot;2007&quot;&gt;2007&lt;/option&gt;&lt;option value=&quot;2008&quot;&gt;2008&lt;/option&gt;&lt;option value=&quot;2009&quot;&gt;2009&lt;/option&gt;&lt;option value=&quot;2010&quot;&gt;2010&lt;/option&gt;&lt;option value=&quot;2011&quot;&gt;2011&lt;/option&gt;&lt;option value=&quot;2012&quot;&gt;2012&lt;/option&gt;&lt;option value=&quot;2013&quot;&gt;2013&lt;/option&gt;&lt;option value=&quot;2014&quot;&gt;2014&lt;/option&gt;&lt;option value=&quot;2015&quot;&gt;2015&lt;/option&gt;&lt;option value=&quot;2016&quot;&gt;2016&lt;/option&gt;&lt;option value=&quot;2017&quot;&gt;2017&lt;/option&gt;&lt;option value=&quot;2018&quot;&gt;2018&lt;/option&gt;&lt;/select&gt;&lt;select id=&quot;appbundle_commandes_billets___name___dateNaissance_month&quot; name=&quot;appbundle_commandes[billets][__name__][dateNaissance][month]&quot; class=&quot;form-control&quot;&gt;&lt;option value=&quot;1&quot;&gt;Jan&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;Feb&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;Mar&lt;/option&gt;&lt;option value=&quot;4&quot;&gt;Apr&lt;/option&gt;&lt;option value=&quot;5&quot;&gt;May&lt;/option&gt;&lt;option value=&quot;6&quot;&gt;Jun&lt;/option&gt;&lt;option value=&quot;7&quot;&gt;Jul&lt;/option&gt;&lt;option value=&quot;8&quot;&gt;Aug&lt;/option&gt;&lt;option value=&quot;9&quot;&gt;Sep&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;Oct&lt;/option&gt;&lt;option value=&quot;11&quot;&gt;Nov&lt;/option&gt;&lt;option value=&quot;12&quot;&gt;Dec&lt;/option&gt;&lt;/select&gt;&lt;select id=&quot;appbundle_commandes_billets___name___dateNaissance_day&quot; name=&quot;appbundle_commandes[billets][__name__][dateNaissance][day]&quot; class=&quot;form-control&quot;&gt;&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;&lt;option value=&quot;4&quot;&gt;4&lt;/option&gt;&lt;option value=&quot;5&quot;&gt;5&lt;/option&gt;&lt;option value=&quot;6&quot;&gt;6&lt;/option&gt;&lt;option value=&quot;7&quot;&gt;7&lt;/option&gt;&lt;option value=&quot;8&quot;&gt;8&lt;/option&gt;&lt;option value=&quot;9&quot;&gt;9&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;10&lt;/option&gt;&lt;option value=&quot;11&quot;&gt;11&lt;/option&gt;&lt;option value=&quot;12&quot;&gt;12&lt;/option&gt;&lt;option value=&quot;13&quot;&gt;13&lt;/option&gt;&lt;option value=&quot;14&quot;&gt;14&lt;/option&gt;&lt;option value=&quot;15&quot;&gt;15&lt;/option&gt;&lt;option value=&quot;16&quot;&gt;16&lt;/option&gt;&lt;option value=&quot;17&quot;&gt;17&lt;/option&gt;&lt;option value=&quot;18&quot;&gt;18&lt;/option&gt;&lt;option value=&quot;19&quot;&gt;19&lt;/option&gt;&lt;option value=&quot;20&quot;&gt;20&lt;/option&gt;&lt;option value=&quot;21&quot;&gt;21&lt;/option&gt;&lt;option value=&quot;22&quot;&gt;22&lt;/option&gt;&lt;option value=&quot;23&quot;&gt;23&lt;/option&gt;&lt;option value=&quot;24&quot;&gt;24&lt;/option&gt;&lt;option value=&quot;25&quot;&gt;25&lt;/option&gt;&lt;option value=&quot;26&quot;&gt;26&lt;/option&gt;&lt;option value=&quot;27&quot;&gt;27&lt;/option&gt;&lt;option value=&quot;28&quot;&gt;28&lt;/option&gt;&lt;option value=&quot;29&quot;&gt;29&lt;/option&gt;&lt;option value=&quot;30&quot;&gt;30&lt;/option&gt;&lt;option value=&quot;31&quot;&gt;31&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/fieldset&gt;&lt;div class=&quot;form-group&quot;&gt;&lt;div class=&quot;form-check&quot;&gt;        &lt;input type=&quot;checkbox&quot; id=&quot;appbundle_commandes_billets___name___tarifReduit&quot; name=&quot;appbundle_commandes[billets][__name__][tarifReduit]&quot; onclick=&quot;messageCheckbox()&quot; class=&quot;form-check-input&quot; value=&quot;1&quot; /&gt;
+        &lt;label class=&quot;form-check-label&quot; for=&quot;appbundle_commandes_billets___name___tarifReduit&quot;&gt;Tarif réduit&lt;/label&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/fieldset&gt;"></div>
+            <div class="row">
+                <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>, il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="submit" value="Valider" class='btn-success btn-lg float-right'>
+                </div>
+            </div>
+            <input type="hidden" id="appbundle_commandes__token" name="appbundle_commandes[_token]" value="2LF8VS0CySIfHIMDO2PuMZTG4ol3j273NQfdkLp_yWU" />
+            </form>
+        </div>
+    </article>
+
+    <aside class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <h2>Tarifs</h2>
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Billet « normal » à partir de 12 ans</td>
+                <td>16 €</td>
+            </tr>
+            <tr>
+                <td>Billet « enfant » à partir de 4 ans et jusqu’à 12 ans</td>
+                <td>8 €</td>
+            </tr>
+            <tr>
+                <td>Billet « senior » à partir de 60 ans</td>
+                <td>12 €</td>
+            </tr>
+            <tr>
+                <td>Billet « réduit »</td>
+                <td>10 €</td>
+            </tr>
+            </tbody>
+        </table>
+        <span> <i>Pour les enfants de moins de 4ans l'entrée est gratuite</i></span>
+    </aside>
+
+
+    </section>
+
+    <footer class="footer">
+
+    </footer>
+
+
+
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="/js/main.js"></script>
+    
+    <script>
+        // Datepicker vue Panier
+        var dates = "01-04-2018,02-04-2018,10-05-2018,21-05-2018,01-01-2018,01-05-2018,08-05-2018,14-07-2018,15-08-2018,01-11-2018,11-11-2018,25-12-2018";
+        var myDates = dates.split(',');
+
+        $(".datepicker2")
+            .datepicker({
+                format: "dd-mm-yyyy",
+                startDate: "0d",
+                language: "fr",
+                daysOfWeekDisabled: "2,0",
+                autoclose: true,
+                todayHighlight: true,
+                endDate: "05-01-2019",
+                datesDisabled:myDates
+            })
+            .change(function () {
+                var date = new Date();
+                var heureActuel = date.getHours();
+                var heureLimite = '14';
+                var todaysDate = '05-07-2018';
+                var datePicker = $(this).val();
+                if (todaysDate === datePicker){
+                    if (heureActuel > heureLimite)
+                    {
+                        $('.typeBilletJour').val(1);
+                    }
+                }else{
+                    $('.typeBilletJour').val(0);
+                }
+            });
+
+        // Ajout billets dans vue Panier
+        // On récupère la balise <div> en question qui contient l'attribut "data-prototype".
+        var $container = $('div#appbundle_commandes_billets');
+
+        // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement.
+        var index = $container.find(':input').length;
+
+        // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+        $('#add_billet').click(function (e) {
+            addBillet($container);
+
+            e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+            return false;
+        });
+
+        // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un
+        if (index == 0) {
+            addBillet($container)
+        } else {
+
+            // S'il existe déjà des billets, on ajoute un lien de suppression pour chacun d'entre eux
+            $container.children('div').each(function () {
+                addDeleteLink($(this));
+            });
+        }
+
+        // La fonction qui ajoute un formulaire BilletType
+        function addBillet($container) {
+            // Dans le contenu de l'attribut "data-prototype", on remplace :
+            // - le texte "__name__label__" qu'il contient par le label du champ
+            // - le texte "__name__" qu'il conien par le numéro du champ
+            var template = $container.attr('data-prototype')
+                .replace(/__name__label__/g, 'Billet n°' + (index+1))
+                .replace(/__name__/g,        index)
+            ;
+
+            // On crée un objet jquery qui contient ce template
+            var $prototype = $(template);
+
+            // On ajoute au prototype un lien pour pouvoir supprimer le billet
+            addDeleteLink($prototype);
+
+            // On ajoute le prototype modifié à la fin de la balise <div>
+            $container.append($prototype);
+
+            // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+            index++;
+        }
+
+        // La fonction qui ajoute un lien de suppressio d'une catégorie
+        function addDeleteLink($prototype) {
+            // Création du lien
+            var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer<a>');
+
+            // Ajout du lien
+            $prototype.append($deleteLink);
+
+            // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+            $deleteLink.click(function (e) {
+                $prototype.remove();
+
+                e.preventDefault(); // évite qu'un # appraraisse dans l'URL
+                return false;
+            });
+        }
+
+        $('.form-check-input').change(function () {
+            if($('.form-check-input').is(':checked')){
+                $('#alert_demiTarif').show();
+            }else{
+                $('#alert_demiTarif').hide();
+            }
+        });
+    </script>
+</body>
+</html>
+
+.<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>
+         louvre     </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" type="image/jpg" href="/images/logo-louvre.jpg">
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container justify-content-between">
+                <a class="py-2" href="/">
+                    <img class="logo-icon" src="/images/logo-louvre.jpg">
+                </a>
+                <a class="btn btn-secondary btn-lg" href="/louvre/info_facturation">Billetterie</a>
+            </div>
+        </nav>
+     </header>
+    <aside>
+            </aside>
+
+    <section class="container">
+        
+    <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <div class="col-md-8">
+            <form name="appbundle_commandes" method="post">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="appbundle_commandes_dateBillet" class="form-control-label required">Date de la visite</label>
+                    <input type="text" id="appbundle_commandes_dateBillet" name="appbundle_commandes[dateBillet]" required="required" class="datepicker2 form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-control-label required" for="appbundle_commandes_demiJournee">Type de billet</label>
+                    <select id="appbundle_commandes_demiJournee" name="appbundle_commandes[demiJournee]" class="typeBilletJour form-control"><option value="0" selected="selected">Journée</option><option value="1">Demi-journée</option></select>
+                </div>
+            </div>
+            <br>
+            <legend class="col-form-label required">Billets</legend>
+            <div id="appbundle_commandes_billets" data-prototype="&lt;fieldset class=&quot;form-group&quot;&gt;&lt;legend class=&quot;col-form-label required&quot;&gt;__name__label__&lt;/legend&gt;&lt;div id=&quot;appbundle_commandes_billets___name__&quot;&gt;&lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;appbundle_commandes_billets___name___nom&quot; class=&quot;form-control-label required&quot;&gt;Nom&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;appbundle_commandes_billets___name___nom&quot; name=&quot;appbundle_commandes[billets][__name__][nom]&quot; required=&quot;required&quot; class=&quot;form-control&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;appbundle_commandes_billets___name___prenom&quot; class=&quot;form-control-label required&quot;&gt;Prenom&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;appbundle_commandes_billets___name___prenom&quot; name=&quot;appbundle_commandes[billets][__name__][prenom]&quot; required=&quot;required&quot; class=&quot;form-control&quot; /&gt;&lt;/div&gt;&lt;fieldset class=&quot;form-group&quot;&gt;&lt;legend class=&quot;col-form-label required&quot;&gt;Date naissance&lt;/legend&gt;&lt;div id=&quot;appbundle_commandes_billets___name___dateNaissance&quot; class=&quot;form-inline&quot;&gt;            &lt;div class=&quot;sr-only&quot;&gt;
+                &lt;label class=&quot;form-control-label required&quot; for=&quot;appbundle_commandes_billets___name___dateNaissance_year&quot;&gt;Année&lt;/label&gt;
+                &lt;label class=&quot;form-control-label required&quot; for=&quot;appbundle_commandes_billets___name___dateNaissance_month&quot;&gt;Mois&lt;/label&gt;
+                &lt;label class=&quot;form-control-label required&quot; for=&quot;appbundle_commandes_billets___name___dateNaissance_day&quot;&gt;Jour&lt;/label&gt;
+            &lt;/div&gt;&lt;select id=&quot;appbundle_commandes_billets___name___dateNaissance_year&quot; name=&quot;appbundle_commandes[billets][__name__][dateNaissance][year]&quot; class=&quot;form-control&quot;&gt;&lt;option value=&quot;1898&quot;&gt;1898&lt;/option&gt;&lt;option value=&quot;1899&quot;&gt;1899&lt;/option&gt;&lt;option value=&quot;1900&quot;&gt;1900&lt;/option&gt;&lt;option value=&quot;1901&quot;&gt;1901&lt;/option&gt;&lt;option value=&quot;1902&quot;&gt;1902&lt;/option&gt;&lt;option value=&quot;1903&quot;&gt;1903&lt;/option&gt;&lt;option value=&quot;1904&quot;&gt;1904&lt;/option&gt;&lt;option value=&quot;1905&quot;&gt;1905&lt;/option&gt;&lt;option value=&quot;1906&quot;&gt;1906&lt;/option&gt;&lt;option value=&quot;1907&quot;&gt;1907&lt;/option&gt;&lt;option value=&quot;1908&quot;&gt;1908&lt;/option&gt;&lt;option value=&quot;1909&quot;&gt;1909&lt;/option&gt;&lt;option value=&quot;1910&quot;&gt;1910&lt;/option&gt;&lt;option value=&quot;1911&quot;&gt;1911&lt;/option&gt;&lt;option value=&quot;1912&quot;&gt;1912&lt;/option&gt;&lt;option value=&quot;1913&quot;&gt;1913&lt;/option&gt;&lt;option value=&quot;1914&quot;&gt;1914&lt;/option&gt;&lt;option value=&quot;1915&quot;&gt;1915&lt;/option&gt;&lt;option value=&quot;1916&quot;&gt;1916&lt;/option&gt;&lt;option value=&quot;1917&quot;&gt;1917&lt;/option&gt;&lt;option value=&quot;1918&quot;&gt;1918&lt;/option&gt;&lt;option value=&quot;1919&quot;&gt;1919&lt;/option&gt;&lt;option value=&quot;1920&quot;&gt;1920&lt;/option&gt;&lt;option value=&quot;1921&quot;&gt;1921&lt;/option&gt;&lt;option value=&quot;1922&quot;&gt;1922&lt;/option&gt;&lt;option value=&quot;1923&quot;&gt;1923&lt;/option&gt;&lt;option value=&quot;1924&quot;&gt;1924&lt;/option&gt;&lt;option value=&quot;1925&quot;&gt;1925&lt;/option&gt;&lt;option value=&quot;1926&quot;&gt;1926&lt;/option&gt;&lt;option value=&quot;1927&quot;&gt;1927&lt;/option&gt;&lt;option value=&quot;1928&quot;&gt;1928&lt;/option&gt;&lt;option value=&quot;1929&quot;&gt;1929&lt;/option&gt;&lt;option value=&quot;1930&quot;&gt;1930&lt;/option&gt;&lt;option value=&quot;1931&quot;&gt;1931&lt;/option&gt;&lt;option value=&quot;1932&quot;&gt;1932&lt;/option&gt;&lt;option value=&quot;1933&quot;&gt;1933&lt;/option&gt;&lt;option value=&quot;1934&quot;&gt;1934&lt;/option&gt;&lt;option value=&quot;1935&quot;&gt;1935&lt;/option&gt;&lt;option value=&quot;1936&quot;&gt;1936&lt;/option&gt;&lt;option value=&quot;1937&quot;&gt;1937&lt;/option&gt;&lt;option value=&quot;1938&quot;&gt;1938&lt;/option&gt;&lt;option value=&quot;1939&quot;&gt;1939&lt;/option&gt;&lt;option value=&quot;1940&quot;&gt;1940&lt;/option&gt;&lt;option value=&quot;1941&quot;&gt;1941&lt;/option&gt;&lt;option value=&quot;1942&quot;&gt;1942&lt;/option&gt;&lt;option value=&quot;1943&quot;&gt;1943&lt;/option&gt;&lt;option value=&quot;1944&quot;&gt;1944&lt;/option&gt;&lt;option value=&quot;1945&quot;&gt;1945&lt;/option&gt;&lt;option value=&quot;1946&quot;&gt;1946&lt;/option&gt;&lt;option value=&quot;1947&quot;&gt;1947&lt;/option&gt;&lt;option value=&quot;1948&quot;&gt;1948&lt;/option&gt;&lt;option value=&quot;1949&quot;&gt;1949&lt;/option&gt;&lt;option value=&quot;1950&quot;&gt;1950&lt;/option&gt;&lt;option value=&quot;1951&quot;&gt;1951&lt;/option&gt;&lt;option value=&quot;1952&quot;&gt;1952&lt;/option&gt;&lt;option value=&quot;1953&quot;&gt;1953&lt;/option&gt;&lt;option value=&quot;1954&quot;&gt;1954&lt;/option&gt;&lt;option value=&quot;1955&quot;&gt;1955&lt;/option&gt;&lt;option value=&quot;1956&quot;&gt;1956&lt;/option&gt;&lt;option value=&quot;1957&quot;&gt;1957&lt;/option&gt;&lt;option value=&quot;1958&quot;&gt;1958&lt;/option&gt;&lt;option value=&quot;1959&quot;&gt;1959&lt;/option&gt;&lt;option value=&quot;1960&quot;&gt;1960&lt;/option&gt;&lt;option value=&quot;1961&quot;&gt;1961&lt;/option&gt;&lt;option value=&quot;1962&quot;&gt;1962&lt;/option&gt;&lt;option value=&quot;1963&quot;&gt;1963&lt;/option&gt;&lt;option value=&quot;1964&quot;&gt;1964&lt;/option&gt;&lt;option value=&quot;1965&quot;&gt;1965&lt;/option&gt;&lt;option value=&quot;1966&quot;&gt;1966&lt;/option&gt;&lt;option value=&quot;1967&quot;&gt;1967&lt;/option&gt;&lt;option value=&quot;1968&quot;&gt;1968&lt;/option&gt;&lt;option value=&quot;1969&quot;&gt;1969&lt;/option&gt;&lt;option value=&quot;1970&quot;&gt;1970&lt;/option&gt;&lt;option value=&quot;1971&quot;&gt;1971&lt;/option&gt;&lt;option value=&quot;1972&quot;&gt;1972&lt;/option&gt;&lt;option value=&quot;1973&quot;&gt;1973&lt;/option&gt;&lt;option value=&quot;1974&quot;&gt;1974&lt;/option&gt;&lt;option value=&quot;1975&quot;&gt;1975&lt;/option&gt;&lt;option value=&quot;1976&quot;&gt;1976&lt;/option&gt;&lt;option value=&quot;1977&quot;&gt;1977&lt;/option&gt;&lt;option value=&quot;1978&quot;&gt;1978&lt;/option&gt;&lt;option value=&quot;1979&quot;&gt;1979&lt;/option&gt;&lt;option value=&quot;1980&quot;&gt;1980&lt;/option&gt;&lt;option value=&quot;1981&quot;&gt;1981&lt;/option&gt;&lt;option value=&quot;1982&quot;&gt;1982&lt;/option&gt;&lt;option value=&quot;1983&quot;&gt;1983&lt;/option&gt;&lt;option value=&quot;1984&quot;&gt;1984&lt;/option&gt;&lt;option value=&quot;1985&quot;&gt;1985&lt;/option&gt;&lt;option value=&quot;1986&quot;&gt;1986&lt;/option&gt;&lt;option value=&quot;1987&quot;&gt;1987&lt;/option&gt;&lt;option value=&quot;1988&quot;&gt;1988&lt;/option&gt;&lt;option value=&quot;1989&quot;&gt;1989&lt;/option&gt;&lt;option value=&quot;1990&quot;&gt;1990&lt;/option&gt;&lt;option value=&quot;1991&quot;&gt;1991&lt;/option&gt;&lt;option value=&quot;1992&quot;&gt;1992&lt;/option&gt;&lt;option value=&quot;1993&quot;&gt;1993&lt;/option&gt;&lt;option value=&quot;1994&quot;&gt;1994&lt;/option&gt;&lt;option value=&quot;1995&quot;&gt;1995&lt;/option&gt;&lt;option value=&quot;1996&quot;&gt;1996&lt;/option&gt;&lt;option value=&quot;1997&quot;&gt;1997&lt;/option&gt;&lt;option value=&quot;1998&quot;&gt;1998&lt;/option&gt;&lt;option value=&quot;1999&quot;&gt;1999&lt;/option&gt;&lt;option value=&quot;2000&quot;&gt;2000&lt;/option&gt;&lt;option value=&quot;2001&quot;&gt;2001&lt;/option&gt;&lt;option value=&quot;2002&quot;&gt;2002&lt;/option&gt;&lt;option value=&quot;2003&quot;&gt;2003&lt;/option&gt;&lt;option value=&quot;2004&quot;&gt;2004&lt;/option&gt;&lt;option value=&quot;2005&quot;&gt;2005&lt;/option&gt;&lt;option value=&quot;2006&quot;&gt;2006&lt;/option&gt;&lt;option value=&quot;2007&quot;&gt;2007&lt;/option&gt;&lt;option value=&quot;2008&quot;&gt;2008&lt;/option&gt;&lt;option value=&quot;2009&quot;&gt;2009&lt;/option&gt;&lt;option value=&quot;2010&quot;&gt;2010&lt;/option&gt;&lt;option value=&quot;2011&quot;&gt;2011&lt;/option&gt;&lt;option value=&quot;2012&quot;&gt;2012&lt;/option&gt;&lt;option value=&quot;2013&quot;&gt;2013&lt;/option&gt;&lt;option value=&quot;2014&quot;&gt;2014&lt;/option&gt;&lt;option value=&quot;2015&quot;&gt;2015&lt;/option&gt;&lt;option value=&quot;2016&quot;&gt;2016&lt;/option&gt;&lt;option value=&quot;2017&quot;&gt;2017&lt;/option&gt;&lt;option value=&quot;2018&quot;&gt;2018&lt;/option&gt;&lt;/select&gt;&lt;select id=&quot;appbundle_commandes_billets___name___dateNaissance_month&quot; name=&quot;appbundle_commandes[billets][__name__][dateNaissance][month]&quot; class=&quot;form-control&quot;&gt;&lt;option value=&quot;1&quot;&gt;Jan&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;Feb&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;Mar&lt;/option&gt;&lt;option value=&quot;4&quot;&gt;Apr&lt;/option&gt;&lt;option value=&quot;5&quot;&gt;May&lt;/option&gt;&lt;option value=&quot;6&quot;&gt;Jun&lt;/option&gt;&lt;option value=&quot;7&quot;&gt;Jul&lt;/option&gt;&lt;option value=&quot;8&quot;&gt;Aug&lt;/option&gt;&lt;option value=&quot;9&quot;&gt;Sep&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;Oct&lt;/option&gt;&lt;option value=&quot;11&quot;&gt;Nov&lt;/option&gt;&lt;option value=&quot;12&quot;&gt;Dec&lt;/option&gt;&lt;/select&gt;&lt;select id=&quot;appbundle_commandes_billets___name___dateNaissance_day&quot; name=&quot;appbundle_commandes[billets][__name__][dateNaissance][day]&quot; class=&quot;form-control&quot;&gt;&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;&lt;option value=&quot;4&quot;&gt;4&lt;/option&gt;&lt;option value=&quot;5&quot;&gt;5&lt;/option&gt;&lt;option value=&quot;6&quot;&gt;6&lt;/option&gt;&lt;option value=&quot;7&quot;&gt;7&lt;/option&gt;&lt;option value=&quot;8&quot;&gt;8&lt;/option&gt;&lt;option value=&quot;9&quot;&gt;9&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;10&lt;/option&gt;&lt;option value=&quot;11&quot;&gt;11&lt;/option&gt;&lt;option value=&quot;12&quot;&gt;12&lt;/option&gt;&lt;option value=&quot;13&quot;&gt;13&lt;/option&gt;&lt;option value=&quot;14&quot;&gt;14&lt;/option&gt;&lt;option value=&quot;15&quot;&gt;15&lt;/option&gt;&lt;option value=&quot;16&quot;&gt;16&lt;/option&gt;&lt;option value=&quot;17&quot;&gt;17&lt;/option&gt;&lt;option value=&quot;18&quot;&gt;18&lt;/option&gt;&lt;option value=&quot;19&quot;&gt;19&lt;/option&gt;&lt;option value=&quot;20&quot;&gt;20&lt;/option&gt;&lt;option value=&quot;21&quot;&gt;21&lt;/option&gt;&lt;option value=&quot;22&quot;&gt;22&lt;/option&gt;&lt;option value=&quot;23&quot;&gt;23&lt;/option&gt;&lt;option value=&quot;24&quot;&gt;24&lt;/option&gt;&lt;option value=&quot;25&quot;&gt;25&lt;/option&gt;&lt;option value=&quot;26&quot;&gt;26&lt;/option&gt;&lt;option value=&quot;27&quot;&gt;27&lt;/option&gt;&lt;option value=&quot;28&quot;&gt;28&lt;/option&gt;&lt;option value=&quot;29&quot;&gt;29&lt;/option&gt;&lt;option value=&quot;30&quot;&gt;30&lt;/option&gt;&lt;option value=&quot;31&quot;&gt;31&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/fieldset&gt;&lt;div class=&quot;form-group&quot;&gt;&lt;div class=&quot;form-check&quot;&gt;        &lt;input type=&quot;checkbox&quot; id=&quot;appbundle_commandes_billets___name___tarifReduit&quot; name=&quot;appbundle_commandes[billets][__name__][tarifReduit]&quot; onclick=&quot;messageCheckbox()&quot; class=&quot;form-check-input&quot; value=&quot;1&quot; /&gt;
+        &lt;label class=&quot;form-check-label&quot; for=&quot;appbundle_commandes_billets___name___tarifReduit&quot;&gt;Tarif réduit&lt;/label&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/fieldset&gt;"></div>
+            <div class="row">
+                <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>, il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="submit" value="Valider" class='btn-success btn-lg float-right'>
+                </div>
+            </div>
+            <input type="hidden" id="appbundle_commandes__token" name="appbundle_commandes[_token]" value="vMuCmkLHOP733n7yMEF_07oAscDkIfujHQEtfMWIaCg" />
+            </form>
+        </div>
+    </article>
+
+    <aside class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+        <h2>Tarifs</h2>
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Billet « normal » à partir de 12 ans</td>
+                <td>16 €</td>
+            </tr>
+            <tr>
+                <td>Billet « enfant » à partir de 4 ans et jusqu’à 12 ans</td>
+                <td>8 €</td>
+            </tr>
+            <tr>
+                <td>Billet « senior » à partir de 60 ans</td>
+                <td>12 €</td>
+            </tr>
+            <tr>
+                <td>Billet « réduit »</td>
+                <td>10 €</td>
+            </tr>
+            </tbody>
+        </table>
+        <span> <i>Pour les enfants de moins de 4ans l'entrée est gratuite</i></span>
+    </aside>
+
+
+    </section>
+
+    <footer class="footer">
+
+    </footer>
+
+
+
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="/js/main.js"></script>
+    
+    <script>
+        // Datepicker vue Panier
+        var dates = "01-04-2018,02-04-2018,10-05-2018,21-05-2018,01-01-2018,01-05-2018,08-05-2018,14-07-2018,15-08-2018,01-11-2018,11-11-2018,25-12-2018";
+        var myDates = dates.split(',');
+
+        $(".datepicker2")
+            .datepicker({
+                format: "dd-mm-yyyy",
+                startDate: "0d",
+                language: "fr",
+                daysOfWeekDisabled: "2,0",
+                autoclose: true,
+                todayHighlight: true,
+                endDate: "05-01-2019",
+                datesDisabled:myDates
+            })
+            .change(function () {
+                var date = new Date();
+                var heureActuel = date.getHours();
+                var heureLimite = '14';
+                var todaysDate = '05-07-2018';
+                var datePicker = $(this).val();
+                if (todaysDate === datePicker){
+                    if (heureActuel > heureLimite)
+                    {
+                        $('.typeBilletJour').val(1);
+                    }
+                }else{
+                    $('.typeBilletJour').val(0);
+                }
+            });
+
+        // Ajout billets dans vue Panier
+        // On récupère la balise <div> en question qui contient l'attribut "data-prototype".
+        var $container = $('div#appbundle_commandes_billets');
+
+        // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement.
+        var index = $container.find(':input').length;
+
+        // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+        $('#add_billet').click(function (e) {
+            addBillet($container);
+
+            e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+            return false;
+        });
+
+        // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un
+        if (index == 0) {
+            addBillet($container)
+        } else {
+
+            // S'il existe déjà des billets, on ajoute un lien de suppression pour chacun d'entre eux
+            $container.children('div').each(function () {
+                addDeleteLink($(this));
+            });
+        }
+
+        // La fonction qui ajoute un formulaire BilletType
+        function addBillet($container) {
+            // Dans le contenu de l'attribut "data-prototype", on remplace :
+            // - le texte "__name__label__" qu'il contient par le label du champ
+            // - le texte "__name__" qu'il conien par le numéro du champ
+            var template = $container.attr('data-prototype')
+                .replace(/__name__label__/g, 'Billet n°' + (index+1))
+                .replace(/__name__/g,        index)
+            ;
+
+            // On crée un objet jquery qui contient ce template
+            var $prototype = $(template);
+
+            // On ajoute au prototype un lien pour pouvoir supprimer le billet
+            addDeleteLink($prototype);
+
+            // On ajoute le prototype modifié à la fin de la balise <div>
+            $container.append($prototype);
+
+            // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+            index++;
+        }
+
+        // La fonction qui ajoute un lien de suppressio d'une catégorie
+        function addDeleteLink($prototype) {
+            // Création du lien
+            var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer<a>');
+
+            // Ajout du lien
+            $prototype.append($deleteLink);
+
+            // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+            $deleteLink.click(function (e) {
+                $prototype.remove();
+
+                e.preventDefault(); // évite qu'un # appraraisse dans l'URL
+                return false;
+            });
+        }
+
+        $('.form-check-input').change(function () {
+            if($('.form-check-input').is(':checked')){
+                $('#alert_demiTarif').show();
+            }else{
+                $('#alert_demiTarif').hide();
+            }
+        });
+    </script>
+</body>
+</html>
+
+..<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>
+         louvre     </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" type="image/jpg" href="/images/logo-louvre.jpg">
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container justify-content-between">
+                <a class="py-2" href="/">
+                    <img class="logo-icon" src="/images/logo-louvre.jpg">
+                </a>
+                <a class="btn btn-secondary btn-lg" href="/louvre/info_facturation">Billetterie</a>
+            </div>
+        </nav>
+     </header>
+    <aside>
+            </aside>
+
+    <section class="container">
+            <div class="jumbotron text-center">
+        <img class="logo-icon" src="/images/logo-louvre.jpg">
+        <br>
+        <h2>Merci pour votre commande</h2>
+        <p>Vous allez recevoir vos billets sur l'adresse mail que vous avez indiqué. Bonne visite dans notre musée.</p>
+        <a href="/">
+         <button class="btn btn-info float-right">Retourner à l'accueil</button>
+        </a>
+    </div>
+    </section>
+
+    <footer class="footer">
+
+    </footer>
+
+
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
+
+...........                                                18 / 18 (100%)
+
+Time: 643 ms, Memory: 34.00MB
+
+OK (18 tests, 18 assertions)

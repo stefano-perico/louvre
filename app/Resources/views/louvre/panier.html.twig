@@ -1,37 +1,40 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-
+    <aside>
+        <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>, il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
+        </div>
+    </aside>
     <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
-        <div class="col-md-8">
-            {{ form_start(form) }}
-            {{ form_errors(form) }}
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    {{ form_label(form.dateBillet, "Date de la visite") }}
-                    {{ form_widget(form.dateBillet, {'attr': {'class': 'datepicker2'}}) }}
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.dateBillet, "Date de la visite") }}
+                        {{ form_widget(form.dateBillet, {'attr': {'class': 'datepicker2'}}) }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.demiJournee, "Type de billet") }}
+                        {{ form_widget(form.demiJournee, {'attr': {'class': 'typeBilletJour'}}) }}
+                    </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    {{ form_label(form.demiJournee, "Type de billet") }}
-                    {{ form_widget(form.demiJournee, {'attr': {'class': 'typeBilletJour'}}) }}
+                <br>
+                {{ form_label(form.billets) }}
+                {{ form_widget(form.billets) }}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <button type="submit" class='btn btn-success btn-lg float-right'>Valider</button>
+                    </div>
                 </div>
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
             </div>
-            <br>
-            {{ form_label(form.billets) }}
-            {{ form_widget(form.billets) }}
-            <div class="row">
-                <div class="col-md-12 alert alert-danger alert-dismissible" id="alert_demiTarif" style="display:none ">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>"Tarif réduit", il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
-                </div>
-                <div class="col-md-6 mb-3">
-                    <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <input type="submit" value="Valider" class='btn-success btn-lg float-right'>
-                </div>
-            </div>
-            {{ form_rest(form) }}
-            {{ form_end(form) }}
         </div>
     </article>
 

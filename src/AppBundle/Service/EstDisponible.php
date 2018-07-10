@@ -17,9 +17,8 @@ class EstDisponible
     const BILLET_MAX = 1000;
     const HEURE_LIMITE_JOURNEE = 14;
 
-    protected $joursFerme = ['2','7']; // mardi et dimanche
-    public $jourFeries;
-    protected $em;
+    private $jourFeries;
+    private $em;
 
     public function __construct(JoursFeries $joursFeries, EntityManager $em)
     {
@@ -58,6 +57,11 @@ class EstDisponible
     {
         $dateLimite = $this->getDate()->add(new \DateInterval('P6M'));
         return $dateLimite->format('d-m-Y');
+    }
+
+    public function getJourFeries()
+    {
+        return $this->jourFeries;
     }
 
 

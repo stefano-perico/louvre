@@ -46,7 +46,7 @@ class CommandesRepository extends EntityRepository
 
     public function sumBillet($idCommande)
     {
-        return $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->innerJoin('c.billet', 'b')
             ->select('SUM(b.prix)')
             ->where('b.commande = :idCommande')
@@ -54,6 +54,7 @@ class CommandesRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult()
             ;
+        return $qb;
     }
 
 }

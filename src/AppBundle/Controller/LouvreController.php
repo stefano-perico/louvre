@@ -109,9 +109,8 @@ class LouvreController extends Controller
     /**
      * @Route("/louvre/validation", name="validation_cmd")
      */
-    public function validationCommandeAction(GestionCommande $commande)
+    public function validationCommandeAction()
     {
-        $commande->remove();
         return $this->render(':louvre:validation.html.twig');
     }
 

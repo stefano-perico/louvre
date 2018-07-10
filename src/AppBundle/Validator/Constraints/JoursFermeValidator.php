@@ -30,7 +30,7 @@ class JoursFermeValidator extends ConstraintValidator
             ;
         }
 
-        $jours_feries = $this->joursFeries->jours_feries($value);
+        $jours_feries = $this->joursFeries->joursFeries($value);
         if (in_array($value->format('d-m-Y'), $jours_feries))
         {
             $this->context

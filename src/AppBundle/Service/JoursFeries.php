@@ -24,7 +24,7 @@ class JoursFeries
         return $base->format('d-m-Y');
     }
 
-    public function jours_feries(\DateTime $date = null)
+    public function joursFeries(\DateTime $date = null)
     {
         if ($date == null)
         {
@@ -60,7 +60,7 @@ class JoursFeries
     }
 
     public function getJoursFeriesDatePicker(){
-        return implode(",", $this->jours_feries());
+        return implode(",", $this->joursFeries());
     }
 
 

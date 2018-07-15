@@ -4,7 +4,7 @@ namespace Tests\AppBundle\Service;
 
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Commande;
-use AppBundle\Service\CalculerPrix;
+use AppBundle\Service\CalculatePrice;
 use PHPUnit\Framework\TestCase;
 
 class CalculerPrixTest extends TestCase
@@ -30,7 +30,7 @@ class CalculerPrixTest extends TestCase
         $dateNaissance = new \DateTime($age);
         $billet->setDateNaissance($dateNaissance);
 
-        $prixBillet = new CalculerPrix();
+        $prixBillet = new CalculatePrice();
         $test = $prixBillet->prixBillet($billet, $commande);
 
         $this->assertSame($prix, $test);
@@ -60,7 +60,7 @@ class CalculerPrixTest extends TestCase
         $billet->setDateNaissance($dateNaissance);
         $billet->setTarifReduit(true);
 
-        $prixBillet = new CalculerPrix();
+        $prixBillet = new CalculatePrice();
         $test = $prixBillet->prixBillet($billet, $commande);
 
         $this->assertSame($prix, $test);
@@ -89,7 +89,7 @@ class CalculerPrixTest extends TestCase
         $dateNaissance = new \DateTime($age);
         $billet->setDateNaissance($dateNaissance);
 
-        $prixBillet = new CalculerPrix();
+        $prixBillet = new CalculatePrice();
         $test = $prixBillet->prixBillet($billet, $commande);
 
         $this->assertSame($prix, $test);

@@ -16,11 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends Controller
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/", name="home")
      */
     public function homeAction(Session $session)
     {
         $session->clear();
-        return $this->render(':louvre:accueil.html.twig');
+        return $this->render(':louvre:home.html.twig');
     }
 }

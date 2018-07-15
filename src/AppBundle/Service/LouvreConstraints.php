@@ -41,7 +41,6 @@ class LouvreConstraints
         {
             return false;
         }
-
         return true;
     }
 

@@ -3,22 +3,22 @@
 {% block body %}
     <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
         <h2>Récapitulatif de votre commande</h2>
-        <p>Bonjour Mr <b>{{ commande.utilisateur.nom |upper }}, {{ commande.utilisateur.prenom|capitalize }}</b></p>
-        <p>Votre commande pour visiter le <b>Louvre</b> le <b>{{ commande.dateBillet|date('d/m/Y') }}</b> est presque fini.</p>
+        <p>Bonjour Mr <b>{{ order.utilisateur.nom |upper }}, {{ order.utilisateur.prenom|capitalize }}</b></p>
+        <p>Votre commande pour visiter le <b>Louvre</b> le <b>{{ order.dateBillet|date('d/m/Y') }}</b> est presque fini.</p>
         <p>Un fois votre commande validé
-            {% if commande.billets|length > 1 %}
+            {% if order.billets|length > 1 %}
                 vos billets seront envoyés
             {% else %}
                 votre billet sera envoyé
             {% endif %}
-            à l'adresse mail suivante: <b>{{ commande.utilisateur.email }}</b>
+            à l'adresse mail suivante: <b>{{ order.utilisateur.email }}</b>
         </p>
 
         <form id="btn_stripe" class="float-right" method="POST">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="{{ token }}"
-                    data-amount="{{ commande.calculatePriceInCent }}"
+                    data-amount="{{ order.calculatePriceInCent }}"
                     data-name="Musée du Louvre"
                     data-description="Paris"
                     data-image="{{ asset('images/logo-louvre.jpg') }}"
@@ -33,7 +33,7 @@
 
     <section class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
         <div class="table-responsive">
-            {% if commande.billets|length > 1 %}
+            {% if order.billets|length > 1 %}
                 <h2>Récapitulatif de vos billets</h2>
             {% else %}
                 <h2>Récapitulatif de votre billet</h2>
@@ -49,7 +49,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for billet in commande.billets %}
+                {% for billet in order.billets %}
                 <tr>
                         <td>{{ billet.nom }}</td>
                         <td>{{ billet.prenom }}</td>
@@ -60,6 +60,6 @@
                 </tbody>
             </table>
         </div>
-        <span class="float-right"><b>Total de votre commande: {{ commande.prix }} €</b></span>
+        <span class="float-right"><b>Total de votre commande: {{ order.prix }} €</b></span>
     </section>
 {% endblock %}

@@ -3,13 +3,12 @@
 
 namespace AppBundle\Validator\Constraints;
 
-use AppBundle\Service\JoursFeries;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class JoursFermeValidator extends ConstraintValidator
 {
-    protected $joursFerme = ['2','7']; // mardi et dimanche
+    private $joursFerme = ['2','7']; // mardi et dimanche
 
     public function validate($value, Constraint $constraint)
     {
@@ -37,7 +36,6 @@ class JoursFermeValidator extends ConstraintValidator
     {
         $base = new \DateTime("$year-03-21");
         $days = easter_days($year);
-
         $base->add(new \DateInterval("P{$days}D"));
         return $base->format('d-m-Y');
     }

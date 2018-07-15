@@ -5,7 +5,7 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Commande;
 
-class CalculerPrix
+class CalculatePrice
 {
     private $bebe = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
     private $senior = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
@@ -14,7 +14,7 @@ class CalculerPrix
     private $normal = array('prix' => 16, 'type' => "Plein Tarif");
     
 
-    public function prixBillet(Billet $billet, Commande $commande)
+    public function setPrice(Billet $billet, Commande $commande)
     {
         if ($billet->getTarifReduit())
         {

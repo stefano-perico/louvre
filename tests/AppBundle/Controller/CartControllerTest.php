@@ -17,14 +17,6 @@ class CartControllerTest extends WebTestCase
         echo $client->getResponse()->getContent();
     }
 
-    public function testValidationActionIsUp()
-    {
-        $client = static::createClient();
-        $client->request('GET', 'louvre/validation');
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        echo $client->getResponse()->getContent();
-    }
 
 
 

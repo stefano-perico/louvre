@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InvoiceInformationController extends Controller
 {
     /**
-     * @Route("/louvre/info_facturation", name="info_fac")
+     * @Route("/louvre/info_facturation", name="invoice")
      */
     public function invoiceInformationAction(Request $request)
     {
@@ -28,8 +28,8 @@ class InvoiceInformationController extends Controller
         if ($form->isSubmitted() && $form->isValid()){
             $request->getSession()->set('User', $user);
             $this->addFlash('success', 'Vos informations de facturations ont bien été enregistrées');
-            return $this->redirectToRoute('panier');
+            return $this->redirectToRoute('cart');
         }
-        return $this->render(':louvre:infoFacturation.html.twig', array('form' => $form->createView()));
+        return $this->render(':louvre:invoiceInformation.html.twig', array('form' => $form->createView()));
     }
 }

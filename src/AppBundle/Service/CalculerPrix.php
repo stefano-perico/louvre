@@ -2,15 +2,11 @@
 
 namespace AppBundle\Service;
 
-
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Commande;
 
-
 class CalculerPrix
 {
-    const HEURE_LIMITE_JOURNEE = 14;
-
     private $bebe = array('age' => 4, 'prix' => 0, 'type' => 'Gratuit');
     private $senior = array('age' => 60, 'prix' => 12, 'type' => 'Senior');
     private $reduit = array('prix' => 10, 'type' => 'Réduit');
@@ -20,14 +16,9 @@ class CalculerPrix
 
     public function prixBillet(Billet $billet, Commande $commande)
     {
-        $dateBillet = $commande->getDateBillet();
-        if($this->isDemiJournee($dateBillet))
+        if ($billet->getTarifReduit())
         {
-            $commande->setDemiJournee(true);
-        }
-        if ($billet->getTarifReduit() == true)
-        {
-            if ($commande->getDemiJournee() == true)
+            if ($commande->getDemiJournee())
             {
                 $prix = $this->reduit['prix']/2;
                 $billet
@@ -43,7 +34,7 @@ class CalculerPrix
             ;
             return $prix;
         }
-        elseif ($commande->getDemiJournee() == true)
+        elseif ($commande->getDemiJournee())
         {
             $prix = $this->setDemiJournee($billet);
             return $prix;
@@ -120,18 +111,5 @@ class CalculerPrix
                 ;
         }
         return $prix;
-    }
-
-    private function isDemiJournee(\DateTime $dateBillet)
-    {
-        $dateDuJour = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-        $heureLimite = new \DateTime();
-        $heureLimite->setTime(self::HEURE_LIMITE_JOURNEE,0);
-        if($dateBillet->format('d-m-Y') == $dateDuJour->format('d-m-Y') ) {
-            if ($dateDuJour->format('h:i' > $heureLimite->format('h:i'))) {
-                return true;
-            }
-        }
-        return false;
     }
 }

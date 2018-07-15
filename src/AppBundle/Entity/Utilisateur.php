@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Utilisateur
@@ -22,16 +23,20 @@ class Utilisateur
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="nom", type="string", length=45)
+     * @Assert\Length(
+     *     min= 2,
+     *     max= 45
+     * )
      */
     private $nom;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="prenom", type="string", length=45)
+     * @Assert\Length(
+     *     min= 2,
+     *     max= 45
+     * )
      */
     private $prenom;
 
@@ -39,6 +44,10 @@ class Utilisateur
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=100)
+     * @Assert\Length(
+     *     min= 6,
+     *     max= 100
+     * )
      */
     private $email;
 
@@ -53,6 +62,10 @@ class Utilisateur
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=255)
+     * @Assert\Length(
+     *     min= 6,
+     *     max= 150
+     * )
      */
     private $adresse;
 
@@ -67,6 +80,10 @@ class Utilisateur
      * @var string
      *
      * @ORM\Column(name="ville", type="string", length=255)
+     * @Assert\Length(
+     *     min= 2,
+     *     max= 60
+     * )
      */
     private $ville;
 
@@ -74,11 +91,12 @@ class Utilisateur
      * @var string
      *
      * @ORM\Column(name="pays", type="string", length=255)
+     * @Assert\Length(
+     *     min= 2,
+     *     max= 60
+     * )
      */
     private $pays;
-
-
-
 
     /**
      * Get id

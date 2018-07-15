@@ -2,9 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Service\CalculerPrix;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * billets
@@ -25,16 +25,20 @@ class Billet
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="nom", type="string", length=45)
+     * @Assert\Length(
+     *     min= 2,
+     *     max= 45
+     * )
      */
     private $nom;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="prenom", type="string", length=45)
+     * @Assert\Length(
+     *     min= 2,
+     *     max= 45
+     * )
      */
     private $prenom;
 

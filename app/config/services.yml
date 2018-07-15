@@ -29,18 +29,15 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    AppBundle\Service\EstDisponible:
-        arguments: ['@AppBundle\Service\JoursFeries', '@doctrine.orm.entity_manager']
-
-    AppBundle\Service\GestionCommande:
-        arguments: ['@doctrine.orm.entity_manager', '@session', '@AppBundle\Service\CalculerPrix', '@AppBundle\Service\StripeService']
+    AppBundle\Service\datepickerConstraints:
+        arguments: ['@doctrine.orm.entity_manager']
 
     AppBundle\Service\StripeService:
-        arguments: ['%stripe_secret_key%']
+        arguments: ['%stripe_secret_key%', '@session']
         public: true
 
     AppBundle\Service\MailerService:
-        arguments: ['@Swift_Mailer']
+        arguments: ['@Swift_Mailer', '@templating.engine.twig']
 
 
 

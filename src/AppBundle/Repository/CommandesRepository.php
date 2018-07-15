@@ -35,9 +35,9 @@ class CommandesRepository extends EntityRepository
     {
         return
             $this->createQueryBuilder('c')
-                ->innerJoin('c.billet', 'b')
+                ->innerJoin('c.billets', 'b')
                 ->select('COUNT(b)')
-                ->where('c.dateBillet = :date')
+                ->andWhere('c.dateBillet = :date')
                 ->setParameter('date', $commande->getDateBillet())
                 ->getQuery()
                 ->getSingleScalarResult()
@@ -49,7 +49,7 @@ class CommandesRepository extends EntityRepository
         $qb = $this->createQueryBuilder('c')
             ->innerJoin('c.billet', 'b')
             ->select('SUM(b.prix)')
-            ->where('b.commande = :idCommande')
+            ->andWhere('b.commande = :idCommande')
             ->setParameter('idCommande', $idCommande)
             ->getQuery()
             ->getSingleScalarResult()

@@ -67,9 +67,9 @@ $(document).ready(function () {
 
     $('.form-check-input').change(function () {
         if($('.form-check-input').is(':checked')){
-            $('#alert_demiTarif').show();
+            $('#alert_demiTarif').css('display', 'block');
         }else{
-            $('#alert_demiTarif').hide();
+            $('#alert_demiTarif').css('display', 'none');
         }
     });
 });

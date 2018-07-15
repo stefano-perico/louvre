@@ -12,19 +12,16 @@ use AppBundle\Entity\Commande;
 use Doctrine\ORM\EntityManager;
 
 
-class EstDisponible
+class LouvreConstraints
 {
     const BILLET_MAX = 1000;
     const HEURE_LIMITE_JOURNEE = 14;
 
-    private $jourFeries;
     private $em;
 
-    public function __construct(JoursFeries $joursFeries, EntityManager $em)
+    public function __construct(EntityManager $em)
     {
-        $this->jourFeries = $joursFeries;
         $this->em = $em;
-
     }
 
     public function getDate()
@@ -33,7 +30,7 @@ class EstDisponible
         return $date;
     }
 
-    public function billetsDispo(Commande $commande)
+    public function ticketAvailable(Commande $commande)
     {
         $commandeRepo = $this->em->getRepository(Commande::class);
         $nbBillets = $commandeRepo->countBillets($commande);
@@ -48,21 +45,12 @@ class EstDisponible
         return true;
     }
 
-    public function resteBillets()
-    {
-            return "Désoler mais, il n'est pas possible de commander de billets pour cette date";
-    }
-
-    public function dateLimite()
+    public function deadline()
     {
         $dateLimite = $this->getDate()->add(new \DateInterval('P6M'));
         return $dateLimite->format('d-m-Y');
     }
 
-    public function getJourFeries()
-    {
-        return $this->jourFeries;
-    }
 
 
 

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <aside>
-        <div class="col-md-12 alert alert-danger" id="alert_demiTarif">
+        <div class="col-md-12 alert alert-danger" id="alert_demiTarif" style="display: none">
             <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>, il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
         </div>
     </aside>
@@ -73,10 +73,6 @@
     <script type="text/javascript" src="{{ asset('js/cart.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            // Datepicker vue Panier
-            var dates = "{{ estDispo.jourFeries.getJoursFeriesDatePicker }}";
-            var myDates = dates.split(',');
-
             $(".datepicker2")
                 .datepicker({
                     format: "dd-mm-yyyy",
@@ -85,14 +81,13 @@
                     daysOfWeekDisabled: "2,0",
                     autoclose: true,
                     todayHighlight: true,
-                    endDate: "{{ estDispo.dateLimite }}",
-                    datesDisabled:myDates
+                    endDate: "{{ constraints.deadline }}"
                 })
                 .change(function () {
                     var date = new Date();
                     var heureActuel = date.getHours();
-                    var heureLimite = '{{ constant('AppBundle\\Service\\EstDisponible::HEURE_LIMITE_JOURNEE') }}';
-                    var todaysDate = '{{ estDispo.date | date('d-m-Y')}}';
+                    var heureLimite = '{{ constant('AppBundle\\Service\\LouvreConstraints::HEURE_LIMITE_JOURNEE') }}';
+                    var todaysDate = '{{ constraints.date | date('d-m-Y')}}';
                     var datePicker = $(this).val();
                     if (todaysDate === datePicker){
                         if (heureActuel > heureLimite)

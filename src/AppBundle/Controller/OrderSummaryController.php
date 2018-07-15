@@ -25,8 +25,7 @@ class OrderSummaryController extends Controller
                 foreach ($stripe->getErrors() as $error){
                     $this->addFlash('danger', $error);
                 }
-            }
-            else{
+            } else {
                 $order->setValide(true);
                 $this->addFlash('success', 'Votre commande a bien été validée');
                 $mailer->sendMessage($order);

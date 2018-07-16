@@ -18,7 +18,6 @@ class InvoiceInformationControllerTest extends WebTestCase
         $client->request('GET', 'louvre/info_facturation');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        echo $client->getResponse()->getContent();
     }
 
     public function testInvoiceInformationAction()
@@ -43,6 +42,5 @@ class InvoiceInformationControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
 
         $this->assertSame(1, $crawler->filter('aside.alert.alert-success')->count());
-        echo $client->getResponse()->getContent();
     }
 }

@@ -14,7 +14,6 @@ class CartControllerTest extends WebTestCase
         $client->request('GET', 'louvre/panier');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        echo $client->getResponse()->getContent();
     }
 
 

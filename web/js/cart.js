@@ -10,6 +10,14 @@ $(document).ready(function () {
     $('#add_billet').click(function (e) {
         addBillet($container);
 
+        $('.form-check-input').change(function () {
+            if($('.form-check-input').is(':checked')){
+                $('#alert_demiTarif').css('display', 'block');
+            }else{
+                $('#alert_demiTarif').css('display', 'none');
+            }
+        });
+
         e.preventDefault(); // évite qu'un # apparaisse dans l'URL
         return false;
     });
@@ -64,7 +72,7 @@ $(document).ready(function () {
             return false;
         });
     }
-
+    
     $('.form-check-input').change(function () {
         if($('.form-check-input').is(':checked')){
             $('#alert_demiTarif').css('display', 'block');

@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <aside>
-        <div class="col-md-12 alert alert-danger" id="alert_demiTarif" style="display: none">
-            <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>, il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
-        </div>
-    </aside>
+
     <article class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
         <div class="row">
             <div class="col-md-12">
@@ -23,6 +19,11 @@
                 <br>
                 {{ form_label(form.billets) }}
                 {{ form_widget(form.billets) }}
+                <aside>
+                    <div class="col-md-12 alert alert-danger" id="alert_demiTarif" style="display: none">
+                        <strong>Attention !</strong> vous avez coché la case <strong>" Tarif réduit "</strong>, il sera nécessaire de présenter une carte d'étudiant, militaire ou équivalent lors de l'entrée pour bénéficier bien du tarif réduit.
+                    </div>
+                </aside>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>

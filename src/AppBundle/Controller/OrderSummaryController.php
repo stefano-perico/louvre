@@ -19,16 +19,16 @@ class OrderSummaryController extends Controller
         $order = $request->getSession()->get('Order');
         if ($request->isMethod('POST')){
             $stripe->charge($request->request->get('stripeToken'), $order->calculatePriceInCent());
-            if (!empty($stripe->getErrors())){
-                foreach ($stripe->getErrors() as $error){
+            if (!empty($stripe->getErrors())) {
+                foreach ($stripe->getErrors() as $error) {
                     $this->addFlash('danger', $error);
                 }
-            }else{
+            } else {
                 $order->setValide(true);
-                $this->addFlash('success', 'Votre commande a bien été validée');
                 $mailer->sendMessage($order);
                 $em->persist($order);
                 $em->flush();
+                $this->addFlash('success', 'Votre commande a bien été validée');
                 return $this->redirectToRoute('home');
             }
         }

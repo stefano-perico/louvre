@@ -7,7 +7,7 @@ use AppBundle\Entity\Commande;
 use AppBundle\Service\CalculatePrice;
 use PHPUnit\Framework\TestCase;
 
-class CalculerPrixTest extends TestCase
+class CalculatePriceTest extends TestCase
 {
     const DATE_VISITE = '2018-08-02';
 
@@ -31,7 +31,7 @@ class CalculerPrixTest extends TestCase
         $billet->setDateNaissance($dateNaissance);
 
         $prixBillet = new CalculatePrice();
-        $test = $prixBillet->prixBillet($billet, $commande);
+        $test = $prixBillet->setPrice($billet, $commande);
 
         $this->assertSame($prix, $test);
     }
@@ -61,7 +61,7 @@ class CalculerPrixTest extends TestCase
         $billet->setTarifReduit(true);
 
         $prixBillet = new CalculatePrice();
-        $test = $prixBillet->prixBillet($billet, $commande);
+        $test = $prixBillet->setPrice($billet, $commande);
 
         $this->assertSame($prix, $test);
     }
@@ -90,7 +90,7 @@ class CalculerPrixTest extends TestCase
         $billet->setDateNaissance($dateNaissance);
 
         $prixBillet = new CalculatePrice();
-        $test = $prixBillet->prixBillet($billet, $commande);
+        $test = $prixBillet->setPrice($billet, $commande);
 
         $this->assertSame($prix, $test);
     }

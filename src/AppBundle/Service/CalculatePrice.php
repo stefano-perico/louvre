@@ -16,8 +16,17 @@ class CalculatePrice
 
     public function setPrice(Billet $billet, Commande $commande)
     {
+
         if ($billet->getTarifReduit())
         {
+            if ($billet->getAge() <= $this->bebe['age'])
+            {
+                $prix = $this->bebe['prix'];
+                $billet
+                    ->setPrix($this->bebe['prix'])
+                    ->setType($this->bebe['type']. ', Réduit');
+                return $prix;
+            }
             if ($commande->getDemiJournee())
             {
                 $prix = $this->reduit['prix']/2;

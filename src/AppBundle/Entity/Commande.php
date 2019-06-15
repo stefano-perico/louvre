@@ -54,7 +54,7 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="billet_id", referencedColumnName="id")
      */
     private $billets;
 

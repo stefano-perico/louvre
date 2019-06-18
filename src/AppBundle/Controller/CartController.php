@@ -38,7 +38,7 @@ class CartController extends Controller
                 $request->getSession()->set('Order', $order);
                 return $this->redirectToRoute('order_summary');
             }else{
-                $this->addFlash('warning', "Désoler mais, la limite de billet pour cette date a été atteinte, merci de choisir une autre date de visite");
+                $this->addFlash('warning', "Désolé mais, la limite de billet pour cette date a été atteinte, merci de choisir une autre date de visite");
             }
         }
         return $this->render(':louvre:cart.html.twig', array('form' => $form->createView(), 'constraints' => $louvreConstraints));
